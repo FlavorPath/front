@@ -1,15 +1,17 @@
 import { BottomSheet } from "react-spring-bottom-sheet";
 import useBottomSheetStore from "../../../store/stores/BottomSheet.store";
 
-type ExampleProps = {
+type BottomSheetProps = {
   dynamicMinHeight: number;
   dynamicMaxHeight: number;
+  children: React.ReactNode;
 };
 
 export default function CustomBottomSheet({
   dynamicMinHeight,
   dynamicMaxHeight,
-}: ExampleProps) {
+  children,
+}: BottomSheetProps) {
   const isOpen = useBottomSheetStore<boolean>((state) => state.isOpen);
   const setOpenBottomSheet = useBottomSheetStore(
     (state) => state.setOpenBottomSheet
@@ -22,7 +24,7 @@ export default function CustomBottomSheet({
         open={isOpen}
         snapPoints={() => [dynamicMinHeight, dynamicMaxHeight]}
       >
-        My awesome content here
+        {children}
       </BottomSheet>
     </>
   );
