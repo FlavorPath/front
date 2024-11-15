@@ -1,5 +1,11 @@
+import Example from "./ui/view/molcule/bottomSheet";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Example />
+    </>
+  );
 }
 
 export default App;
