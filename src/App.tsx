@@ -1,14 +1,10 @@
-import React from "react";
-import ErrorBoundary from "./utils/hooks/ErrorBoundary";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import router from "./routes/router";
 
 function App() {
-  return (
-    <>
-      <ErrorBoundary>
-        <div>App</div>
-      </ErrorBoundary>
-    </>
-  );
+  const appRouter = createBrowserRouter(router);
+
+  return <RouterProvider router={appRouter} />;
 }
 
 export default App;
