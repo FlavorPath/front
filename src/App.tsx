@@ -1,9 +1,11 @@
-import Example from "./ui/view/molcule/bottomSheet";
+import ErrorBoundary from "./utils/hooks/ErrorBoundary";
 
 function App() {
   return (
     <>
-      <Example />
+      <ErrorBoundary>
+        <div>App</div>
+      </ErrorBoundary>
     </>
   );
 }
