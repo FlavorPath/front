@@ -1,5 +1,14 @@
+import React from "react";
+import ErrorBoundary from "./utils/hooks/ErrorBoundary";
+
 function App() {
-	return <>지마켓</>;
+  return (
+    <>
+      <ErrorBoundary>
+        <div>App</div>
+      </ErrorBoundary>
+    </>
+  );
 }
 
 export default App;
