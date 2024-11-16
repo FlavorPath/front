@@ -1,3 +1,4 @@
+import React from "react";
 import ErrorBoundary from "./utils/hooks/ErrorBoundary";
 
 function App() {
