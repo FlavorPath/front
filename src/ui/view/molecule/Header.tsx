@@ -9,16 +9,19 @@ interface IProps {
 
 const Header = ({ headerText }: IProps) => {
   const navigate = useNavigate();
+  const canGoBack = window.history.length > 1;
 
-	return (
+  return (
     <div className={styles.header}>
       <div className={styles.text}>{headerText}</div>
-      <Icon
-        iconName='HiOutlineArrowLeft'
-        size={24}
-        onClick={() => navigate(-1)}
-        className={styles.back_btn}
-      />
+      {canGoBack && (
+        <Icon
+          iconName='HiOutlineArrowLeft'
+          size={24}
+          onClick={() => navigate(-1)}
+          className={styles.back_btn}
+        />
+      )}
     </div>
   );
 };
