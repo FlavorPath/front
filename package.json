@@ -10,12 +10,14 @@
     "preview": "vite preview",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "panda-prepare": "panda codegen"
   },
   "dependencies": {
     "axios": "^1.7.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
     "react-kakao-maps-sdk": "^1.1.27",
     "react-router-dom": "^6.28.0",
     "react-spring": "^9.7.4",

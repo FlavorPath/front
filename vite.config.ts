@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"), // '@'를 'src'로 매핑
+      '@': path.resolve(__dirname, './src'),
+      '@styled-system': path.resolve(__dirname, './styled-system'),
     },
   },
 });
