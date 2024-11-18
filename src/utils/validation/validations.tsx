@@ -5,8 +5,8 @@ export const idValidation = (userId: string) => {
     return '아이디를 입력해 주세요.';
   }
 
-  if (!userId.match(/^[a-z0-9]+$/)) {
-    return '영문 소문자, 숫자를 제외만 입력할 수 있습니다.';
+  if (!userId.match(/^[a-zA-Z0-9]+$/)) {
+    return '영문 대소문자, 숫자만 입력할 수 있습니다.';
   }
 
   // try {
@@ -24,6 +24,18 @@ export const idValidation = (userId: string) => {
 
 
 export const nicknameValidation = (nickname: string) => {
+  if (!nickname) {
+    return '닉네임을 입력해 주세요.';
+  }
+
+  if (!nickname.match(/^[가-힣a-zA-Z0-9]+$/)) {
+    return '한글, 영문, 숫자만 입력할 수 있습니다.';
+  }
+
+  if (nickname.length < 2) {
+    return '닉네임은 2자 이상 가능합니다.'
+  }
+
   return '';
 };
 
