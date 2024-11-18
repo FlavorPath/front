@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import NavigationItem from "./NavigationItem";
 
 const meta: Meta<typeof NavigationItem> = {
-  title: "Components/Molecules/NavigationItem",
+  title: "Components/Molcules/NavigationItem",
   component: NavigationItem,
   argTypes: {
     iconName: {
