@@ -12,7 +12,7 @@ export const textStyles = defineTextStyles({
 		value: {
 			fontFamily: 'GmarketSans',
 			fontWeight: 'medium',
-			fontSize: '252x',
+			fontSize: '22px',
 		},
 	},
 	body1: {
