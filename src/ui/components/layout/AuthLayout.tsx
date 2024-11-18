@@ -1,6 +1,6 @@
-import Header from '@/ui/view/molcule/Header';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Header from '@/ui/view/molecule/Header';
 
 type AuthPathType = '/signup' | '/login';
 
