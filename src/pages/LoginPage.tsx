@@ -29,6 +29,7 @@ const LoginPage = () => {
               onChange={onChange}
               className={getErrorMessage(key) ? styles.error : ''}
               placeholder={`${key === 'userId' ? '아이디' : '비밀번호'}를 입력해 주세요.`}
+              error={!!getErrorMessage(key)}
             />
             <p className={styles.error_text}>{getErrorMessage(key)}</p>
           </div>
