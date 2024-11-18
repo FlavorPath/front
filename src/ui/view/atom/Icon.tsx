@@ -1,19 +1,51 @@
-import * as HeroIcon from "react-icons/hi";
+import * as ReactHeroIcon from "react-icons/hi";
+import * as HeroSolidIcon from "@heroicons/react/24/solid";
+import * as HeroOutLineIcon from "@heroicons/react/24/outline";
 
 interface IProps {
-  iconName: keyof typeof HeroIcon;
+  iconName: string;
+  library?: "react-icons" | "hero-solid" | "hero-outline";
   size?: number;
   color?: string;
-  onClick: () => void;
-  className?: string;
   fill?: string;
+  onClick?: () => void;
+  className?: string;
 }
 
-const Icon = ({ iconName, size, color, onClick, className, fill }: IProps) => {
-  const IconComponent = HeroIcon[iconName];
+const Icon = ({
+  iconName,
+  library = "react-icons",
+  size = 24,
+  color = "currentColor",
+  fill = "none",
+  onClick,
+  className,
+}: IProps) => {
+  let IconComponent: React.ElementType | undefined;
+  if (library === "react-icons") {
+    IconComponent = ReactHeroIcon[iconName as keyof typeof ReactHeroIcon];
+  }
+  if (library === "hero-solid") {
+    IconComponent = HeroSolidIcon[iconName as keyof typeof HeroSolidIcon];
+  }
+  if (library === "hero-outline") {
+    IconComponent = HeroOutLineIcon[iconName as keyof typeof HeroOutLineIcon];
+  }
+
+  if (!IconComponent) {
+    console.error(`Icon "${iconName}" not found in "${library}" library.`);
+    return null;
+  }
+
   return (
     <button type="button" onClick={onClick} className={className}>
-      <IconComponent size={size} color={color} fill={fill} />
+      <IconComponent
+        width={size}
+        height={size}
+        color={color}
+        fill={fill}
+        className={className}
+      />
     </button>
   );
 };
