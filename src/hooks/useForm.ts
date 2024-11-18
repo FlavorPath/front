@@ -29,6 +29,7 @@ export const useForm = <T extends { [key: string]: any }>({
 
     if (Object.values(validationErrors).every(error => !error)) {
       submitHandler();
+      setIsLoading(false)
     }
   };
 
