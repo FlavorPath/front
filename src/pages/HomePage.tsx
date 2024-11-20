@@ -1,8 +1,10 @@
 import KaKaoMap from "@/ui/components/map/KaKaoMap";
 import SearchInput from "@/ui/view/atom/SearchInput";
 import ButtonGroup from "@/ui/view/molecule/ButtonGroup";
+import CustomBottomSheet from "@/ui/view/molecule/CustomBottomSheet";
 import { css } from "@styled-system/css";
 import { useState } from "react";
+import RestaurantPage from "./RestaurantPage";
 
 const HomePage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -22,6 +24,11 @@ const HomePage = () => {
         className={styles.input}
       />
       <ButtonGroup />
+      <CustomBottomSheet
+        dynamicMinHeight={300}
+        dynamicMaxHeight={600}
+        children={<RestaurantPage />}
+      />
       <KaKaoMap />
     </div>
   );
