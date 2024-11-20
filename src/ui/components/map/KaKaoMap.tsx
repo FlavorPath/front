@@ -1,13 +1,16 @@
-import { useState } from "react";
 import useKakaoLoader from "@/hooks/map/useKakaoLoader";
 import CustomMapMarker from "@/ui/view/atom/CustomMapMarker";
 import { Map } from "react-kakao-maps-sdk";
+import { useState } from "react";
+import useDynamicMapSize from "@/hooks/map/useDynamicMapSize";
 
 type LabelType = ("Korean" | "Japanese" | "Ramen" | "Chinese" | "Western")[];
 
 export default function KaKaoMap() {
   useKakaoLoader();
+  const mapSize = useDynamicMapSize();
   const [map, setMap] = useState<any>(null);
+
   const mockMarkerResponse: {
     restaurantId: number;
     name: string;
@@ -35,9 +38,8 @@ export default function KaKaoMap() {
   ];
 
   const handleMarkerClick = (latitude: number, longitude: number) => {
-    const newLatitude = latitude - 0.001;
     if (map) {
-      map.setCenter(new window.kakao.maps.LatLng(newLatitude, longitude));
+      map.setCenter(new window.kakao.maps.LatLng(latitude, longitude));
     }
   };
 
@@ -48,10 +50,7 @@ export default function KaKaoMap() {
         lat: 33.450701,
         lng: 126.570667,
       }}
-      style={{
-        width: "375px",
-        height: "780px",
-      }}
+      style={mapSize} // 동적으로 계산된 크기 사용
       level={3}
       onCreate={(mapInstance) => setMap(mapInstance)}
     >
