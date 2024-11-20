@@ -26,8 +26,8 @@ const Navigation = () => {
         position: "fixed",
         bottom: 0,
         width: "100%",
-        height: "60px", // 네비게이션 높이 명확히 설정
-        zIndex: 1000, // 다른 요소 위로 올리기
+        height: "60px",
+        zIndex: 900,
       })}
     >
       {navigationItems.map((item) => (
