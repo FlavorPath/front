@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useKakaoLoader from "@/hooks/map/useKakaoLoader";
 import CustomMapMarker from "@/ui/view/atom/CustomMapMarker";
 import { Map } from "react-kakao-maps-sdk";
@@ -6,7 +7,7 @@ type LabelType = ("Korean" | "Japanese" | "Ramen" | "Chinese" | "Western")[];
 
 export default function KaKaoMap() {
   useKakaoLoader();
-
+  const [map, setMap] = useState<any>(null);
   const mockMarkerResponse: {
     restaurantId: number;
     name: string;
@@ -33,6 +34,13 @@ export default function KaKaoMap() {
     },
   ];
 
+  const handleMarkerClick = (latitude: number, longitude: number) => {
+    const newLatitude = latitude - 0.001;
+    if (map) {
+      map.setCenter(new window.kakao.maps.LatLng(newLatitude, longitude));
+    }
+  };
+
   return (
     <Map
       id="map"
@@ -41,10 +49,11 @@ export default function KaKaoMap() {
         lng: 126.570667,
       }}
       style={{
-        width: "390px",
+        width: "375px",
         height: "780px",
       }}
       level={3}
+      onCreate={(mapInstance) => setMap(mapInstance)}
     >
       {mockMarkerResponse.map((mock, index) => (
         <CustomMapMarker
@@ -56,6 +65,7 @@ export default function KaKaoMap() {
           restaurantId={mock.restaurantId}
           name={mock.name}
           label={mock.label}
+          onMarkerClick={handleMarkerClick}
         />
       ))}
     </Map>

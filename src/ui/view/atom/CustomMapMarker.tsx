@@ -18,6 +18,7 @@ interface IProp {
   restaurantId: number;
   name: string;
   label: LabelType;
+  onMarkerClick: (latitude: number, longitude: number) => void; // 클릭 이벤트 핸들러
 }
 
 const markerMap = {
@@ -28,13 +29,21 @@ const markerMap = {
   Western: WesternMarker,
 } as const;
 
-const CustomMapMarker = ({ location, restaurantId, name, label }: IProp) => {
+const CustomMapMarker = ({
+  location,
+  restaurantId,
+  name,
+  label,
+  onMarkerClick,
+}: IProp) => {
   const setOpenBottomSheet = useBottomSheetStore(
     (state) => state.setOpenBottomSheet
   );
+
   const onClick = () => {
     console.log(`식당이름: ${name}`);
     setOpenBottomSheet(true);
+    onMarkerClick(location.latitude, location.longitude);
   };
 
   return (
