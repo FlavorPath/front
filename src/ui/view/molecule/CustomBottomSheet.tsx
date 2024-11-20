@@ -16,16 +16,21 @@ export default function CustomBottomSheet({
   const setOpenBottomSheet = useBottomSheetStore(
     (state) => state.setOpenBottomSheet
   );
-
   return (
-    <>
-      <button onClick={() => setOpenBottomSheet(!isOpen)}>Open</button>
-      <BottomSheet
-        open={isOpen}
-        snapPoints={() => [dynamicMinHeight, dynamicMaxHeight]}
-      >
-        {children}
-      </BottomSheet>
-    </>
+    <BottomSheet
+      open={isOpen}
+      snapPoints={() => [dynamicMinHeight, dynamicMaxHeight]}
+      onDismiss={() => {
+        setOpenBottomSheet(false);
+      }}
+      style={
+        {
+          "--rsbs-backdrop-bg": "transparent",
+          "--rsbs-handle-bg": "rgba(255, 135, 0, 0.8)",
+        } as React.CSSProperties
+      }
+    >
+      {children}
+    </BottomSheet>
   );
 }
