@@ -11,6 +11,9 @@ importers:
       '@heroicons/react':
         specifier: ^2.1.5
         version: 2.1.5(react@18.3.1)
+      '@tanstack/react-query':
+        specifier: ^5.60.6
+        version: 5.60.6(react@18.3.1)
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -1922,6 +1925,14 @@ packages:
     resolution: {integrity: sha512-iq4yt3Fx35ZV5owNC//E6G+QPV19xHHVN2Ugi3p7KOSFK3chuXX9mxZ1rfir+t+U30a5EPOEnlsY3/1LXn7aTw==}
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+
+  '@tanstack/query-core@5.60.6':
+    resolution: {integrity: sha512-tI+k0KyCo1EBJ54vxK1kY24LWj673ujTydCZmzEZKAew4NqZzTaVQJEuaG1qKj2M03kUHN46rchLRd+TxVq/zQ==}
+
+  '@tanstack/react-query@5.60.6':
+    resolution: {integrity: sha512-FUzSDaiPkuZCmuGqrixfRRXJV9u+nrUh9lAlA5Q3ZFrOw1Js1VeBfxi1NIcJO3ZWJdKceBqKeBJdNcWStCYZnw==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -6675,6 +6686,13 @@ snapshots:
   '@storybook/theming@8.4.4(storybook@8.4.4(prettier@3.2.5))':
     dependencies:
       storybook: 8.4.4(prettier@3.2.5)
+
+  '@tanstack/query-core@5.60.6': {}
+
+  '@tanstack/react-query@5.60.6(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.60.6
+      react: 18.3.1
 
   '@testing-library/dom@10.4.0':
     dependencies:
