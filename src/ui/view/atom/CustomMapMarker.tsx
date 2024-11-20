@@ -6,19 +6,18 @@ import ChineseMarker from "@/assets/ChineseFood.svg";
 import WesternMarker from "@/assets/WesternFood.svg";
 import useBottomSheetStore from "@/store/stores/BottomSheet.store";
 
-const Label = ["Korean", "Japanese", "Ramen", "Chinese", "Western"] as const;
-type Label = (typeof Label)[number];
-
 interface ILocation {
   latitude: number;
   longitude: number;
 }
 
+type LabelType = ("Korean" | "Japanese" | "Ramen" | "Chinese" | "Western")[];
+
 interface IProp {
   location: ILocation;
   restaurantId: number;
   name: string;
-  label: Label[];
+  label: LabelType;
 }
 
 const markerMap = {
