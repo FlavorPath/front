@@ -8,8 +8,8 @@ const NavigationLayout = () => {
       className={css({
         position: "relative",
         minHeight: "100vh",
-        paddingBottom: "60px", // 네비게이션 높이만큼 콘텐츠 영역 확보
-        overflow: "hidden", // 콘텐츠가 영역 밖으로 나가지 않도록 설정
+        paddingBottom: "60px",
+        overflow: "hidden",
       })}
     >
       <Outlet />

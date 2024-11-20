@@ -16,15 +16,15 @@ const router = [
       },
       {
         path: "/recommendations",
-        element: <div>추천 페이지</div>, // 페이지 추가 필요
+        element: <div>추천 페이지</div>,
       },
       {
         path: "/bookmarks",
-        element: <div>스크랩 페이지</div>, // 페이지 추가 필요
+        element: <div>스크랩 페이지</div>,
       },
       {
         path: "/profile",
-        element: <div>내 정보 페이지</div>, // 페이지 추가 필요
+        element: <div>내 정보 페이지</div>,
       },
     ],
   },
