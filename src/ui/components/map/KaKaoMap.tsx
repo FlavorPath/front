@@ -38,8 +38,9 @@ export default function KaKaoMap() {
   ];
 
   const handleMarkerClick = (latitude: number, longitude: number) => {
+    const newLatitude = latitude - 0.001;
     if (map) {
-      map.setCenter(new window.kakao.maps.LatLng(latitude, longitude));
+      map.setCenter(new window.kakao.maps.LatLng(newLatitude, longitude));
     }
   };
 
