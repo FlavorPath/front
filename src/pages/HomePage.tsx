@@ -9,8 +9,8 @@ import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
 
 const HomePage = () => {
   const [searchValue, setSearchValue] = useState("");
-  const { containerRef, dynamicMinHeight, dynamicMaxHeight } =
-    useDynamicBottomSheetHeight();
+  // const { containerRef, dynamicMinHeight, dynamicMaxHeight } =
+  //   useDynamicBottomSheetHeight();
 
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
@@ -18,7 +18,7 @@ const HomePage = () => {
   };
 
   return (
-    <div ref={containerRef} className={styles.container}>
+    <div className={styles.container}>
       <SearchInput
         icon="MagnifyingGlassIcon"
         placeholder="식당을 탐색해보세요"
@@ -27,12 +27,12 @@ const HomePage = () => {
         className={styles.input}
       />
       <ButtonGroup />
-      <CustomBottomSheet
+      {/* <CustomBottomSheet
         dynamicMinHeight={dynamicMinHeight}
         dynamicMaxHeight={dynamicMaxHeight}
       >
         <RestaurantPage />
-      </CustomBottomSheet>
+      </CustomBottomSheet> */}
       <KaKaoMap />
     </div>
   );
