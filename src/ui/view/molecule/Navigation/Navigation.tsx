@@ -22,7 +22,7 @@ const Navigation = () => {
         alignItems: "center",
         padding: "10px 0",
         backgroundColor: "white",
-        borderTop: "1px solid #eaeaea",
+        borderTop: "1px solid #ff8700",
         position: "fixed",
         bottom: 0,
         width: "100%",
