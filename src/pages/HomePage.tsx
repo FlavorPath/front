@@ -5,9 +5,12 @@ import CustomBottomSheet from "@/ui/view/molecule/CustomBottomSheet";
 import { css } from "@styled-system/css";
 import { useState } from "react";
 import RestaurantPage from "./RestaurantPage";
+import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
 
 const HomePage = () => {
   const [searchValue, setSearchValue] = useState("");
+  const { containerRef, dynamicMinHeight, dynamicMaxHeight } =
+    useDynamicBottomSheetHeight();
 
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
@@ -15,7 +18,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div ref={containerRef} className={styles.container}>
       <SearchInput
         icon="MagnifyingGlassIcon"
         placeholder="식당을 탐색해보세요"
@@ -25,10 +28,11 @@ const HomePage = () => {
       />
       <ButtonGroup />
       <CustomBottomSheet
-        dynamicMinHeight={300}
-        dynamicMaxHeight={600}
-        children={<RestaurantPage />}
-      />
+        dynamicMinHeight={dynamicMinHeight}
+        dynamicMaxHeight={dynamicMaxHeight}
+      >
+        <RestaurantPage />
+      </CustomBottomSheet>
       <KaKaoMap />
     </div>
   );
@@ -44,6 +48,6 @@ const styles = {
     position: "fixed",
     marginLeft: 30,
     marginTop: 30,
-    zIndex: 1000,
+    zIndex: 700,
   }),
 };
