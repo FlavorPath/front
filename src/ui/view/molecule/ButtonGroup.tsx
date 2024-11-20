@@ -27,7 +27,7 @@ const ButtonGroup = () => {
         gap: "10px",
         marginTop: "75px",
         position: "fixed",
-        zIndex: 1000,
+        zIndex: 900,
         marginLeft: "30px",
       })}
     >
@@ -35,15 +35,11 @@ const ButtonGroup = () => {
         <Button
           key={item.value}
           variant={activeButton === item.value ? "filled" : "outlined"}
-          size="small"
           className={css({
             width: "55px",
-            height: "30px",
-            fontSize: "12px",
-            padding: "none",
-            borderRadius: "16px",
-            whiteSpace: "nowrap",
-            border: "2px solid",
+            height: "24px",
+            borderRadius: 12,
+            fontWeight: "medium",
           })}
           onClick={() => handleClick(item.value)}
         >
