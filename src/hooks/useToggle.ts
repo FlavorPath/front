@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import useToggleStore from '@/store/stores/toggle.store';
+import { useEffect } from 'react'
 
 interface IProps {
 	defaultValue?: boolean;
 }
 
 export const useToggle = ({defaultValue = false}: IProps) => {
-	const [value, setValue] = useState(defaultValue);
+	const { isOn, toggle, setDefaultValue } = useToggleStore();
 
-	const toggle = () => setValue(prev => !prev)
+  useEffect(() => {
+    setDefaultValue?.(defaultValue);
+  }, [setDefaultValue]);
 
-	return {value, toggle}
+	return { isOn, toggle };
 }

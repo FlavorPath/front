@@ -13,7 +13,7 @@ interface IProps {
 
 const StoreCard = (props: IProps) => {
   const { imageUrl, keywords, storeName, storeAddress, searchText } = props;
-  const { value: isBookmarked, toggle: toggleBookmark } = useToggle({ defaultValue: true })
+  const { isOn: isBookmarked, toggle: toggleBookmark } = useToggle({ defaultValue: true })
 	
   return (
     <div className={styles.container}>
@@ -26,7 +26,7 @@ const StoreCard = (props: IProps) => {
           />
         </div>
         <div className={styles.info_box}>
-          <div className={flex({ marginTop: '2px' })}>
+          <div className={flex({ marginTop: '2px', gap: '4px' })}>
             {keywords.map((key, index) => (
               <span
                 key={key}

@@ -1,17 +1,12 @@
-import useToggleStore from '@/store/stores/toggle.store';
+import { useToggle } from '@/hooks/useToggle';
 import { css, cx } from '@styled-system/css';
-import { useEffect } from 'react';
 
 interface ToggleProps {
 	defaultValue?: boolean;
 }
 
 const Toggle = ({ defaultValue = false }: ToggleProps) => {
-	const { isOn, toggle, setDefaultValue } = useToggleStore();
-
-	useEffect(() => {
-    setDefaultValue?.(defaultValue);
-  }, [setDefaultValue]);
+	const { isOn, toggle } = useToggle({defaultValue})
 
   return (
     <button

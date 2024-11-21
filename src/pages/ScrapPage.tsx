@@ -12,8 +12,11 @@ const ScrapPage = () => {
 
 	return (
     <div>
-      <Header headerText='내 스크랩' />
-      <StoreListTemplate/>
+      <Header
+        headerText='내 스크랩'
+        hideArrow
+      />
+      <StoreListTemplate />
     </div>
   );
 };
