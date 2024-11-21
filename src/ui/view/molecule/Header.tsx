@@ -12,7 +12,7 @@ const Header = ({ headerText }: IProps) => {
   const canGoBack = window.history.length > 1;
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.text}>{headerText}</div>
       {canGoBack && (
         <Icon
@@ -22,7 +22,7 @@ const Header = ({ headerText }: IProps) => {
           className={styles.back_btn}
         />
       )}
-    </div>
+    </header>
   );
 };
 
@@ -37,12 +37,13 @@ const styles = {
   back_btn: css({
     position: 'absolute',
     left: '30px',
-		top: '50%',
-		transform: 'translateY(-50%)',
+    top: '50%',
+    transform: 'translateY(-50%)',
   }),
   text: center({
     width: '100%',
     paddingTop: '4px',
     textStyle: 'heading2',
+    fontFamily: 'Gmarket Sans',
   }),
 };
