@@ -21,7 +21,7 @@ const fetchMapMarkers = async (label?: string) => {
 };
 
 export const useMapMarkers = (label?: string) => {
-  return useQuery<MarkerResponse>({
+  return useQuery<MarkerResponse[]>({
     queryKey: ["markers", label],
     queryFn: () => fetchMapMarkers(label),
     staleTime: 1000 * 60 * 5, // 캐시 유지 시간 설정 (5분)

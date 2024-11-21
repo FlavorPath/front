@@ -5,19 +5,18 @@ import RamenMarker from "@/assets/Ramen.svg";
 import ChineseMarker from "@/assets/ChineseFood.svg";
 import WesternMarker from "@/assets/WesternFood.svg";
 import useBottomSheetStore from "@/store/stores/BottomSheet.store";
+import { useMemo } from "react";
 
 interface ILocation {
   latitude: number;
   longitude: number;
 }
 
-type LabelType = ("Korean" | "Japanese" | "Ramen" | "Chinese" | "Western")[];
-
 interface IProp {
   location: ILocation;
   restaurantId: number;
   name: string;
-  label: LabelType;
+  label: string[];
   onMarkerClick: (latitude: number, longitude: number) => void; // 클릭 이벤트 핸들러
 }
 
@@ -46,6 +45,11 @@ const CustomMapMarker = ({
     onMarkerClick(location.latitude, location.longitude);
   };
 
+  const markerImageSrc = useMemo(
+    () => markerMap[label[0] as keyof typeof markerMap] ?? KoreanMarker,
+    [label]
+  );
+
   return (
     <MapMarker
       position={{
@@ -53,7 +57,7 @@ const CustomMapMarker = ({
         lng: location.longitude,
       }}
       image={{
-        src: markerMap[label[0]],
+        src: markerImageSrc,
         size: {
           width: 34,
           height: 43,

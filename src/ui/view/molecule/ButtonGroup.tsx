@@ -1,24 +1,17 @@
-import React, { useState } from "react";
-
 import { css } from "@styled-system/css";
 import Button from "../atom/Button";
+import { useButtonGroupStore } from "@/store/stores/map.store";
 
 const buttonItems = [
-  { label: "한식", value: "korean" },
-  { label: "일식", value: "japanese" },
-  { label: "중식", value: "chinese" },
-  { label: "양식", value: "western" },
-  { label: "카페", value: "cafe" },
+  { label: "한식", value: "Korean" },
+  { label: "일식", value: "Japanese" },
+  { label: "중식", value: "Chinese" },
+  { label: "양식", value: "Western" },
+  { label: "라멘", value: "Ramen" },
 ];
 
 const ButtonGroup = () => {
-  const [activeButton, setActiveButton] = useState<string>("");
-
-  const handleClick = (value: string) => {
-    setActiveButton(value);
-    console.log(`Selected: ${value}`);
-  };
-
+  const { activeButton, setActiveButton } = useButtonGroupStore();
   return (
     <div
       className={css({
@@ -41,7 +34,7 @@ const ButtonGroup = () => {
             borderRadius: 12,
             fontWeight: "medium",
           })}
-          onClick={() => handleClick(item.value)}
+          onClick={() => setActiveButton(item.value)}
         >
           {item.label}
         </Button>
