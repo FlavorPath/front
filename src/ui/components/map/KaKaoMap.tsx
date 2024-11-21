@@ -3,71 +3,49 @@ import CustomMapMarker from "@/ui/view/atom/CustomMapMarker";
 import { Map } from "react-kakao-maps-sdk";
 import { useState } from "react";
 import useDynamicMapSize from "@/hooks/map/useDynamicMapSize";
-
-type LabelType = ("Korean" | "Japanese" | "Ramen" | "Chinese" | "Western")[];
+import { useMap } from "@/hooks/map/useMap.hook";
 
 export default function KaKaoMap() {
   useKakaoLoader();
+  const { filteredMarkers, isLoading, isError } = useMap();
   const mapSize = useDynamicMapSize();
   const [map, setMap] = useState<any>(null);
 
-  const mockMarkerResponse: {
-    restaurantId: number;
-    name: string;
-    label: LabelType;
-    location: { latitude: number; longitude: number };
-  }[] = [
-    {
-      restaurantId: 1,
-      name: "홀짝집",
-      label: ["Korean"],
-      location: {
-        latitude: 34.450701,
-        longitude: 125.570667,
-      },
-    },
-    {
-      restaurantId: 2,
-      name: "만리지화",
-      label: ["Japanese"],
-      location: {
-        latitude: 33.450701,
-        longitude: 126.570667,
-      },
-    },
-  ];
-
   const handleMarkerClick = (latitude: number, longitude: number) => {
-    const newLatitude = latitude - 0.001;
+    const adjustedLatitude = latitude - 0.001;
     if (map) {
-      map.setCenter(new window.kakao.maps.LatLng(newLatitude, longitude));
+      map.setCenter(new window.kakao.maps.LatLng(adjustedLatitude, longitude));
     }
   };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Something went wrong. Please try again.</p>;
 
   return (
     <Map
       id="map"
       center={{
-        lat: 33.450701,
-        lng: 126.570667,
+        lat: 37.5665,
+        lng: 126.978,
       }}
-      style={mapSize} // 동적으로 계산된 크기 사용
+      style={mapSize}
       level={3}
       onCreate={(mapInstance) => setMap(mapInstance)}
     >
-      {mockMarkerResponse.map((mock, index) => (
-        <CustomMapMarker
-          key={index}
-          location={{
-            latitude: mock.location.latitude,
-            longitude: mock.location.longitude,
-          }}
-          restaurantId={mock.restaurantId}
-          name={mock.name}
-          label={mock.label}
-          onMarkerClick={handleMarkerClick}
-        />
-      ))}
+      {filteredMarkers &&
+        filteredMarkers.map((marker, index) => (
+          <CustomMapMarker
+            key={index}
+            location={{
+              latitude: marker.location.latitude,
+              longitude: marker.location.longitude,
+            }}
+            restaurantId={marker.restaurantId}
+            name={marker.name}
+            label={marker.label}
+            onMarkerClick={handleMarkerClick}
+          />
+        ))}
     </Map>
   );
 }

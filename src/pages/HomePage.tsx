@@ -1,7 +1,6 @@
 import KaKaoMap from "@/ui/components/map/KaKaoMap";
 import SearchInput from "@/ui/view/atom/SearchInput";
 import ButtonGroup from "@/ui/view/molecule/ButtonGroup";
-
 import { css } from "@styled-system/css";
 import { useNavigate } from 'react-router-dom';
 
