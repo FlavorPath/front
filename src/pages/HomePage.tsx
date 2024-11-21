@@ -3,24 +3,20 @@ import SearchInput from "@/ui/view/atom/SearchInput";
 import ButtonGroup from "@/ui/view/molecule/ButtonGroup";
 
 import { css } from "@styled-system/css";
-import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleSearchChange = (value: string) => {
-    setSearchValue(value);
-    console.log("검색어:", value);
-  };
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
       <SearchInput
-        icon="MagnifyingGlassIcon"
-        placeholder="식당을 탐색해보세요"
-        value={searchValue}
-        onValueChange={handleSearchChange}
+        icon='MagnifyingGlassIcon'
+        placeholder='식당을 탐색해보세요'
+        defaultValue=''
+        readOnly
         className={styles.input}
+        onClick={() => navigate('/search')}
       />
       <ButtonGroup />
       <KaKaoMap />
@@ -32,12 +28,16 @@ export default HomePage;
 
 const styles = {
   container: css({
-    position: "relative",
+    position: 'relative',
   }),
   input: css({
-    position: "fixed",
+    position: 'fixed',
     marginLeft: 30,
     marginTop: 30,
     zIndex: 700,
+    cursor: 'pointer',
+    '& input': {
+      cursor: 'pointer',
+    },
   }),
 };
