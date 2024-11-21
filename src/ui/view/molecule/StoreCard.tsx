@@ -1,8 +1,7 @@
 import { css, cx } from '@styled-system/css';
 import { flex } from '@styled-system/patterns';
-import bookmark from '../../../assets/icons/bookmark.svg';
-import bookmarkInactive from '../../../assets/icons/bookmark-inactive.svg';
 import { useToggle } from '@/hooks/useToggle';
+import Icon from '../atom/Icon';
 
 interface IProps {
 	imageUrl: string;
@@ -14,11 +13,11 @@ interface IProps {
 
 const StoreCard = (props: IProps) => {
   const { imageUrl, keywords, storeName, storeAddress, searchText } = props;
-  const { value: isBookmarked, toggle: toggleBookmark } = useToggle({defaultValue: false})
+  const { value: isBookmarked, toggle: toggleBookmark } = useToggle({ defaultValue: true })
 	
   return (
     <div className={styles.container}>
-      <a className={flex({ width: '100%'})}>
+      <a className={flex({ width: '100%' })}>
         <div className={styles.store_img}>
           <img
             src={imageUrl}
@@ -49,7 +48,25 @@ const StoreCard = (props: IProps) => {
         className={styles.bookmark}
         onClick={toggleBookmark}
       >
-        {isBookmarked ? <img src={bookmark} /> : <img src={bookmarkInactive} />}
+        {isBookmarked ? (
+          <span
+            className={styles.solid_icon}
+          >
+            <Icon
+              library={'hero-solid'}
+              iconName='BookmarkIcon'
+            />
+          </span>
+        ) : (
+          <span
+            className={styles.outlined_icon}
+          >
+            <Icon
+              library={'hero-outline'}
+              iconName='BookmarkIcon'
+            />
+          </span>
+        )}
       </button>
     </div>
   );
@@ -60,7 +77,7 @@ export default StoreCard;
 const styles = {
   container: flex({
     width: '100%',
-    padding: '30px 20px',
+    padding: '30px 30px',
     position: 'relative',
     borderBottomColor: 'background.lightgray',
     borderBottomWidth: '1px',
@@ -92,6 +109,20 @@ const styles = {
   }),
   bookmark: css({
     position: 'absolute',
-    right: '20px',
+    right: '30px',
+    width: '20px',
+    height: '24px',
+  }),
+  outlined_icon: css({
+    '& > button > svg': {
+      fill: 'white',
+      stroke: 'primary.main',
+      strokeWidth: '2',
+    },
+  }),
+  solid_icon: css({
+    '& > button > svg': {
+      fill: 'primary.main',
+    },
   }),
 };
