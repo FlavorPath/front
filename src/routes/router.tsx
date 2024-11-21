@@ -21,7 +21,7 @@ const router = [
       },
       {
         path: "/bookmarks",
-        element: <div>스크랩 페이지</div>, // 페이지 추가 필요
+        element: <ScrapPage />, // 페이지 추가 필요
       },
       {
         path: "/profile",
