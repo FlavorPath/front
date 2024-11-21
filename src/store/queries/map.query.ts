@@ -17,6 +17,7 @@ const fetchMapMarkers = async (label?: string) => {
     ? `${API_PATH.marker}?label=${encodeURIComponent(label)}`
     : API_PATH.marker;
   const response = await axiosInstance.get(url);
+  console.log(`label: ${label} url: ${url}`);
   return response.data;
 };
 

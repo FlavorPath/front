@@ -25,8 +25,8 @@ export default function KaKaoMap() {
     <Map
       id="map"
       center={{
-        lat: 37.5665, // 서울의 위도
-        lng: 126.978, // 서울의 경도
+        lat: 37.5665,
+        lng: 126.978,
       }}
       style={mapSize}
       level={3}
