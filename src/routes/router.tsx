@@ -1,5 +1,7 @@
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
+import ScrapPage from '@/pages/ScrapPage';
+import SearchPage from '@/pages/SearchPage';
 import SignUpPage from '@/pages/SignupPage';
 import Bottom from "@/ui/components/Bottom";
 import AuthLayout from '@/ui/components/layout/AuthLayout';
@@ -29,6 +31,14 @@ const router = [
       },
     ],
   },
+  {
+    path: '/bookmark',
+    element: <ScrapPage />
+  },
+  {
+    path: '/search',
+    element: <SearchPage />
+  }
 ];
 
 export default router;
