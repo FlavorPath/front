@@ -3,22 +3,20 @@ import StoreCard from '../molecule/StoreCard';
 import { useStores } from '@/hooks/useStores';
 
 const StoreListTemplate = () => {
-  	const storeData = useStores();
+  const { stores, noResultText, searchValue } = useStores();
 
   return (
     <div>
-      {storeData.stores?.length ? (
-        storeData.stores?.map((item: any) => (
+      {stores?.length ? (
+        stores?.map(item => (
           <StoreCard
             key={item.name}
-            imageUrl='https://mblogthumb-phinf.pstatic.net/MjAyMjA2MTVfNTAg/MDAxNjU1Mjc1NjY4ODQw.6yx22lIpua3VuAel1Qe3W4AYGAR1K1imN21ieqFSd88g.JQ4N1OOBNIK4TLep64AelKYhMI4WdELxGyuxPFQ3NJMg.JPEG.uijing3697/KakaoTalk_20220615_143719849_06.jpg?type=w800'
-            keywords={['고기', '한식', '중식']}
-            storeName={'홀짝집'}
-            storeAddress={'서울 송파구 백제고분로 69 (잠실동)'}
+            {...item}
+            searchText={searchValue}
           />
         ))
       ) : (
-        <div className={styles.no_result}>{storeData.noResultText}</div>
+        <div className={styles.no_result}>{noResultText}</div>
       )}
     </div>
   );

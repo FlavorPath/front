@@ -1,9 +1,5 @@
+import { Store } from '@/mocks/mock-data/stores.mock';
 import { create } from 'zustand';
-
-export interface Store {
-	storeName: string;
-	storeAddress: string;
-}
 
 interface StoreState {
   stores: Store[];

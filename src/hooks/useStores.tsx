@@ -1,4 +1,9 @@
-import useStoreState, { Store } from '@/store/stores/stores.store';
+import { Store } from '@/mocks/mock-data/stores.mock';
+import { useGetBookmarks } from '@/store/queries/bookmarks.query';
+import { useGetSearchStores } from '@/store/queries/search.query';
+import useSearchStore from '@/store/stores/search.store';
+import useStoreState from '@/store/stores/stores.store';
+import useToggleStore from '@/store/stores/toggle.store';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -8,21 +13,39 @@ export interface StoreData {
 }
 
 export const useStores = () => {
-	const {pathname} = useLocation();
+	const { pathname } = useLocation();
   const isSearchPage = pathname === '/search';
-  const isBookmarkPage = pathname === '/bookmark';
+  const isBookmarkPage = pathname === '/bookmarks';
 
-	const { stores, setStores, noResultText, setNoResultText } = useStoreState();
+	const { stores, noResultText, setStores, setNoResultText } = useStoreState();
+	const { searchValue, setSearchValue } = useSearchStore();
+	const isToggleOn = useToggleStore(state => state.isOn);
 
+	const { data: bookmarks } = useGetBookmarks()
+	
+	const {
+    data: searchResult,
+    refetch,
+    isFetching: isSearchLoading,
+	} = useGetSearchStores({ searchText: searchValue, isToggleOn });
+	
 	useEffect(() => {
 		if (isSearchPage) {
-			setStores(stores)
-			setNoResultText('검색 결과가 없습니다.')
+			setStores(searchResult);
+      setNoResultText('검색 결과가 없습니다.');
 		} else if (isBookmarkPage) {
-			setStores(stores);
-      setNoResultText('스크랩된 스토어가 없습니다.');
+			setStores(bookmarks);
+			setNoResultText('스크랩된 스토어가 없습니다.');
 		}
-	}, [])
+	}, [isSearchPage, isBookmarkPage, searchResult, bookmarks]); 
 
-	return { stores, noResultText };
+	return {
+    stores,
+    noResultText,
+    isToggleOn,
+    searchValue,
+    setSearchValue,
+    onSubmit: refetch,
+    isSearchLoading,
+  };
 }

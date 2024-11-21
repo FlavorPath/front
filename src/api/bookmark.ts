@@ -1,12 +1,14 @@
-import axiosInstance from '.'
 
-interface IResBookmark {
-	restaurantId: number;
-	name: string;
-	label: string;
+import axios from 'axios'
+
+export const fetchGetBookmarks = async () => {
+	const response = await axios.get('/scraps')
+	return response.data
 }
 
-export const getBookmarks = async () => {
-	const response = await axiosInstance.get('/scraps');
+export const removeBookmarks = async (restaurantId: number) => {
+	const response = await axios.delete('/scraps', {
+    data: { restaurantId },
+  });
 	return response.data
 }

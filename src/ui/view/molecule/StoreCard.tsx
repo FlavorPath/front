@@ -1,33 +1,29 @@
 import { css, cx } from '@styled-system/css';
 import { flex } from '@styled-system/patterns';
-import { useToggle } from '@/hooks/useToggle';
 import Icon from '../atom/Icon';
+import { useLocation } from 'react-router-dom';
+import { Store } from '@/mocks/mock-data/stores.mock';
+import { useDeleteBookmark } from '@/store/queries/bookmarks.query';
 
-interface IProps {
-	imageUrl: string;
-	keywords: string[];
-	storeName: string;
-	storeAddress: string;
-	searchText?: string;
-}
+const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
+  const location = useLocation();
+  const isSearching = location.pathname === '/search'
 
-const StoreCard = (props: IProps) => {
-  const { imageUrl, keywords, storeName, storeAddress, searchText } = props;
-  const { isOn: isBookmarked, toggle: toggleBookmark } = useToggle({ defaultValue: true })
-	
+  const { mutate: deleteBookmark } = useDeleteBookmark();
+
   return (
     <div className={styles.container}>
       <a className={flex({ width: '100%' })}>
         <div className={styles.store_img}>
           <img
-            src={imageUrl}
+            src={props.img}
             alt='store img'
             style={{ height: 'inherit', objectFit: 'cover' }}
           />
         </div>
         <div className={styles.info_box}>
           <div className={flex({ marginTop: '2px', gap: '4px' })}>
-            {keywords.map((key, index) => (
+            {props.labels.map((key, index) => (
               <span
                 key={key}
                 className={cx(
@@ -36,38 +32,27 @@ const StoreCard = (props: IProps) => {
                 )}
               >
                 {key}
-                {index !== keywords.length - 1 ? ',' : ''}
+                {index !== props.labels.length - 1 ? ',' : ''}
               </span>
             ))}
           </div>
-          <strong className={styles.title}>{storeName}</strong>
-          <span className={styles.address}>{storeAddress}</span>
+          <strong className={styles.title}>{props.name}</strong>
+          <span className={styles.address}>{props.address}</span>
         </div>
       </a>
-      <button
-        className={styles.bookmark}
-        onClick={toggleBookmark}
-      >
-        {isBookmarked ? (
-          <span
-            className={styles.solid_icon}
-          >
+      {!isSearching && (
+        <button
+          className={styles.bookmark}
+          onClick={() => deleteBookmark({ restaurantId: props.restaurantId})}
+        >
+          <span className={styles.solid_icon}>
             <Icon
               library={'hero-solid'}
               iconName='BookmarkIcon'
             />
           </span>
-        ) : (
-          <span
-            className={styles.outlined_icon}
-          >
-            <Icon
-              library={'hero-outline'}
-              iconName='BookmarkIcon'
-            />
-          </span>
-        )}
-      </button>
+        </button>
+      )}
     </div>
   );
 };
