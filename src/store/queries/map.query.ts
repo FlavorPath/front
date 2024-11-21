@@ -1,16 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 import { API_PATH } from "@/api/api-path";
 import axiosInstance from "@/api";
-const fetchRestaurantDetails = async (id: number) => {
-  const url = API_PATH.restaurant.replace(":id", id.toString());
+
+type MarkerResponse = {
+  restaurantId: number;
+  name: string;
+  label: string[];
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+};
+
+const fetchMapMarkers = async (label?: string) => {
+  const url = label
+    ? `${API_PATH.marker}?label=${encodeURIComponent(label)}`
+    : API_PATH.marker;
   const response = await axiosInstance.get(url);
   return response.data;
 };
-export const useRestaurantDetails = (id: number) => {
-  return useQuery({
-    queryKey: ["restaurant", id],
-    queryFn: () => fetchRestaurantDetails(id),
-    enabled: !!id,
-    staleTime: 1000 * 60 * 5,
+
+export const useMapMarkers = (label?: string) => {
+  return useQuery<MarkerResponse>({
+    queryKey: ["markers", label],
+    queryFn: () => fetchMapMarkers(label),
+    staleTime: 1000 * 60 * 5, // 캐시 유지 시간 설정 (5분)
+    enabled: label !== undefined, // label이 undefined일 경우 쿼리 비활성화
   });
 };
