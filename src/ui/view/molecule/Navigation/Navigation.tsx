@@ -25,7 +25,7 @@ const Navigation = () => {
         borderTop: "1px solid #ff8700",
         position: "fixed",
         bottom: 0,
-        width: "100%",
+        width: "375px",
         height: "60px",
         zIndex: 900,
       })}
