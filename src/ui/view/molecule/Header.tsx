@@ -36,7 +36,7 @@ const styles = {
   }),
   back_btn: css({
     position: 'absolute',
-    left: '30px',
+    left: '15px',
     top: '50%',
     transform: 'translateY(-50%)',
   }),
