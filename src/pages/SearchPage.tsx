@@ -30,7 +30,6 @@ const SearchPage = () => {
       <div className={styles.toggle_wrap}>
         <div className={styles.toggle_text}>키워드로 검색</div>
         <Toggle />
-        {String(isSearchLoading)}
       </div>
       <StoreListTemplate />
       {isSearchLoading && (
