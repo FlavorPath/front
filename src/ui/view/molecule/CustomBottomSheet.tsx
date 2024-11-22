@@ -28,6 +28,7 @@ export default function CustomBottomSheet({
           "--rsbs-backdrop-bg": "transparent",
           "--rsbs-handle-bg": "rgba(255, 135, 0, 0.8)",
           zIndex: 1000,
+          position: "fixed",
         } as React.CSSProperties
       }
     >
