@@ -4,6 +4,7 @@ import { useGetSearchStores } from '@/store/queries/search.query';
 import useSearchStore from '@/store/stores/search.store';
 import useStoreState from '@/store/stores/stores.store';
 import useToggleStore from '@/store/stores/toggle.store';
+import useDebounce from '@/utils/hooks/useDebounce';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -22,22 +23,27 @@ export const useStores = () => {
 	const isToggleOn = useToggleStore(state => state.isOn);
 
 	const { data: bookmarks } = useGetBookmarks()
-	
-	const {
-    data: searchResult,
-    refetch,
-    isFetching: isSearchLoading,
-	} = useGetSearchStores({ searchText: searchValue, isToggleOn });
+	const debouncedSearchValue = useDebounce(searchValue, 150); 
+
+	const { data: searchResult, isFetching: isSearchLoading } = useGetSearchStores(
+    {
+      searchText: debouncedSearchValue,
+      isToggleOn,
+    },
+  );
 	
 	useEffect(() => {
 		if (isSearchPage) {
-			setStores(searchResult);
-      setNoResultText('검색 결과가 없습니다.');
+			// if (!searchValue) return setStores([]);
+			if (searchResult) {
+				setStores(searchResult);
+        setNoResultText('검색 결과가 없습니다.');
+			}
 		} else if (isBookmarkPage) {
 			setStores(bookmarks);
 			setNoResultText('스크랩된 스토어가 없습니다.');
 		}
-	}, [isSearchPage, isBookmarkPage, searchResult, bookmarks]); 
+	}, [isSearchPage, isBookmarkPage, searchResult, bookmarks, searchValue]); 
 
 	return {
     stores,
@@ -45,7 +51,6 @@ export const useStores = () => {
     isToggleOn,
     searchValue,
     setSearchValue,
-    onSubmit: refetch,
     isSearchLoading,
   };
 }

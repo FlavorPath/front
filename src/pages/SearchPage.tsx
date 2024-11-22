@@ -7,13 +7,7 @@ import { css } from '@styled-system/css';
 import { center, flex } from '@styled-system/patterns';
 
 const SearchPage = () => {
-	const { isToggleOn, searchValue, setSearchValue, onSubmit, isSearchLoading } = useStores();
-
-	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
-      onSubmit();
-    }
-  };
+	const { isToggleOn, searchValue, setSearchValue, isSearchLoading } = useStores();
 
 	return (
     <div>
@@ -24,21 +18,20 @@ const SearchPage = () => {
           placeholder={isToggleOn ? '키워드로 검색해보세요' : '식당을 탐색해보세요'}
           value={searchValue}
           onValueChange={setSearchValue}
-          onKeyDown={handleKeyDown}
         />
       </div>
       <div className={styles.toggle_wrap}>
         <div className={styles.toggle_text}>키워드로 검색</div>
         <Toggle />
       </div>
-      <StoreListTemplate />
       {isSearchLoading && (
-        <div className={styles.blur}>
+        <div>
           <div className={styles.loading}>
             <span>Loading...</span>
           </div>
         </div>
       )}
+			<StoreListTemplate />
     </div>
   );
 };
@@ -57,13 +50,6 @@ const styles = {
   }),
 	input_box: css({
 		padding: '8px 30px'
-	}),
-	blur: css({
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		right: 0,
-		bottom: 0,
 	}),
 	loading: center({
 		width: '120px',
