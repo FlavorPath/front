@@ -7,8 +7,8 @@ export const useGetSearchStores = ({ searchText, isToggleOn }: { searchText: str
   const isCurrentPage = location.pathname === '/search';
 
   return useQuery({
-    queryKey: ['search-store', isToggleOn ? 'label' : 'name'],
+    queryKey: ['search-store', isToggleOn ? 'label' : 'name', searchText],
     queryFn: () => fetchSearchStore(searchText, isToggleOn),
-    enabled: !!isCurrentPage && !!searchText,
+    enabled: !!isCurrentPage
   });
 };
