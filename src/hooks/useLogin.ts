@@ -1,5 +1,6 @@
 // import { login } from '@/api/auth';
 import { useForm } from '@/hooks/useForm';
+import { useFetchLogin } from '@/store/queries/auth.query';
 import { validation } from '@/utils/validation/index';
 
 export interface LoginFormData {
@@ -8,12 +9,15 @@ export interface LoginFormData {
 }
 
 export const useLogin = () => {
-	const submitHandler = async () => {
-    try {
-			// login(inputs.userId, inputs.password);
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
+  const { mutate } = useFetchLogin();
+
+  const getErrorMessage = (key: string) => errors[key as keyof LoginFormData];
+
+  const submitHandler = async () => {
+    mutate({
+      username: inputs.userId,
+      password: inputs.password,
+    });
   };
 
   const { inputs, errors, handleChange, handleSubmit } = useForm<LoginFormData>({
@@ -24,8 +28,6 @@ export const useLogin = () => {
     validates: validation,
     submitHandler: submitHandler,
   });
-
-  const getErrorMessage = (key: string) => errors[key as keyof LoginFormData];
 
   return {
     inputs,
