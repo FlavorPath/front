@@ -26,10 +26,10 @@ const Input = ({ className, error, ...props }: IProps) => {
       />
       {props.type === 'password' && (
         <Icon
-          iconName={showPassword ? 'HiEye' : 'HiEyeOff'}
+          library='hero-solid'
+          iconName={showPassword ? 'EyeIcon' : 'EyeSlashIcon'}
           onClick={toggle}
           className={styles.eye_icon}
-          color='#444'
         />
       )}
     </div>

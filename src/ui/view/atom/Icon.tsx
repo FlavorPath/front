@@ -38,7 +38,11 @@ const Icon = ({
   }
 
   return (
-    <button type="button" onClick={onClick} className={className}>
+    <button
+      type='button'
+      onClick={onClick}
+      className={className}
+    >
       <IconComponent
         width={size}
         height={size}

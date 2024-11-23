@@ -3,4 +3,6 @@ export const API_PATH = {
   restaurant: 'restaurant/:id',
   login: '/user/login',
   register: '/user/register',
+  scraps: '/scraps',
+  searchStore: '/search',
 };

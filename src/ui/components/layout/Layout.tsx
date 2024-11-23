@@ -12,13 +12,14 @@ const Layout = ({children}: {children: ReactNode}) => {
 export default Layout;
 
 const styles = {
-	container: css({
-		width: '100dvw',
-		height: '100vh'
-	}),
-	inner: css({
-		margin: '0 auto',
-		width: '375px',
-		height: '100%',
-	})
-}
+  container: css({
+    width: '100dvw',
+    height: '100vh',
+    fontFamily: 'Gmarket Sans',
+  }),
+  inner: css({
+    margin: '0 auto',
+    width: '375px',
+    height: '100%',
+  }),
+};
