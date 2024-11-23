@@ -4,6 +4,7 @@ import { Map } from "react-kakao-maps-sdk";
 import { useState } from "react";
 import useDynamicMapSize from "@/hooks/map/useDynamicMapSize";
 import { useMap } from "@/hooks/map/useMap.hook";
+import { css } from "@styled-system/css";
 
 export default function KaKaoMap() {
   useKakaoLoader();
@@ -31,6 +32,10 @@ export default function KaKaoMap() {
       style={mapSize}
       level={3}
       onCreate={(mapInstance) => setMap(mapInstance)}
+      className={css({
+        position: "fixed",
+        left: 0,
+      })}
     >
       {filteredMarkers &&
         filteredMarkers.map((marker, index) => (

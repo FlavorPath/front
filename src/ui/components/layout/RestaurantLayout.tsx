@@ -1,23 +1,21 @@
 import Icon from "@/ui/view/atom/Icon";
-import ButtonGroup from "@/ui/view/molecule/ButtonGroup";
+import SimpleSlider from "@/ui/view/molecule/ImgSlide";
+import LabelGroup from "@/ui/view/molecule/LabelGroup";
+import RestaurantNavigation from "@/ui/view/molecule/RestaurantNavigation";
 import { css } from "@styled-system/css";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
 
 const RestaurantLayout = () => {
   const [activeBookMarker, setActiveBookMarker] = useState(false);
+  const LabelItem = ["한식", "고기"];
   return (
-    <div style={{ height: "100%", position: "relative" }}>
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
       <div className={styles.container}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "30px",
-            paddingTop: "10px",
-            paddingBottom: "none",
-          }}
-        >
+        <div className={styles.header}>
           <h1 className={css({ textStyle: "heading1" })}>홀짝집</h1>
           <Icon
             iconName="BookmarkIcon"
@@ -28,9 +26,12 @@ const RestaurantLayout = () => {
             })}
           />
         </div>
-        <ButtonGroup />
+        <div className={styles.main}>
+          <LabelGroup labelItems={LabelItem} />
+          <SimpleSlider />
+        </div>
+        <RestaurantNavigation />
       </div>
-      <Outlet />
     </div>
   );
 };
@@ -41,5 +42,20 @@ const styles = {
   container: css({
     height: "420px",
     width: "100%",
+    paddingTop: "10px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "7px",
+  }),
+  header: css({
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "10px 30px 0px 30px",
+  }),
+  main: css({
+    padding: "0px 30px 0px 30px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "7px",
   }),
 };

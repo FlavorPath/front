@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 import { css } from "@styled-system/css";
 import Navigation from "@/ui/view/molecule/Navigation/Navigation";
 import CustomBottomSheet from "@/ui/view/molecule/CustomBottomSheet";
-import RestaurantPage from "@/pages/RestaurantPage";
 import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
 import RestaurantLayout from "./RestaurantLayout";
 
@@ -14,8 +13,8 @@ const NavigationLayout = () => {
       ref={containerRef}
       className={css({
         position: "relative",
-        minHeight: "100vh",
-        overflow: "hidden",
+        height: "100%",
+        width: "100%",
       })}
     >
       <Outlet />
