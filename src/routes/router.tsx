@@ -14,20 +14,6 @@ const router = [
       {
         path: "/",
         element: <HomePage />,
-        children: [
-          {
-            path: "/",
-            element: <div>식당 메인</div>,
-          },
-          {
-            path: "menu",
-            element: <div>식당 메뉴</div>,
-          },
-          {
-            path: "review",
-            element: <div>식당 리뷰</div>,
-          },
-        ],
       },
       {
         path: "/recommendations",

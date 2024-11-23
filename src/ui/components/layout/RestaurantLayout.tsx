@@ -1,3 +1,4 @@
+import { useSelectedRestaurant } from "@/hooks/restaurant/useSelectedRestaurant.hook";
 import Icon from "@/ui/view/atom/Icon";
 import Slider from "@/ui/view/molecule/ImgSlide";
 import LabelGroup from "@/ui/view/molecule/LabelGroup";
@@ -9,6 +10,8 @@ import { Outlet } from "react-router-dom";
 const RestaurantLayout = () => {
   const [activeBookMarker, setActiveBookMarker] = useState(false);
   const LabelItem = ["한식", "고기"];
+  const { selectedRestaurant } = useSelectedRestaurant();
+
   return (
     <div
       style={{
@@ -17,7 +20,11 @@ const RestaurantLayout = () => {
     >
       <div className={styles.container}>
         <div className={styles.header}>
-          <h1 className={css({ textStyle: "heading1" })}>홀짝집</h1>
+          <h1 className={css({ textStyle: "heading1" })}>
+            {selectedRestaurant
+              ? selectedRestaurant.name
+              : "식당 이름 로딩 중..."}
+          </h1>
           <Icon
             iconName="BookmarkIcon"
             library="hero-solid"

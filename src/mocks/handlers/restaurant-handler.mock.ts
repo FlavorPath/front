@@ -6,13 +6,13 @@ import { restaurantMockData } from "../mock-data/restaurant.mock";
 export const restaurantHandler = [
   http.get(`${API_PATH.restaurant}/:id`, async ({ params }) => {
     const { id } = params;
-    console.log(`id: ${id}`);
+    console.log(`식당 상세 데이터 요청: ${id}`);
     await delayForDevelopment();
-    if (!id) {
-      return new HttpResponse("Not found", {
-        status: 404,
+    if (!id || typeof id !== "string") {
+      return new HttpResponse("message: 식당을 찾을 수 없음", {
+        status: 400,
         headers: {
-          "Content-Type": "text/plain",
+          "Content-Type": "application/json",
         },
       });
     }
@@ -20,13 +20,16 @@ export const restaurantHandler = [
       (data) => data.restaurantId.toString() === id
     );
     if (!restaurant) {
-      return new HttpResponse("Not found", {
-        status: 404,
-        headers: {
-          "Content-Type": "text/plain",
-        },
-      });
+      return new HttpResponse(
+        JSON.stringify({ message: "식당을 찾을 수 없음" }),
+        {
+          status: 404,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
-    return HttpResponse.json(restaurant);
+    return HttpResponse.json(restaurant, { status: 200 });
   }),
 ];

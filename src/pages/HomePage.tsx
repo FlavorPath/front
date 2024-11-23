@@ -1,6 +1,6 @@
 import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
 import RestaurantLayout from "@/ui/components/layout/RestaurantLayout";
-import KaKaoMap from "@/ui/components/map/KaKaoMap";
+import KaKaoMap from "@/ui/components/map/KaKaoMap.1";
 import SearchInput from "@/ui/view/atom/SearchInput";
 import ButtonGroup from "@/ui/view/molecule/ButtonGroup";
 import CustomBottomSheet from "@/ui/view/molecule/CustomBottomSheet";
