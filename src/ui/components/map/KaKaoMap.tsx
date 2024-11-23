@@ -19,7 +19,7 @@ export default function KaKaoMap() {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <div>지도 로딩중...</div>;
   if (isError) return <p>Something went wrong. Please try again.</p>;
 
   return (

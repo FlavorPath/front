@@ -14,6 +14,20 @@ const router = [
       {
         path: "/",
         element: <HomePage />,
+        children: [
+          {
+            path: "/",
+            element: <div>식당 메인</div>,
+          },
+          {
+            path: "menu",
+            element: <div>식당 메뉴</div>,
+          },
+          {
+            path: "review",
+            element: <div>식당 리뷰</div>,
+          },
+        ],
       },
       {
         path: "/recommendations",
@@ -21,7 +35,7 @@ const router = [
       },
       {
         path: "/bookmarks",
-        element: <ScrapPage />, // 페이지 추가 필요
+        element: <ScrapPage />,
       },
       {
         path: "/profile",

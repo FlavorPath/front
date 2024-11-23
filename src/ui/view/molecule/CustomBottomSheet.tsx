@@ -19,7 +19,7 @@ export default function CustomBottomSheet({
   return (
     <BottomSheet
       open={isOpen}
-      snapPoints={() => [dynamicMinHeight, dynamicMaxHeight]}
+      snapPoints={() => [370, dynamicMaxHeight]}
       onDismiss={() => {
         setOpenBottomSheet(false);
       }}

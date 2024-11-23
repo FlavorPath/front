@@ -7,7 +7,7 @@ const images = [
   "https://via.placeholder.com/800x400?text=Slide+3",
 ];
 
-export default function SimpleSlider() {
+export default function Slider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -21,11 +21,11 @@ export default function SimpleSlider() {
 const styles = {
   sliderContainer: css({
     position: "relative",
-    width: "315px",
-    height: "208px",
+    width: "335px",
+    height: "210px",
     margin: "0 auto",
     overflow: "hidden",
-    borderRadius: "30px",
+    borderRadius: "20px",
     backgroundColor: "primary.main",
   }),
 };

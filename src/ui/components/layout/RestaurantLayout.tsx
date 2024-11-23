@@ -1,9 +1,10 @@
 import Icon from "@/ui/view/atom/Icon";
-import SimpleSlider from "@/ui/view/molecule/ImgSlide";
+import Slider from "@/ui/view/molecule/ImgSlide";
 import LabelGroup from "@/ui/view/molecule/LabelGroup";
 import RestaurantNavigation from "@/ui/view/molecule/RestaurantNavigation";
 import { css } from "@styled-system/css";
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 const RestaurantLayout = () => {
   const [activeBookMarker, setActiveBookMarker] = useState(false);
@@ -23,14 +24,16 @@ const RestaurantLayout = () => {
             onClick={() => setActiveBookMarker(true)}
             className={css({
               stroke: "primary.main",
+              strokeWidth: "2px",
             })}
           />
         </div>
         <div className={styles.main}>
           <LabelGroup labelItems={LabelItem} />
-          <SimpleSlider />
+          <Slider />
         </div>
         <RestaurantNavigation />
+        <Outlet />
       </div>
     </div>
   );
@@ -40,8 +43,8 @@ export default RestaurantLayout;
 
 const styles = {
   container: css({
-    height: "420px",
-    width: "100%",
+    width: "375px",
+    margin: "0 auto",
     paddingTop: "10px",
     display: "flex",
     flexDirection: "column",
@@ -50,10 +53,10 @@ const styles = {
   header: css({
     display: "flex",
     justifyContent: "space-between",
-    padding: "10px 30px 0px 30px",
+    padding: "10px 20px 0px 20px",
   }),
   main: css({
-    padding: "0px 30px 0px 30px",
+    padding: "0px 20px 0px 20px",
     display: "flex",
     flexDirection: "column",
     gap: "7px",

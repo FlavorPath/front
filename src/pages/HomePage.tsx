@@ -1,14 +1,18 @@
+import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
+import RestaurantLayout from "@/ui/components/layout/RestaurantLayout";
 import KaKaoMap from "@/ui/components/map/KaKaoMap";
 import SearchInput from "@/ui/view/atom/SearchInput";
 import ButtonGroup from "@/ui/view/molecule/ButtonGroup";
+import CustomBottomSheet from "@/ui/view/molecule/CustomBottomSheet";
 import { css } from "@styled-system/css";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const navigate = useNavigate();
-
+  const { containerRef, dynamicMinHeight, dynamicMaxHeight } =
+    useDynamicBottomSheetHeight();
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <SearchInput
         icon="MagnifyingGlassIcon"
         placeholder="식당을 탐색해보세요"
@@ -19,6 +23,12 @@ const HomePage = () => {
       />
       <ButtonGroup />
       <KaKaoMap />
+      <CustomBottomSheet
+        dynamicMinHeight={dynamicMinHeight}
+        dynamicMaxHeight={dynamicMaxHeight}
+      >
+        <RestaurantLayout />
+      </CustomBottomSheet>
     </div>
   );
 };
