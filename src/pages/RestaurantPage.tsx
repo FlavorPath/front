@@ -1,4 +1,5 @@
 import Restaurant from "@/ui/components/restaurant/Restaurant";
+import Header from "@/ui/view/molecule/Header";
 import { css } from "@styled-system/css";
 import { Outlet, useParams } from "react-router-dom";
 
@@ -12,6 +13,7 @@ const RestaurantPage = () => {
 
   return (
     <div className={styles.container}>
+      <Header />
       <Restaurant restarauntId={restarauntId} />
       <Outlet />
     </div>
