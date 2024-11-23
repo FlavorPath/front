@@ -18,7 +18,8 @@ const LabelGroup = ({ labelItems }: IProp) => {
           key={index}
           variant={"filled"}
           className={css({
-            width: "55px",
+            width: "fit-content",
+            padding: "10px",
             height: "24px",
             borderRadius: 12,
             fontWeight: "medium",
