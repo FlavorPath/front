@@ -1,5 +1,7 @@
 import { delay } from "msw";
 import { mapHandlers } from "./map-handler.mock";
+import { authHandlers } from './auth-handler.mock';
+
 import { storeHandlers } from './store-handler.mock';
 import { bookmarkHandler } from './bookmark-handler.mock';
 export const delayForDevelopment = async (ms = 1000) => {
@@ -7,4 +9,6 @@ export const delayForDevelopment = async (ms = 1000) => {
     await delay(ms);
   }
 };
-export const handlers = [...mapHandlers, ...storeHandlers, ...bookmarkHandler];
+
+export const handlers = [...mapHandlers, ...authHandlers, ...storeHandlers, ...bookmarkHandler];
+

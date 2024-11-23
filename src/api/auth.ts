@@ -6,12 +6,12 @@ export const checkId = async (id: string) => {
 };
 
 
-export const login = async (id: string, password: string) => {
-	const response = await axios.post('/user/login', { id, password });
-	return response.data
-}
+export const login = async (username: string, password: string) => {
+  const response = await axios.post('/user/login', { username, password });
+  return response.data;
+};
 
-export const signup = async (id: string, password: string, nickname: string) => {
-	const response = await axios.post('/user/register', { id, password, nickname });
-	return response.data;
-}
+export const signup = async (username: string, password: string, nickname: string) => {
+  const response = await axios.post('/user/register', { username, password, nickname });
+  return response.data;
+};
