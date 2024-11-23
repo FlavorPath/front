@@ -1,4 +1,4 @@
-import { useSelectedRestaurant } from "@/hooks/restaurant/useSelectedRestaurant.hook";
+import useSelectedRestaurant from "@/hooks/restaurant/useSelectedRestaurant.hook";
 import Icon from "@/ui/view/atom/Icon";
 import Slider from "@/ui/view/molecule/ImgSlide";
 import LabelGroup from "@/ui/view/molecule/LabelGroup";
@@ -7,41 +7,36 @@ import { css } from "@styled-system/css";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-const RestaurantLayout = () => {
-  const [activeBookMarker, setActiveBookMarker] = useState(false);
-  const LabelItem = ["한식", "고기"];
-  const { selectedRestaurant } = useSelectedRestaurant();
+type RestaurantLayoutProps = {
+  restarauntId: number;
+};
 
+const RestaurantLayout = ({ restarauntId }: RestaurantLayoutProps) => {
+  const { restaurantDetail } = useSelectedRestaurant(restarauntId);
+  console.log(restaurantDetail);
+  const [activeBookMarker, setActiveBookMarker] = useState(false);
   return (
-    <div
-      style={{
-        position: "relative",
-      }}
-    >
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={css({ textStyle: "heading1" })}>
-            {selectedRestaurant
-              ? selectedRestaurant.name
-              : "식당 이름 로딩 중..."}
-          </h1>
-          <Icon
-            iconName="BookmarkIcon"
-            library="hero-solid"
-            onClick={() => setActiveBookMarker(true)}
-            className={css({
-              stroke: "primary.main",
-              strokeWidth: "2px",
-            })}
-          />
-        </div>
-        <div className={styles.main}>
-          <LabelGroup labelItems={LabelItem} />
-          <Slider />
-        </div>
-        <RestaurantNavigation />
-        <Outlet />
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={css({ textStyle: "heading1" })}>
+          {restaurantDetail ? restaurantDetail.name : "로딩중..."}
+        </h1>
+        <Icon
+          iconName="BookmarkIcon"
+          library="hero-solid"
+          onClick={() => setActiveBookMarker(true)}
+          className={css({
+            stroke: "primary.main",
+            strokeWidth: "2px",
+          })}
+        />
       </div>
+      <div className={styles.main}>
+        {/* <LabelGroup labelItems={restaurantDetail.labels} /> */}
+        <Slider />
+      </div>
+      <RestaurantNavigation />
+      <Outlet />
     </div>
   );
 };

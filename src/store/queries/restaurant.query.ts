@@ -29,6 +29,7 @@ export type RestaurantDetail = {
 export const fetchRestaurantDetail = async (id: number) => {
   const url = `${API_PATH.restaurant}/${id}`;
   const response = await axiosInstance.get(url);
+  console.log("식당 상세 데이터: " + response.data);
   return response.data;
 };
 
@@ -37,5 +38,6 @@ export const useRestaurantDetail = (id: number) => {
     queryKey: ["restaurant", id],
     queryFn: () => fetchRestaurantDetail(id),
     staleTime: 1000 * 60 * 5,
+    enabled: !!id,
   });
 };

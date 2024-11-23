@@ -8,28 +8,6 @@ export const restaurantHandler = [
     const { id } = params;
     console.log(`식당 상세 데이터 요청: ${id}`);
     await delayForDevelopment();
-    if (!id || typeof id !== "string") {
-      return new HttpResponse("message: 식당을 찾을 수 없음", {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    }
-    const restaurant = restaurantMockData.find(
-      (data) => data.restaurantId.toString() === id
-    );
-    if (!restaurant) {
-      return new HttpResponse(
-        JSON.stringify({ message: "식당을 찾을 수 없음" }),
-        {
-          status: 404,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
-    return HttpResponse.json(restaurant, { status: 200 });
+    return HttpResponse.json(restaurantMockData, { status: 200 });
   }),
 ];

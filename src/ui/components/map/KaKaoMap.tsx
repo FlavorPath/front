@@ -5,14 +5,16 @@ import { useState } from "react";
 import useDynamicMapSize from "@/hooks/map/useDynamicMapSize";
 import { useMap } from "@/hooks/map/useMap.hook";
 import { css } from "@styled-system/css";
-import useSelectedRestaurant from "@/hooks/restaurant/useSelectedRestaurant.hook";
-import useRestaurantStore from "@/store/stores/restaurant.store";
 
-export default function KaKaoMap() {
+type KaKaoMapProps = {
+  setRestarauntId: React.Dispatch<React.SetStateAction<number | undefined>>;
+};
+
+export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
   useKakaoLoader();
+  const [map, setMap] = useState<any>(null);
   const { filteredMarkers, isLoading, isError } = useMap();
   const mapSize = useDynamicMapSize();
-  const [map, setMap] = useState<any>(null);
 
   const handleMarkerClick = async (
     latitude: number,
@@ -23,20 +25,11 @@ export default function KaKaoMap() {
     if (map) {
       map.setCenter(new window.kakao.maps.LatLng(adjustedLatitude, longitude));
     }
-    try {
-      const { restaurantDetail } = useSelectedRestaurant(restaurantId); // 데이터를 가져오는 함수
-      // const token = localStorage.getItem("jwtToken") || ""; // 토큰 가져오기 (필요 시)
-      const { setRestaurant } = useRestaurantStore();
-      if (restaurantDetail) {
-        setRestaurant(restaurantDetail);
-      }
-    } catch (error) {
-      console.error("에러 발생 in 식당 상세 데이터패칭:", error);
-    }
+    setRestarauntId(restaurantId);
   };
 
   if (isLoading) return <div>지도 로딩중...</div>;
-  if (isError) return <p>오류 발생.</p>;
+  if (isError) return <p>Something went wrong. Please try again.</p>;
 
   return (
     <Map
