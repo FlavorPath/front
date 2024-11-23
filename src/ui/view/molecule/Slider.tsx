@@ -4,7 +4,6 @@ import React, { useState, useRef } from "react";
 interface IProp {
   images: string[];
 }
-
 export default function Slider({ images }: IProp) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -25,28 +24,24 @@ export default function Slider({ images }: IProp) {
   };
   const handleDragEnd = () => {
     if (!isDragging) return;
-
-    const threshold = 50; // 드래그 변경 최소 거리
+    const threshold = 50;
     if (translateX > threshold && currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1); // 이전 슬라이드
+      setCurrentIndex((prev) => prev - 1);
     } else if (translateX < -threshold && currentIndex < images.length - 1) {
-      setCurrentIndex((prev) => prev + 1); // 다음 슬라이드
+      setCurrentIndex((prev) => prev + 1);
     }
-
     setIsDragging(false);
-    setTranslateX(0); // 이동 초기화
+    setTranslateX(0);
   };
 
   return (
     <div
       className={styles.sliderContainer}
       ref={sliderRef}
-      // 마우스 이벤트
       onMouseDown={(e) => handleDragStart(e.clientX)}
       onMouseMove={(e) => handleDragMove(e.clientX)}
       onMouseUp={handleDragEnd}
       onMouseLeave={handleDragEnd}
-      // 터치 이벤트
       onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
       onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
       onTouchEnd={handleDragEnd}
@@ -67,7 +62,6 @@ export default function Slider({ images }: IProp) {
           />
         ))}
       </div>
-      {/* 하단 네비게이션 점 */}
       <div className={styles.navigationDots}>
         {images.map((_, index) => (
           <div
@@ -94,9 +88,9 @@ const styles = {
     height: "210px",
     margin: "0 auto",
     overflow: "hidden",
-    borderRadius: "20px",
+    borderRadius: "10px",
     backgroundColor: "primary.main",
-    userSelect: "none", // 드래그 중 텍스트 선택 방지
+    userSelect: "none",
   }),
   sliderWrapper: css({
     display: "flex",

@@ -1,17 +1,17 @@
 import useSelectedRestaurant from "@/hooks/restaurant/useSelectedRestaurant.hook";
 import Icon from "@/ui/view/atom/Icon";
-import Slider from "@/ui/view/molecule/ImgSlide";
+
 import LabelGroup from "@/ui/view/molecule/LabelGroup";
 import RestaurantNavigation from "@/ui/view/molecule/RestaurantNavigation";
+import Slider from "@/ui/view/molecule/Slider";
 import { css } from "@styled-system/css";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
 
 type RestaurantLayoutProps = {
   restarauntId: number;
 };
 
-const RestaurantLayout = ({ restarauntId }: RestaurantLayoutProps) => {
+const Restaurant = ({ restarauntId }: RestaurantLayoutProps) => {
   const { restaurantDetail } = useSelectedRestaurant(restarauntId);
   console.log(restaurantDetail);
   const [activeBookMarker, setActiveBookMarker] = useState(false);
@@ -40,17 +40,17 @@ const RestaurantLayout = ({ restarauntId }: RestaurantLayoutProps) => {
         )}
       </div>
       <RestaurantNavigation />
-      <div></div>
     </div>
   );
 };
 
-export default RestaurantLayout;
+export default Restaurant;
 
 const styles = {
   container: css({
     width: "375px",
     margin: "0 auto",
+    height: "350px",
     paddingTop: "10px",
     display: "flex",
     flexDirection: "column",

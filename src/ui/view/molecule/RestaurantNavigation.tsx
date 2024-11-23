@@ -1,17 +1,26 @@
 import { useRestaurantNavigationStore } from "@/store/stores/restaurantNavigation.store";
 import { css } from "@styled-system/css";
+import { useNavigate, useParams } from "react-router-dom";
 
-const navigationItems = [{ Name: "홈" }, { Name: "메뉴" }, { Name: "리뷰" }];
+const navigationItems = [
+  { Name: "홈", path: "" },
+  { Name: "메뉴", path: "menu" },
+  { Name: "리뷰", path: "review" },
+];
 
 const RestaurantNavigation = () => {
-  const { activeTab, setActiveTab } = useRestaurantNavigationStore();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const handleNavigation = (item: { Name: string; path: string }) => {
+    navigate(`/restaurant/${id}/${item.path}`);
+  };
   return (
     <div className={styles.Wrapper}>
       {navigationItems.map((item, index) => (
         <div
           key={item.Name}
           className={styles.Item}
-          onClick={() => setActiveTab(item.Name)}
+          onClick={() => handleNavigation(item)}
         >
           {item.Name}
         </div>

@@ -1,5 +1,6 @@
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
+import RestaurantPage from "@/pages/RestaurantPage";
 import ScrapPage from "@/pages/ScrapPage";
 import SearchPage from "@/pages/SearchPage";
 import SignUpPage from "@/pages/SignupPage";
@@ -26,6 +27,24 @@ const router = [
       {
         path: "/profile",
         element: <div>내 정보 페이지</div>,
+      },
+    ],
+  },
+  {
+    path: "/restaurant/:id",
+    element: <RestaurantPage />,
+    children: [
+      {
+        path: "",
+        element: <div>식당 메인</div>,
+      },
+      {
+        path: "menu",
+        element: <div>메뉴 페이지</div>,
+      },
+      {
+        path: "review",
+        element: <div>리뷰 페이지</div>,
       },
     ],
   },

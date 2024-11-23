@@ -1,6 +1,5 @@
-import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
-import RestaurantLayout from "@/ui/components/layout/RestaurantLayout";
 import KaKaoMap from "@/ui/components/map/KaKaoMap";
+import Restaurant from "@/ui/components/restaurant/Restaurant";
 import SearchInput from "@/ui/view/atom/SearchInput";
 import ButtonGroup from "@/ui/view/molecule/ButtonGroup";
 import CustomBottomSheet from "@/ui/view/molecule/CustomBottomSheet";
@@ -10,11 +9,14 @@ import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { containerRef, dynamicMinHeight, dynamicMaxHeight } =
-    useDynamicBottomSheetHeight();
   const [restarauntId, setRestarauntId] = useState<number>(1);
+
+  const navigateToRestaurant = (id: number) => {
+    navigate(`/restaurant/${id}`);
+  };
+
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div className={styles.container}>
       <SearchInput
         icon="MagnifyingGlassIcon"
         placeholder="식당을 탐색해보세요"
@@ -25,11 +27,8 @@ const HomePage = () => {
       />
       <ButtonGroup />
       <KaKaoMap setRestarauntId={setRestarauntId} />
-      <CustomBottomSheet
-        dynamicMinHeight={dynamicMinHeight}
-        dynamicMaxHeight={dynamicMaxHeight}
-      >
-        <RestaurantLayout restarauntId={restarauntId} />
+      <CustomBottomSheet onNavigate={navigateToRestaurant}>
+        <Restaurant restarauntId={restarauntId} />
       </CustomBottomSheet>
     </div>
   );
