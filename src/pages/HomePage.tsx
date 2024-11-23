@@ -12,7 +12,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const { containerRef, dynamicMinHeight, dynamicMaxHeight } =
     useDynamicBottomSheetHeight();
-  const [restarauntId, setRestarauntId] = useState<number | undefined>();
+  const [restarauntId, setRestarauntId] = useState<number>(1);
   return (
     <div className={styles.container} ref={containerRef}>
       <SearchInput

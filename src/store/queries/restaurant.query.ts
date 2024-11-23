@@ -6,6 +6,7 @@ export type RestaurantDetail = {
   restaurantId: number;
   name: string;
   labels: string[];
+  images: string[];
   menu: {
     name: string;
     price: string;

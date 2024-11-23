@@ -32,11 +32,15 @@ const RestaurantLayout = ({ restarauntId }: RestaurantLayoutProps) => {
         />
       </div>
       <div className={styles.main}>
-        {/* <LabelGroup labelItems={restaurantDetail.labels} /> */}
-        <Slider />
+        {restaurantDetail && (
+          <>
+            <LabelGroup labelItems={restaurantDetail.labels} />
+            <Slider images={restaurantDetail.images} />
+          </>
+        )}
       </div>
       <RestaurantNavigation />
-      <Outlet />
+      <div></div>
     </div>
   );
 };

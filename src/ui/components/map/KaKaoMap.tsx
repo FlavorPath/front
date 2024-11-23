@@ -7,7 +7,7 @@ import { useMap } from "@/hooks/map/useMap.hook";
 import { css } from "@styled-system/css";
 
 type KaKaoMapProps = {
-  setRestarauntId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setRestarauntId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
