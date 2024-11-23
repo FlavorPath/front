@@ -4,6 +4,7 @@ import Navigation from "@/ui/view/molecule/Navigation/Navigation";
 import CustomBottomSheet from "@/ui/view/molecule/CustomBottomSheet";
 import RestaurantPage from "@/pages/RestaurantPage";
 import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
+import RestaurantLayout from "./RestaurantLayout";
 
 const NavigationLayout = () => {
   const { containerRef, dynamicMinHeight, dynamicMaxHeight } =
@@ -23,7 +24,7 @@ const NavigationLayout = () => {
         dynamicMinHeight={dynamicMinHeight}
         dynamicMaxHeight={dynamicMaxHeight}
       >
-        <RestaurantPage />
+        <RestaurantLayout />
       </CustomBottomSheet>
       <Navigation />
     </div>
