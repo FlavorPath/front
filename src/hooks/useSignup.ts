@@ -1,5 +1,5 @@
-// import { signup } from '@/api/auth';
 import { useForm } from '@/hooks/useForm';
+import { useFetchRegister } from '@/store/queries/auth.query';
 import { validation } from '@/utils/validation/index';
 import { useEffect } from 'react';
 
@@ -11,13 +11,20 @@ export interface SignupFormData {
 }
 
 export const useSignup = () => {
-  const submitHandler = async () => {
-    try {
-      // signup(inputs.userId, inputs.password, inputs.nickname);
-    } catch (error) {
-      console.error('Login failed:', error);
+  const { mutate } = useFetchRegister();
+
+  const submitHandler = () => {
+    if (inputs.password !== inputs.confirm_password) {
+      setErrors({ ...errors, password: '비밀번호가 일치하지 않습니다.', confirm_password: '비밀번호가 일치하지 않습니다.' })
+      return;
     }
-  };
+
+    mutate({
+      username: inputs.userId,
+      password: inputs.password,
+      nickname: inputs.nickname,
+    });
+  }
 
   const { inputs, errors, setErrors, handleChange, handleSubmit } = useForm<SignupFormData>({
     initialValues: {

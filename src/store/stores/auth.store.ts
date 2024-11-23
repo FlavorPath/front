@@ -16,7 +16,10 @@ const useAuth = create<AuthState>()(
     set => ({
       isLoggedIn: false,
       accessToken: '',
-      setAccessToken: (token: string) => set({ accessToken: token, isLoggedIn: !!token }),
+      setAccessToken: (token: string) => {
+        set({ accessToken: token, isLoggedIn: !!token });
+        localStorage.setItem('@token', token)
+      },
       logout: () =>
         set({
           accessToken: '',

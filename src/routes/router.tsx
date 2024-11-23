@@ -1,7 +1,8 @@
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
+import ScrapPage from "@/pages/ScrapPage";
+import SearchPage from "@/pages/SearchPage";
 import SignUpPage from "@/pages/SignupPage";
-
 import AuthLayout from "@/ui/components/layout/AuthLayout";
 import NavigationLayout from "@/ui/components/layout/NavigationLayout";
 
@@ -20,7 +21,7 @@ const router = [
       },
       {
         path: "/bookmarks",
-        element: <div>스크랩 페이지</div>,
+        element: <ScrapPage />, // 페이지 추가 필요
       },
       {
         path: "/profile",
@@ -41,6 +42,14 @@ const router = [
         element: <SignUpPage />,
       },
     ],
+  },
+  {
+    path: "/bookmark",
+    element: <ScrapPage />,
+  },
+  {
+    path: "/search",
+    element: <SearchPage />,
   },
 ];
 

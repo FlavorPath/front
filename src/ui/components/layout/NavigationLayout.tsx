@@ -15,7 +15,6 @@ const NavigationLayout = () => {
       className={css({
         position: "relative",
         minHeight: "100vh",
-        paddingBottom: "60px",
         overflow: "hidden",
       })}
     >
