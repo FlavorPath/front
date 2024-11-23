@@ -5,24 +5,26 @@ import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   headerText?: string;
+  hideArrow?: boolean
 }
 
-const Header = ({ headerText }: IProps) => {
+const Header = ({ headerText, hideArrow }: IProps) => {
   const navigate = useNavigate();
   const canGoBack = window.history.length > 1;
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.text}>{headerText}</div>
-      {canGoBack && (
+      {!hideArrow && canGoBack && (
         <Icon
-          iconName='HiOutlineArrowLeft'
+          library='hero-solid'
           size={24}
           onClick={() => navigate(-1)}
           className={styles.back_btn}
+          iconName={'ArrowLeftIcon'}
         />
       )}
-    </div>
+    </header>
   );
 };
 
@@ -33,16 +35,20 @@ const styles = {
     width: '100%',
     height: '58px',
     position: 'relative',
+    '& > button > svg': {
+      fill: 'black'
+    }
   }),
   back_btn: css({
     position: 'absolute',
-    left: '30px',
-		top: '50%',
-		transform: 'translateY(-50%)',
+    left: '15px',
+    top: '50%',
+    transform: 'translateY(-50%)',
   }),
   text: center({
     width: '100%',
     paddingTop: '4px',
     textStyle: 'heading2',
+    fontFamily: 'Gmarket Sans',
   }),
 };

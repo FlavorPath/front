@@ -15,7 +15,7 @@
 
 @font-face {
   font-family: 'Gmarket Sans';
-  src: url('./fonts/GmarketSansTTFMediumttf') format('truetype');
+  src: url('./fonts/GmarketSansTTFMedium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -121,6 +121,10 @@
 }
 
 @layer base {
+	* {
+		font-family: 'Gmarket Sans'
+	}
+
 	html,
 	body,
 	div,
@@ -227,10 +231,6 @@
 }
 
 @layer utilities {
-	* {
-		font-family: 'Gmarket Sans';
-	}
-
 	blockquote,
 	q {
 		quotes: none;

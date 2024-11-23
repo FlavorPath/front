@@ -28,7 +28,7 @@ export default defineConfig({
         },
         background: {
           base: { value: '#f3f3f3' },
-          lightgrtay: { value: '#ebebeb' },
+          lightgray: { value: '#ebebeb' },
           gray: { value: '#d9d9d9' },
         },
       },
