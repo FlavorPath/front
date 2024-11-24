@@ -1,30 +1,34 @@
 import { useState, useEffect } from "react";
 
 const useDynamicMapSize = () => {
-  const [mapSize, setMapSize] = useState({
+  const getMapSize = () => ({
     width: `${window.innerWidth}px`,
-    height: `${window.innerHeight}px`,
+    height: `${window.innerHeight - 60}px`,
   });
 
-  useEffect(() => {
-    let resizeTimeout: NodeJS.Timeout;
+  const [mapSize, setMapSize] = useState(getMapSize);
 
+  useEffect(() => {
     const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        setMapSize({
-          width: `${window.innerWidth}px`,
-          height: `${window.innerHeight}px`,
-        });
-      }, 100);
+      setMapSize(getMapSize());
     };
 
+    let resizeTimeout: number | undefined;
+    const debouncedResize = () => {
+      if (resizeTimeout) {
+        cancelAnimationFrame(resizeTimeout);
+      }
+      resizeTimeout = requestAnimationFrame(handleResize);
+    };
     handleResize();
-    window.addEventListener("resize", handleResize);
+
+    window.addEventListener("resize", debouncedResize);
 
     return () => {
-      clearTimeout(resizeTimeout);
-      window.removeEventListener("resize", handleResize);
+      if (resizeTimeout) {
+        cancelAnimationFrame(resizeTimeout);
+      }
+      window.removeEventListener("resize", debouncedResize);
     };
   }, []);
 

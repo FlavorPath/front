@@ -17,7 +17,7 @@ interface IProp {
   restaurantId: number;
   name: string;
   label: string[];
-  onMarkerClick: (latitude: number, longitude: number) => void; // 클릭 이벤트 핸들러
+  onMarkerClick: (latitude: number, longitude: number) => void;
 }
 
 const markerMap = {
