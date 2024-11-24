@@ -10,4 +10,11 @@ export const restaurantHandler = [
     await delayForDevelopment();
     return HttpResponse.json(restaurantMockData, { status: 200 });
   }),
+  http.post(`${API_PATH.restaurant}/:id/scrap`, async ({ params }) => {
+    const { id } = params;
+    console.log(`식당 스크랩 변경 요청: ${id}`);
+    const isScraped = restaurantMockData.isScraped;
+    await delayForDevelopment();
+    return HttpResponse.json({ scrap: !isScraped }, { status: 201 });
+  }),
 ];
