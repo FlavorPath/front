@@ -1,27 +1,38 @@
-import { center, flex } from '@styled-system/patterns';
-import { css } from '@styled-system/css';
-import Icon from '../atom/Icon';
-import { useNavigate } from 'react-router-dom';
+import { center, flex } from "@styled-system/patterns";
+import { css } from "@styled-system/css";
+import Icon from "../atom/Icon";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   headerText?: string;
-  hideArrow?: boolean
+  hideArrow?: boolean;
+  onClick?: (event?: React.MouseEvent<HTMLElement>) => void;
 }
 
-const Header = ({ headerText, hideArrow }: IProps) => {
+const Header = ({ headerText, hideArrow, onClick }: IProps) => {
   const navigate = useNavigate();
   const canGoBack = window.history.length > 1;
+
+  const handleBackClick = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+  ) => {
+    if (onClick) {
+      onClick(event);
+    } else {
+      navigate(-1);
+    }
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.text}>{headerText}</div>
       {!hideArrow && canGoBack && (
         <Icon
-          library='hero-solid'
+          library="hero-solid"
           size={24}
-          onClick={() => navigate(-1)}
+          onClick={handleBackClick}
           className={styles.back_btn}
-          iconName={'ArrowLeftIcon'}
+          iconName={"ArrowLeftIcon"}
         />
       )}
     </header>
@@ -32,23 +43,23 @@ export default Header;
 
 const styles = {
   header: flex({
-    width: '100%',
-    height: '58px',
-    position: 'relative',
-    '& > button > svg': {
-      fill: 'black'
-    }
+    width: "100%",
+    height: "58px",
+    position: "relative",
+    "& > button > svg": {
+      fill: "black",
+    },
   }),
   back_btn: css({
-    position: 'absolute',
-    left: '15px',
-    top: '50%',
-    transform: 'translateY(-50%)',
+    position: "absolute",
+    left: "15px",
+    top: "50%",
+    transform: "translateY(-50%)",
   }),
   text: center({
-    width: '100%',
-    paddingTop: '4px',
-    textStyle: 'heading2',
-    fontFamily: 'Gmarket Sans',
+    width: "100%",
+    paddingTop: "4px",
+    textStyle: "heading2",
+    fontFamily: "Gmarket Sans",
   }),
 };

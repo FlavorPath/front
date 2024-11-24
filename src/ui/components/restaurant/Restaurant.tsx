@@ -42,8 +42,6 @@ const Restaurant = ({ restarauntId }: RestaurantLayoutProps) => {
           <p>로딩중...</p>
         )}
       </div>
-
-      {/* Navigation */}
       <RestaurantNavigation />
     </div>
   );

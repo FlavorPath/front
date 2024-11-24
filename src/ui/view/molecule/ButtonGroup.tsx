@@ -1,17 +1,24 @@
 import { css } from "@styled-system/css";
 import Button from "../atom/Button";
-import { useButtonGroupStore } from "@/store/stores/map.store";
+import { useButtonGroupStore } from "@/store/stores/label.store";
 
 const buttonItems = [
   { label: "한식", value: "한식" },
   { label: "일식", value: "일식" },
   { label: "중식", value: "중식" },
   { label: "양식", value: "양식" },
-  { label: "라멘", value: "라멘" },
+  { label: "카페", value: "카페" },
 ];
 
 const ButtonGroup = () => {
   const { activeButton, setActiveButton } = useButtonGroupStore();
+  const UpdateActiveState = (value: string) => {
+    if (activeButton === value) {
+      setActiveButton("");
+    } else {
+      setActiveButton(value);
+    }
+  };
   return (
     <div
       className={css({
@@ -34,7 +41,7 @@ const ButtonGroup = () => {
             borderRadius: 12,
             fontWeight: "medium",
           })}
-          onClick={() => setActiveButton(item.value)}
+          onClick={() => UpdateActiveState(item.value)}
         >
           {item.label}
         </Button>

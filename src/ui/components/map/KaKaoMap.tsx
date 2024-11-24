@@ -28,7 +28,20 @@ export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
     setRestarauntId(restaurantId);
   };
 
-  if (isLoading) return <div>지도 로딩중...</div>;
+  if (isLoading)
+    return (
+      <div
+        className={css({
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        })}
+      >
+        지도 로딩중...
+      </div>
+    );
   if (isError) return <p>Something went wrong. Please try again.</p>;
 
   return (
