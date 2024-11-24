@@ -6,6 +6,8 @@ import SearchPage from "@/pages/SearchPage";
 import SignUpPage from "@/pages/SignupPage";
 import AuthLayout from "@/ui/components/layout/AuthLayout";
 import NavigationLayout from "@/ui/components/layout/NavigationLayout";
+import RestaurantMain from "@/ui/components/restaurant/RestaurantMain";
+import RestaurantMenu from "@/ui/components/restaurant/RestaurantMenu";
 
 const router = [
   {
@@ -36,11 +38,11 @@ const router = [
     children: [
       {
         path: "",
-        element: <div>식당 메인</div>,
+        element: <RestaurantMain />,
       },
       {
         path: "menu",
-        element: <div>메뉴 페이지</div>,
+        element: <RestaurantMenu />,
       },
       {
         path: "review",

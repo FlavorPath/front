@@ -1,6 +1,5 @@
 import useSelectedRestaurant from "@/hooks/restaurant/useSelectedRestaurant.hook";
 import Icon from "@/ui/view/atom/Icon";
-
 import LabelGroup from "@/ui/view/molecule/LabelGroup";
 import RestaurantNavigation from "@/ui/view/molecule/RestaurantNavigation";
 import Slider from "@/ui/view/molecule/Slider";
@@ -13,7 +12,6 @@ type RestaurantLayoutProps = {
 
 const Restaurant = ({ restarauntId }: RestaurantLayoutProps) => {
   const { restaurantDetail } = useSelectedRestaurant(restarauntId);
-  console.log(restaurantDetail);
   const [activeBookMarker, setActiveBookMarker] = useState(false);
   return (
     <div className={styles.container}>
