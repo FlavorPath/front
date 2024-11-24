@@ -1,5 +1,5 @@
 import useSelectedRestaurant from "@/hooks/restaurant/useSelectedRestaurant.hook";
-import MenuItem from "@/ui/view/molecule/RestaurantMenu/MenuItem";
+import MenuItem from "@/ui/view/molecule/Restaurant/MenuItem";
 import { css } from "@styled-system/css";
 import { useOutletContext } from "react-router-dom";
 

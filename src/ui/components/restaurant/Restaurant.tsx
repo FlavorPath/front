@@ -4,39 +4,46 @@ import LabelGroup from "@/ui/view/molecule/LabelGroup";
 import RestaurantNavigation from "@/ui/view/molecule/RestaurantNavigation";
 import Slider from "@/ui/view/molecule/Slider";
 import { css } from "@styled-system/css";
-import { useState } from "react";
 
 type RestaurantLayoutProps = {
   restarauntId: number;
 };
 
 const Restaurant = ({ restarauntId }: RestaurantLayoutProps) => {
-  const { restaurantDetail } = useSelectedRestaurant(restarauntId);
-  const [activeBookMarker, setActiveBookMarker] = useState(false);
+  const { restaurantDetail, handleUpdateScrape, isScrapePending } =
+    useSelectedRestaurant(restarauntId);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={css({ textStyle: "heading1" })}>
-          {restaurantDetail ? restaurantDetail.name : "로딩중..."}
+          {restaurantDetail?.name || "로딩중..."}
         </h1>
         <Icon
           iconName="BookmarkIcon"
-          library="hero-solid"
-          onClick={() => setActiveBookMarker(true)}
+          library={"hero-outline"}
+          onClick={handleUpdateScrape}
           className={css({
             stroke: "primary.main",
             strokeWidth: "2px",
+            fill: "none",
           })}
+          fill={restaurantDetail?.isScraped ? "#ff8700" : "white"}
         />
       </div>
+
       <div className={styles.main}>
-        {restaurantDetail && (
+        {restaurantDetail ? (
           <>
             <LabelGroup labelItems={restaurantDetail.labels} />
             <Slider images={restaurantDetail.images} />
           </>
+        ) : (
+          <p>로딩중...</p>
         )}
       </div>
+
+      {/* Navigation */}
       <RestaurantNavigation />
     </div>
   );
