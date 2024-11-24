@@ -1,5 +1,6 @@
 import { fetchGetBookmarks, removeBookmarks } from '@/api/bookmark'
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import { queryClient } from '@/utils/queryClient';
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
 
 export const useGetBookmarks = () => {
@@ -14,8 +15,6 @@ export const useGetBookmarks = () => {
 }
 
 export const useDeleteBookmark = () => {
-  const queryClient = new QueryClient();
-
   return useMutation({
     mutationFn: ({ restaurantId }: { restaurantId: number }) => removeBookmarks(restaurantId),
     onSuccess: () => {
