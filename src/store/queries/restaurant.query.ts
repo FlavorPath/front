@@ -3,6 +3,24 @@ import { queryClient } from "@/App";
 import axiosInstance from "@/api";
 import { API_PATH } from "@/api/api-path";
 
+export type MenuItem = {
+  name: string; // 메뉴 이름
+  price: string; // 가격 (문자열 형식, 예: "13,900원")
+  photo_url: string; // 메뉴 이미지 URL
+};
+
+export type RestaurantDetail = {
+  restaurantId: number; // 식당 ID
+  name: string; // 식당 이름
+  labels: string[]; // 라벨 배열 (예: ["한식", "돼지고기"])
+  images: string[]; // 이미지 URL 배열
+  menu: MenuItem[]; // 메뉴 배열
+  address: string; // 주소
+  hours: string; // 영업 시간
+  phone: string; // 전화번호
+  isScraped: boolean; // 스크랩 여부
+};
+
 export const fetchRestaurantDetail = async (id: number) => {
   const url = `${API_PATH.restaurant}/${id}`;
   const response = await axiosInstance.get(url);
