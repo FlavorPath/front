@@ -45,7 +45,7 @@ const styles = {
     backgroundColor: "primary.main",
     width: "100%",
     height: "50px",
-    position: "fixed",
+    position: "absolute",
     left: 0,
     padding: "0 20px",
     marginTop: 290,

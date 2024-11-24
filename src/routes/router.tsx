@@ -8,6 +8,7 @@ import AuthLayout from "@/ui/components/layout/AuthLayout";
 import NavigationLayout from "@/ui/components/layout/NavigationLayout";
 import RestaurantMain from "@/ui/components/restaurant/RestaurantMain";
 import RestaurantMenu from "@/ui/components/restaurant/RestaurantMenu";
+import RestaurantReview from "@/ui/components/restaurant/RestaurantReview";
 
 const router = [
   {
@@ -46,7 +47,7 @@ const router = [
       },
       {
         path: "review",
-        element: <div>리뷰 페이지</div>,
+        element: <RestaurantReview />,
       },
     ],
   },

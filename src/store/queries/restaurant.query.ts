@@ -80,7 +80,7 @@ export const useSelectedRestaurant = (id: number) => {
   };
 };
 
-const useRestaurantReviews = (id: number) => {
+export const useRestaurantReviews = (id: number) => {
   return useInfiniteQuery({
     queryKey: ["restaurantReviews", id],
     queryFn: ({ pageParam = 0 }) =>

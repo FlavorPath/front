@@ -3,10 +3,15 @@ import { queryClient } from "@/App";
 import {
   updateScrape,
   useRestaurantDetail,
+  useRestaurantReviews,
 } from "@/store/queries/restaurant.query";
 
 const useSelectedRestaurant = (id: number) => {
-  const { data: restaurantDetail, isLoading, error } = useRestaurantDetail(id);
+  const {
+    data: restaurantDetail,
+    isLoading,
+    error: restaurantDetailError,
+  } = useRestaurantDetail(id);
 
   const scrapeMutation = useMutation({
     mutationFn: (id: number) => updateScrape(id),
@@ -21,13 +26,22 @@ const useSelectedRestaurant = (id: number) => {
     }
   };
 
+  const {
+    data: restaurantReviews,
+    fetchNextPage,
+    hasNextPage,
+  } = useRestaurantReviews(id);
+
   return {
     restaurantDetail,
     isLoading,
-    error,
+    restaurantDetailError,
     handleUpdateScrape,
     isScrapePending: scrapeMutation.isPending,
     scrapeError: scrapeMutation.error,
+    restaurantReviews,
+    fetchNextPage,
+    hasNextPage,
   };
 };
 
