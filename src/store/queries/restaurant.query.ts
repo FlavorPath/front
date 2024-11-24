@@ -1,6 +1,7 @@
+import { queryClient } from "@/App";
 import axiosInstance from "@/api";
 import { API_PATH } from "@/api/api-path";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export type RestaurantDetail = {
   restaurantId: number;
@@ -30,7 +31,12 @@ export type RestaurantDetail = {
 export const fetchRestaurantDetail = async (id: number) => {
   const url = `${API_PATH.restaurant}/${id}`;
   const response = await axiosInstance.get(url);
-  console.log("식당 상세 데이터: " + response.data);
+  return response.data;
+};
+
+export const updateScrape = async (id: number) => {
+  const url = `${API_PATH.restaurant}/${id}/scrap`;
+  const response = await axiosInstance.post(url);
   return response.data;
 };
 
@@ -42,3 +48,13 @@ export const useRestaurantDetail = (id: number) => {
     enabled: !!id,
   });
 };
+
+export const updateScrapeMutation = useMutation({
+  // mutationFn에서 id를 매개변수로 받을 수 있도록 수정
+  mutationFn: (id: number) => updateScrape(id),
+  // 요청이 완료되면 관련 쿼리를 무효화하여 데이터 갱신
+  onSettled: async (_, __, variables) => {
+    // variables에는 mutate 호출 시 넘긴 id가 포함됩니다.
+    await queryClient.invalidateQueries({ queryKey: ["scrape", variables] });
+  },
+});
