@@ -6,14 +6,14 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { accessToken } = useAuth()
+  const token = useAuth.getState().accessToken;
 
   useEffect(() => {
     const publicPaths = ['/auth/login', '/auth/signup'];
-    if ((!accessToken && !publicPaths.includes(location.pathname))) {
-      navigate('/auth/login')
-    } 
-  }, [accessToken, location.pathname]);
+    if (!token && !publicPaths.includes(location.pathname)) {
+      navigate('/auth/login');
+    }
+  }, [token, location.pathname]);
 
   return (
     <div className={styles.container}>

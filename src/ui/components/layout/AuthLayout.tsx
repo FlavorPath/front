@@ -8,10 +8,10 @@ type AuthPathType = '/auth/signup' | '/auth/login';
 const AuthLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const {accessToken} = useAuth()
+  const token = useAuth.getState().accessToken;
   const [type, setType] = useState<AuthPathType>('/auth/login')
 
-  if (accessToken) navigate('/')
+  if (token) navigate('/');
 
   useEffect(() => {
     setType(location.pathname as AuthPathType);
