@@ -9,6 +9,6 @@ export const useGetSearchStores = ({ searchText, isToggleOn }: { searchText: str
   return useQuery({
     queryKey: ['search-store', isToggleOn ? 'label' : 'name', searchText],
     queryFn: () => fetchSearchStore(searchText, isToggleOn),
-    enabled: !!isCurrentPage
+    enabled: !!isCurrentPage && !!searchText
   });
 };
