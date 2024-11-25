@@ -1,6 +1,6 @@
-import { queryClient } from "@/App";
 import axiosInstance from "@/api";
 import { API_PATH } from "@/api/api-path";
+import { queryClient } from "@/utils/queryClient";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export type RestaurantDetail = {
