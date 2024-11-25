@@ -5,7 +5,6 @@ import RamenMarker from "@/assets/Ramen.svg";
 import ChineseMarker from "@/assets/ChineseFood.svg";
 import WesternMarker from "@/assets/WesternFood.svg";
 import useBottomSheetStore from "@/store/stores/BottomSheet.store";
-import { useMemo } from "react";
 
 interface ILocation {
   latitude: number;
@@ -20,13 +19,14 @@ interface IProp {
   onMarkerClick: (latitude: number, longitude: number) => void;
 }
 
-const markerMap = {
-  한식: KoreanMarker,
-  일식: JapaneseMarker,
-  라멘: RamenMarker,
-  중식: ChineseMarker,
-  양식: WesternMarker,
-} as const;
+// 튜플 형태의 markerMap
+const markerMap = [
+  ["한식", KoreanMarker],
+  ["일식", JapaneseMarker],
+  ["디저트", RamenMarker],
+  ["중식", ChineseMarker],
+  ["양식", WesternMarker],
+] as const;
 
 const CustomMapMarker = ({
   location,
@@ -40,16 +40,12 @@ const CustomMapMarker = ({
   );
 
   const onClick = () => {
-    // console.log(`라벨: ${label}`);
     setOpenBottomSheet(true);
     onMarkerClick(location.latitude, location.longitude);
   };
 
-  // const markerImageSrc = useMemo(
-  //   () => markerMap[label[0] as keyof typeof markerMap] ?? KoreanMarker,
-  //   [label]
-  // );
-  const markerImageSrc = KoreanMarker;
+  const markerImageSrc =
+    markerMap.find(([key]) => key === label[0])?.[1] || KoreanMarker;
 
   return (
     <MapMarker
@@ -58,7 +54,7 @@ const CustomMapMarker = ({
         lng: location.longitude,
       }}
       image={{
-        src: markerImageSrc,
+        src: markerImageSrc, // 동적으로 결정된 이미지 경로
         size: {
           width: 34,
           height: 43,

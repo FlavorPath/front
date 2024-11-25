@@ -17,8 +17,7 @@ const fetchMapMarkers = async (label?: string) => {
   const url = label
     ? `${API_PATH.marker}?label=${encodeURIComponent(label)}`
     : API_PATH.marker;
-  const response = await axiosInstance.get(url);
-  // const response = await axios.get("http://43.202.172.0:1234/home");
+  const response = await axios.get(url);
   console.log(response.data);
   return response.data;
 };
