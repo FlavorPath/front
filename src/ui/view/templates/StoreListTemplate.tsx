@@ -27,8 +27,6 @@ export default StoreListTemplate;
 const styles = {
   no_result: center({
     textStyle: 'body3',
-    paddingBottom: '30px',
-    paddingTop: '120px',
     position: 'absolute',
     top: '50%',
     left: '50%',
