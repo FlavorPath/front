@@ -7,6 +7,7 @@ export const useMap = () => {
     data: filteredMarkers,
     isLoading,
     isError,
+    isPending,
   } = useMapMarkers(activeButton);
 
   return {
@@ -14,5 +15,6 @@ export const useMap = () => {
     filteredMarkers: filteredMarkers || [],
     isLoading,
     isError,
+    isPending,
   };
 };
