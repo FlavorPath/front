@@ -20,6 +20,11 @@ export const useFetchLogin = () => {
       setAccessToken(data.token);
       navigate('/');
     },
+    onError: (error: any) => {
+      if (error.response?.status === 404) {
+        alert('사용자를 찾을 수 없습니다.');
+      }
+    },
   });
 }
 
