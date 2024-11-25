@@ -1,5 +1,6 @@
 import { useAddReview, useUpdateReview } from '@/store/queries/review.query';
-import { useState } from 'react';
+import useTextareaStore from '@/store/stores/textarea.store';
+import { useEffect } from 'react';
 
 export interface Review {
   id: number;
@@ -17,7 +18,12 @@ interface Props {
 export const useReview = ({ initialContent = '', targetId }: Props) => {
   const params = new URLSearchParams(window.location.search);
   const isUpdate = params.get('type') === 'update';
-  const [content, setContent] = useState(initialContent);
+
+  const { content, setContent, isFocused } = useTextareaStore();  
+
+  useEffect(() => {
+    setContent(initialContent)
+  }, [initialContent])
 
   const { mutate: updateReview } = useUpdateReview();
   const { mutate: addReview } = useAddReview();
@@ -38,8 +44,8 @@ export const useReview = ({ initialContent = '', targetId }: Props) => {
 
   return {
     isUpdate,
+    isFocused,
     content,
-    setContent,
     onSave: handleSave,
   };
 };
