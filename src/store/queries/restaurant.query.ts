@@ -1,4 +1,3 @@
-import axiosInstance from "@/api";
 import { API_PATH } from "@/api/api-path";
 import { queryClient } from "@/utils/queryClient";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -30,9 +29,13 @@ export const fetchRestaurantDetail = async (id: number, token: string) => {
   return response.data;
 };
 
-export const updateScrape = async (id: number) => {
+export const updateScrape = async (id: number, token: string) => {
   const url = `${API_PATH.restaurant}/${id}/scrap`;
-  const response = await axiosInstance.post(url);
+  const response = await axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
@@ -60,8 +63,9 @@ export const useRestaurantDetail = (id: number) => {
 };
 
 export const useUpdateScrapeMutation = () => {
+  const token = getTokenFromLocalStorage();
   return useMutation({
-    mutationFn: (id: number) => updateScrape(id),
+    mutationFn: (id: number) => updateScrape(id, token),
     onSettled: async (_, __, variables) => {
       await queryClient.invalidateQueries({
         queryKey: ["restaurant", variables],
