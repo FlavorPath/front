@@ -26,7 +26,7 @@ export const authStyles = {
   button_grp: css({
     width: "calc(100% - 60px)",
     position: "absolute",
-    bottom: "128px",
+    bottom: "25px",
     left: 0,
     margin: "0 30px",
   }),

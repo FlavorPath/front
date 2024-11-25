@@ -5,4 +5,5 @@ export const API_PATH = {
   register: '/user/register',
   scraps: '/scraps',
   searchStore: '/search',
+  review: '/review'
 };

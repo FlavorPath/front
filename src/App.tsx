@@ -1,9 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import router from "./routes/router";
 import Layout from "./ui/components/layout/Layout";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-export const queryClient = new QueryClient();
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from './utils/queryClient';
 
 function App() {
   const appRouter = createBrowserRouter(router);

@@ -10,7 +10,7 @@ const SignUpPage = () => {
     useSignup();
 
   return (
-    <>
+    <div className={css({ height: 'calc(100dvh - 60px)' })}>
       <form
         onSubmit={onSubmit}
         className={cx(styles.form, css({ marginTop: "28px", gap: "40px" }))}
@@ -40,13 +40,13 @@ const SignUpPage = () => {
           </Button>
           <p className={styles.link_text}>
             회원이라면?{" "}
-            <Link to="/login" className={css({ fontWeight: "medium" })}>
+            <Link to="/auth/login" className={css({ fontWeight: "medium" })}>
               로그인하기
             </Link>
           </p>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

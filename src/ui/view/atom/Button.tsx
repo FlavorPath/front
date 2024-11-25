@@ -1,5 +1,5 @@
 import { button } from '@/styles/commonStyle/button';
-import { ChildrenWithProps } from '@/utils/ChildrenWithProps';
+import { ChildrenWithProps } from '@/utils/types/ChildrenWithProps';
 import { cx } from '@styled-system/css';
 import { ButtonHTMLAttributes } from 'react';
 
@@ -9,7 +9,7 @@ interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'large' | 'small';
 }
 
-const Button = ({ variant, size, className, children, ...props }: ChildrenWithProps<IProps>) => {
+const Button = ({ variant = 'filled', size = 'large', className, children, ...props }: ChildrenWithProps<IProps>) => {
   return (
     <button
       className={cx(button({ variant, size }), className)}
