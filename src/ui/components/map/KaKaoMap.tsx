@@ -15,19 +15,18 @@ export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
   const [map, setMap] = useState<any>(null);
   const { filteredMarkers = [], isLoading, isError } = useMap();
 
-  console.log(filteredMarkers);
   const mapSize = useDynamicMapSize();
 
   const handleMarkerClick = async (
     latitude: number,
     longitude: number,
-    restaurantId: number
+    id: number
   ) => {
     const adjustedLatitude = latitude - 0.001;
     if (map) {
       map.setCenter(new window.kakao.maps.LatLng(adjustedLatitude, longitude));
     }
-    setRestarauntId(restaurantId);
+    setRestarauntId(id);
   };
 
   if (isLoading) return <div>지도 로딩중...</div>;
@@ -56,14 +55,14 @@ export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
               latitude: marker.location.latitude,
               longitude: marker.location.longitude,
             }}
-            restaurantId={marker.restaurantId}
+            restaurantId={marker.id}
             name={marker.name}
             label={marker.label}
             onMarkerClick={() =>
               handleMarkerClick(
                 marker.location.latitude,
                 marker.location.longitude,
-                marker.restaurantId
+                marker.id
               )
             }
           />

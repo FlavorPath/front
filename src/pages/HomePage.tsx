@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const navigate = useNavigate();
   const [restarauntId, setRestarauntId] = useState<number>(1);
-
+  console.log(restarauntId);
   const navigateToRestaurant = (id: number) => {
     navigate(`/restaurant/${id}`);
   };
