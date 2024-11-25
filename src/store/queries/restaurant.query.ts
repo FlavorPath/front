@@ -33,13 +33,12 @@ const getTokenFromLocalStorage = () => {
 
 export const fetchRestaurantDetail = async (id: number, token: string) => {
   const url = `${API_PATH.restaurant}/${id}`;
-  console.log("Using token:", token);
+
   const response = await axiosInstance.get(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(response);
   return response.data;
 };
 

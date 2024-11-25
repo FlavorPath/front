@@ -8,15 +8,24 @@ import { css } from "@styled-system/css";
 
 type KaKaoMapProps = {
   setRestarauntId: React.Dispatch<React.SetStateAction<number>>;
+  activeLabel?: string;
 };
 
-export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
+export default function KaKaoMap({
+  setRestarauntId,
+  activeLabel,
+}: KaKaoMapProps) {
   useKakaoLoader();
   const [map, setMap] = useState<any>(null);
-  const { filteredMarkers = [], isLoading, isError } = useMap();
-
+  const {
+    HoleMarkers,
+    LoadingHole,
+    HoleError,
+    filteredMarkers,
+    isLoading,
+    isError,
+  } = useMap(activeLabel);
   const mapSize = useDynamicMapSize();
-
   const handleMarkerClick = async (
     latitude: number,
     longitude: number,
@@ -29,8 +38,10 @@ export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
     setRestarauntId(id);
   };
 
-  if (isLoading) return <div>지도 로딩중...</div>;
-  if (isError) return <p>Something went wrong. Please try again.</p>;
+  if (LoadingHole || isLoading) return <div>지도 로딩중...</div>;
+  if (HoleError || isError) return <p>문제 발생.</p>;
+
+  const markersToRender = activeLabel ? filteredMarkers : HoleMarkers;
 
   return (
     <Map
@@ -47,17 +58,17 @@ export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
         left: 0,
       })}
     >
-      {filteredMarkers &&
-        filteredMarkers.map((marker, index) => (
+      {markersToRender &&
+        markersToRender.map((marker, index) => (
           <CustomMapMarker
             key={index}
             location={{
               latitude: marker.location.latitude,
               longitude: marker.location.longitude,
             }}
-            restaurantId={marker.id}
+            id={marker.id}
             name={marker.name}
-            label={marker.label}
+            labels={marker.labels}
             onMarkerClick={() =>
               handleMarkerClick(
                 marker.location.latitude,

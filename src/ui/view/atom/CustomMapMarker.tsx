@@ -4,8 +4,9 @@ import JapaneseMarker from "@/assets/JapaneseFood.svg";
 import RamenMarker from "@/assets/Ramen.svg";
 import ChineseMarker from "@/assets/ChineseFood.svg";
 import WesternMarker from "@/assets/WesternFood.svg";
+import Dessert from "@/assets/Dessert.svg";
+
 import useBottomSheetStore from "@/store/stores/BottomSheet.store";
-import { useMemo } from "react";
 
 interface ILocation {
   latitude: number;
@@ -14,42 +15,32 @@ interface ILocation {
 
 interface IProp {
   location: ILocation;
-  restaurantId: number;
   name: string;
-  label: string[];
+  labels: string[];
+  id: number;
   onMarkerClick: (latitude: number, longitude: number) => void;
 }
 
 const markerMap = {
   한식: KoreanMarker,
   일식: JapaneseMarker,
-  라멘: RamenMarker,
+  디저트: Dessert,
   중식: ChineseMarker,
   양식: WesternMarker,
 } as const;
 
-const CustomMapMarker = ({
-  location,
-  restaurantId,
-  name,
-  label,
-  onMarkerClick,
-}: IProp) => {
+const CustomMapMarker = ({ location, name, labels, onMarkerClick }: IProp) => {
   const setOpenBottomSheet = useBottomSheetStore(
     (state) => state.setOpenBottomSheet
   );
 
   const onClick = () => {
-    // console.log(`라벨: ${label}`);
     setOpenBottomSheet(true);
     onMarkerClick(location.latitude, location.longitude);
   };
 
-  // const markerImageSrc = useMemo(
-  //   () => markerMap[label[0] as keyof typeof markerMap] ?? KoreanMarker,
-  //   [label]
-  // );
-  const markerImageSrc = KoreanMarker;
+  const markerImageSrc =
+    markerMap[labels[0] as keyof typeof markerMap] || KoreanMarker;
 
   return (
     <MapMarker

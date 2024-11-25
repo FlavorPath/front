@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const navigate = useNavigate();
   const [restarauntId, setRestarauntId] = useState<number>(1);
-  console.log(restarauntId);
+  const [activeLabel, setActiveLabel] = useState<string>("");
+
   const navigateToRestaurant = (id: number) => {
     navigate(`/restaurant/${id}`);
   };
@@ -20,13 +21,12 @@ const HomePage = () => {
       <SearchInput
         icon="MagnifyingGlassIcon"
         placeholder="식당을 탐색해보세요"
-        defaultValue=""
         readOnly
         className={styles.input}
         onClick={() => navigate("/search")}
       />
-      <ButtonGroup />
-      <KaKaoMap setRestarauntId={setRestarauntId} />
+      <ButtonGroup activeLabel={activeLabel} setActiveLabel={setActiveLabel} />
+      <KaKaoMap setRestarauntId={setRestarauntId} activeLabel={activeLabel} />
       <CustomBottomSheet onNavigate={navigateToRestaurant}>
         <Restaurant restarauntId={restarauntId} />
       </CustomBottomSheet>
