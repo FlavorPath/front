@@ -1,10 +1,25 @@
-import { ReactNode } from "react";
+import { useEffect } from "react";
 import { css } from "@styled-system/css";
+import useAuth from '@/store/stores/auth.store';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const token = useAuth.getState().accessToken;
+
+  useEffect(() => {
+    const publicPaths = ['/auth/login', '/auth/signup'];
+    if (!token && !publicPaths.includes(location.pathname)) {
+      navigate('/auth/login');
+    }
+  }, [token, location.pathname]);
+
   return (
     <div className={styles.container}>
-      <main className={styles.inner}>{children}</main>
+      <main className={styles.inner}>
+        <Outlet />
+      </main>
     </div>
   );
 };
