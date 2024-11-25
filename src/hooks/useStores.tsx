@@ -34,7 +34,6 @@ export const useStores = () => {
 	
 	useEffect(() => {
 		if (isSearchPage) {
-			// if (!searchValue) return setStores([]);
 			if (searchResult) {
 				setStores(searchResult);
         setNoResultText('검색 결과가 없습니다.');
