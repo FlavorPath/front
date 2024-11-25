@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const fetchUpdateReview = async (reviewId: number, content: string) => {
-	const response = await axios.put(`/review/${reviewId}`, {
+	const response = await axios.put(`/user/review/${reviewId}`, {
 		content
 	})
 	return response.data;
