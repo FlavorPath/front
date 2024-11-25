@@ -43,7 +43,7 @@ const LoginPage = () => {
           </Button>
           <p className={styles.link_text}>
             회원이 아니라면?{" "}
-            <Link to="/signup" className={css({ fontWeight: "medium" })}>
+            <Link to="/auth/signup" className={css({ fontWeight: "medium" })}>
               회원가입하기
             </Link>
           </p>
