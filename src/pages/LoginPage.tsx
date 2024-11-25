@@ -1,5 +1,4 @@
 import { useLogin } from "@/hooks/useLogin";
-import { authStyles } from "@/styles/auth.styles";
 import Button from "@/ui/view/atom/Button";
 import Input from "@/ui/view/atom/Input";
 import { css } from "@styled-system/css";
