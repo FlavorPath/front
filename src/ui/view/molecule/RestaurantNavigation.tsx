@@ -1,4 +1,3 @@
-import { useRestaurantNavigationStore } from "@/store/stores/restaurantNavigation.store";
 import { css } from "@styled-system/css";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -16,7 +15,7 @@ const RestaurantNavigation = () => {
   };
   return (
     <div className={styles.Wrapper}>
-      {navigationItems.map((item, index) => (
+      {navigationItems.map((item) => (
         <div
           key={item.Name}
           className={styles.Item}
@@ -40,7 +39,7 @@ const styles = {
     width: "100%",
     height: "50px",
     margin: "0",
-    position: "fixed",
+    position: "absolute",
     left: 0,
     marginTop: 290,
     padding: "0px 20px 0px 20px",
