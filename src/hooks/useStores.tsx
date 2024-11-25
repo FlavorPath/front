@@ -25,7 +25,7 @@ export const useStores = () => {
 	const { data: bookmarks } = useGetBookmarks()
 	const debouncedSearchValue = useDebounce(searchValue, 150); 
 
-	const { data: searchResult, isFetching: isSearchLoading } = useGetSearchStores(
+	const { data: searchResult, isLoading: isSearchLoading } = useGetSearchStores(
     {
       searchText: debouncedSearchValue,
       isToggleOn,
