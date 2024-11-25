@@ -21,15 +21,12 @@ export type RestaurantDetail = {
 };
 
 export const fetchRestaurantDetail = async (id: number, token: string) => {
-  // const url = `${API_PATH.restaurant}/${id}`;
-  const url = "http://43.202.172.0:1234/restaurant/1";
-  console.log(token);
+  const url = `${API_PATH.restaurant}/${id}`;
   const response = await axios.get(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(response);
   return response.data;
 };
 
