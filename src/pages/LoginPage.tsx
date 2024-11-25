@@ -1,7 +1,8 @@
 import { useLogin } from "@/hooks/useLogin";
+import { authStyles } from '@/styles/auth.styles';
 import Button from "@/ui/view/atom/Button";
 import Input from "@/ui/view/atom/Input";
-import { css } from "@styled-system/css";
+import { css, cx } from "@styled-system/css";
 import { center, flex } from "@styled-system/patterns";
 import { Link } from "react-router-dom";
 
@@ -31,8 +32,7 @@ const LoginPage = () => {
             <p className={styles.error_text}>{getErrorMessage(key)}</p>
           </div>
         ))}
-
-        <div className={styles.button_grp}>
+        <div className={cx(authStyles.button_grp, css({bottom: '25px'}))}>
           <Button
             type="submit"
             size="large"
