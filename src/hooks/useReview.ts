@@ -1,6 +1,5 @@
 import { useAddReview, useUpdateReview } from '@/store/queries/review.query';
 import useTextareaStore from '@/store/stores/textarea.store';
-import { useEffect } from 'react';
 
 export interface Review {
   id: number;
