@@ -1,19 +1,20 @@
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import RestaurantPage from "@/pages/RestaurantPage";
-import ReviewPage from '@/pages/ReviewPage';
+import ReviewPage from "@/pages/ReviewPage";
 import ScrapPage from "@/pages/ScrapPage";
 import SearchPage from "@/pages/SearchPage";
 import SignUpPage from "@/pages/SignupPage";
 import AuthLayout from "@/ui/components/layout/AuthLayout";
-import Layout from '@/ui/components/layout/Layout';
+import Layout from "@/ui/components/layout/Layout";
 import NavigationLayout from "@/ui/components/layout/NavigationLayout";
 import RestaurantMain from "@/ui/components/restaurant/RestaurantMain";
 import RestaurantMenu from "@/ui/components/restaurant/RestaurantMenu";
+import RestaurantReview from "@/ui/components/restaurant/RestaurantReview";
 
 const router = [
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     children: [
       {
@@ -52,7 +53,7 @@ const router = [
           },
           {
             path: "review",
-            element: <div>리뷰 페이지</div>,
+            element: <RestaurantReview />,
           },
         ],
       },
@@ -78,12 +79,12 @@ const router = [
         path: "/search",
         element: <SearchPage />,
       },
-    ]
+    ],
   },
   {
-    path: '/review',
-    element: <ReviewPage />
-  }
+    path: "/review",
+    element: <ReviewPage />,
+  },
 ];
 
 export default router;
