@@ -1,9 +1,8 @@
-import axios from 'axios'
+import axiosInstance from '.';
 
 export const fetchSearchStore = async (searchText: string, isToggleOn: boolean) => {
-	let url = '/search'
-	url += isToggleOn ? `?label=${searchText}` : `?name=${searchText}`;
+  const url = `/search?toggle=${isToggleOn ? 'label' : 'name'}&query=${encodeURIComponent(searchText)}`;
 
-	const response = await axios.get(url)
-	return response.data;
-}
+	const response = await axiosInstance.get(url);
+  return response.data;
+};
