@@ -18,5 +18,5 @@ export const handlers = [
   ...storeHandlers,
   ...bookmarkHandler,
   ...restaurantHandler,
-  ...reviewHandler
+  // ...reviewHandler
 ];
