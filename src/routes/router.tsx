@@ -17,73 +17,73 @@ const router = [
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <NavigationLayout />,
         children: [
           {
-            path: "/",
+            path: '/',
             element: <HomePage />,
           },
           {
-            path: "/recommendations",
+            path: '/recommendations',
             element: <div>추천 페이지</div>,
           },
           {
-            path: "/bookmarks",
+            path: '/bookmarks',
             element: <ScrapPage />,
           },
           {
-            path: "/profile",
+            path: '/profile',
             element: <div>내 정보 페이지</div>,
           },
         ],
       },
       {
-        path: "/restaurant/:id",
+        path: '/restaurant/:id',
         element: <RestaurantPage />,
         children: [
           {
-            path: "",
+            path: '',
             element: <RestaurantMain />,
           },
           {
-            path: "menu",
+            path: 'menu',
             element: <RestaurantMenu />,
           },
           {
-            path: "review",
+            path: 'review',
             element: <div>리뷰 페이지</div>,
           },
         ],
       },
       {
-        path: "/auth",
+        path: '/auth',
         element: <AuthLayout />,
         children: [
           {
-            path: "login",
+            path: 'login',
             element: <LoginPage />,
           },
           {
-            path: "signup",
+            path: 'signup',
             element: <SignUpPage />,
           },
         ],
       },
       {
-        path: "/bookmark",
+        path: '/bookmark',
         element: <ScrapPage />,
       },
       {
-        path: "/search",
+        path: '/search',
         element: <SearchPage />,
       },
-    ]
+      {
+        path: '/review',
+        element: <ReviewPage />,
+      },
+    ],
   },
-  {
-    path: '/review',
-    element: <ReviewPage />
-  }
 ];
 
 export default router;
