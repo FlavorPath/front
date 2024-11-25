@@ -13,7 +13,9 @@ type KaKaoMapProps = {
 export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
   useKakaoLoader();
   const [map, setMap] = useState<any>(null);
-  const { filteredMarkers, isLoading, isError } = useMap();
+  const { filteredMarkers = [], isLoading, isError } = useMap();
+
+  console.log(filteredMarkers);
   const mapSize = useDynamicMapSize();
 
   const handleMarkerClick = async (

@@ -40,15 +40,16 @@ const CustomMapMarker = ({
   );
 
   const onClick = () => {
-    console.log(`라벨: ${label}`);
+    // console.log(`라벨: ${label}`);
     setOpenBottomSheet(true);
     onMarkerClick(location.latitude, location.longitude);
   };
 
-  const markerImageSrc = useMemo(
-    () => markerMap[label[0] as keyof typeof markerMap] ?? KoreanMarker,
-    [label]
-  );
+  // const markerImageSrc = useMemo(
+  //   () => markerMap[label[0] as keyof typeof markerMap] ?? KoreanMarker,
+  //   [label]
+  // );
+  const markerImageSrc = KoreanMarker;
 
   return (
     <MapMarker

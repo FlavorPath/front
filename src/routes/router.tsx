@@ -1,6 +1,7 @@
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import RestaurantPage from "@/pages/RestaurantPage";
+import ReviewPage from '@/pages/ReviewPage';
 import ScrapPage from "@/pages/ScrapPage";
 import SearchPage from "@/pages/SearchPage";
 import SignUpPage from "@/pages/SignupPage";
@@ -79,6 +80,10 @@ const router = [
       },
     ]
   },
+  {
+    path: '/review',
+    element: <ReviewPage />
+  }
 ];
 
 export default router;

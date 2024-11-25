@@ -29,7 +29,7 @@ export default Layout;
 const styles = {
   container: css({
     width: "100dvw",
-    height: "100vh",
+    minHeight: "100dvh",
     fontFamily: "Gmarket Sans",
   }),
   inner: css({

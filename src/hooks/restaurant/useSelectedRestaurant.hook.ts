@@ -1,6 +1,6 @@
 import {
-  updateScrapeMutation,
   useRestaurantDetail,
+  useUpdateScrapeMutation,
 } from "@/store/queries/restaurant.query";
 
 const useSelectedRestaurant = (id: number) => {
@@ -10,14 +10,14 @@ const useSelectedRestaurant = (id: number) => {
     error,
     refetch,
   } = useRestaurantDetail(id);
-  const handleUpdateScrape = (id: number) => {
-    updateScrapeMutation.mutate(id);
-  };
+  const { mutate, isPending: isMutating } = useUpdateScrapeMutation();
   return {
     restaurantDetail,
     isLoading,
     error,
-    handleUpdateScrape,
+    mutate,
+
+    isMutating,
   };
 };
 

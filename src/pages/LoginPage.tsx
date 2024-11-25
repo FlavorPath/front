@@ -1,10 +1,11 @@
 import { useLogin } from "@/hooks/useLogin";
-import { authStyles } from '@/styles/auth.styles';
+import { authStyles } from "@/styles/auth.styles";
 import Button from "@/ui/view/atom/Button";
 import Input from "@/ui/view/atom/Input";
-import { css, cx } from "@styled-system/css";
-import { center, flex } from "@styled-system/patterns";
+import { css } from "@styled-system/css";
+import { center } from "@styled-system/patterns";
 import { Link } from "react-router-dom";
+import { authStyles } from "@/styles/auth.styles";
 
 export interface FormData {
   userId: string;
@@ -15,9 +16,9 @@ const LoginPage = () => {
   const { inputs, onChange, onSubmit, getErrorMessage } = useLogin();
 
   return (
-    <>
+    <div className={css({ height: "calc(100dvh - 60px)" })}>
       <div className={styles.logo_box}></div>
-      <form onSubmit={onSubmit} className={styles.form}>
+      <form onSubmit={onSubmit} className={authStyles.form}>
         {Object.keys(inputs).map((key) => (
           <div key={key}>
             <Input
@@ -25,14 +26,15 @@ const LoginPage = () => {
               type={key === "password" ? "password" : "text"}
               value={inputs[key as keyof FormData]}
               onChange={onChange}
-              className={getErrorMessage(key) ? styles.error : ""}
+              className={getErrorMessage(key) ? authStyles.error : ""}
               placeholder={`${key === "userId" ? "아이디" : "비밀번호"}를 입력해 주세요.`}
               error={!!getErrorMessage(key)}
             />
-            <p className={styles.error_text}>{getErrorMessage(key)}</p>
+            <p className={authStyles.error_text}>{getErrorMessage(key)}</p>
           </div>
         ))}
-        <div className={cx(authStyles.button_grp, css({bottom: '25px'}))}>
+
+        <div className={authStyles.button_grp}>
           <Button
             type="submit"
             size="large"
@@ -41,7 +43,7 @@ const LoginPage = () => {
           >
             로그인하기
           </Button>
-          <p className={styles.link_text}>
+          <p className={authStyles.link_text}>
             회원이 아니라면?{" "}
             <Link to="/auth/signup" className={css({ fontWeight: "medium" })}>
               회원가입하기
@@ -49,7 +51,7 @@ const LoginPage = () => {
           </p>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
@@ -60,38 +62,5 @@ const styles = {
     width: "375px",
     height: "214px",
     marginBottom: "30px",
-  }),
-  error: css({
-    borderBottomColor: "secondary.red",
-    borderBottomWidth: "1px",
-  }),
-  error_text: css({
-    color: "secondary.red",
-    textStyle: "body2",
-    marginTop: "8px",
-  }),
-  form: css({
-    display: "flex",
-    flexDir: "column",
-    margin: "0 30px",
-    gap: "46px",
-  }),
-  link_text: css({
-    textAlign: "center",
-    textStyle: "caption1",
-    fontWeight: "light",
-    marginTop: "16px",
-  }),
-  button_grp: css({
-    width: "calc(100% - 60px)",
-    position: "absolute",
-    bottom: "128px",
-    left: 0,
-    margin: "0 30px",
-  }),
-  input_wrap: flex({
-    flexDirection: "column",
-    gap: "54px",
-    margin: "0 30px",
   }),
 };
