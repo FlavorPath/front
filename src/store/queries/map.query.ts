@@ -4,7 +4,7 @@ import axiosInstance from "@/api";
 import axios from "axios";
 
 type MarkerResponse = {
-  restaurantId: number;
+  id: number;
   name: string;
   label: string[];
   location: {
@@ -18,7 +18,6 @@ const fetchMapMarkers = async (label?: string) => {
     ? `${API_PATH.marker}?label=${encodeURIComponent(label)}`
     : API_PATH.marker;
   const response = await axios.get(url);
-  console.log(response.data);
   return response.data;
 };
 

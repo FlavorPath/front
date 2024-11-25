@@ -16,7 +16,6 @@ const useSelectedRestaurant = (id: number) => {
     isLoading,
     error,
     mutate,
-
     isMutating,
   };
 };

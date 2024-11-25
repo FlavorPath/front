@@ -11,7 +11,9 @@ type RestaurantLayoutProps = {
 };
 
 const Restaurant = ({ restarauntId }: RestaurantLayoutProps) => {
+  console.log(restarauntId);
   const { restaurantDetail } = useSelectedRestaurant(restarauntId);
+  console.log("restaurantDetail: " + restaurantDetail);
   const [activeBookMarker, setActiveBookMarker] = useState(false);
   return (
     <div className={styles.container}>
@@ -33,7 +35,7 @@ const Restaurant = ({ restarauntId }: RestaurantLayoutProps) => {
         {restaurantDetail && (
           <>
             <LabelGroup labelItems={restaurantDetail.labels} />
-            <Slider images={restaurantDetail.images} />
+            {/* <Slider images={restaurantDetail.images} /> */}
           </>
         )}
       </div>

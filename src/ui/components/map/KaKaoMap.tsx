@@ -15,7 +15,6 @@ export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
   const [map, setMap] = useState<any>(null);
   const { filteredMarkers = [], isLoading, isError } = useMap();
 
-  console.log(filteredMarkers);
   const mapSize = useDynamicMapSize();
 
   const handleMarkerClick = async (
@@ -56,14 +55,14 @@ export default function KaKaoMap({ setRestarauntId }: KaKaoMapProps) {
               latitude: marker.location.latitude,
               longitude: marker.location.longitude,
             }}
-            restaurantId={marker.restaurantId}
+            restaurantId={marker.id}
             name={marker.name}
             label={marker.label}
             onMarkerClick={() =>
               handleMarkerClick(
                 marker.location.latitude,
                 marker.location.longitude,
-                marker.restaurantId
+                marker.id
               )
             }
           />

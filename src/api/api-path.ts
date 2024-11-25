@@ -1,6 +1,6 @@
 export const API_PATH = {
   marker: "/home",
-  restaurant: "restaurant/:id",
+  restaurant: "/restaurant/:id",
   login: "/user/login",
   register: "/user/register",
   scraps: "/scraps",
