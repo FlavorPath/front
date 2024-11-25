@@ -5,21 +5,14 @@ import Header from '@/ui/view/molecule/Header';
 import { useMobileDevice } from '@/utils/hooks/useMobileDevice';
 import { css, cx } from '@styled-system/css';
 import { flex, float } from '@styled-system/patterns';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-interface IProps {
-  // TODO: 리뷰 아이템 만드는 대로 적용할 것
-	review: string;
-	// 리뷰 추가일때는 음식점 id, 리뷰 수정일때는 리뷰 id
-	targetId: number;
-}
-
-const ReviewPage = ({ review, targetId }: IProps) => {
+const ReviewPage = () => {
   const navigate = useNavigate();
-  const isMobile = useMobileDevice();	
+  const [searchparams] = useSearchParams();
+  const isMobile = useMobileDevice();
 	const { isUpdate, isFocused, content, onSave } = useReview({
-    initialContent: review,
-    targetId,
+    targetId: Number(searchparams.get('targetId')!),
   });
 	
 	return (
