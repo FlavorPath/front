@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   // TODO: 리뷰 아이템 만드는 대로 적용할 것
-	review: string;
-	// 리뷰 추가일때는 음식점 id, 리뷰 수정일때는 리뷰 id
-	targetId: number;
+  review?: string;
+  // 리뷰 추가일때는 음식점 id, 리뷰 수정일때는 리뷰 id
+  targetId?: number;
 }
 
 const ReviewPage = ({ review, targetId }: IProps) => {
@@ -19,7 +19,7 @@ const ReviewPage = ({ review, targetId }: IProps) => {
   const isMobile = useMobileDevice();	
 	const { isUpdate, isFocused, content, onSave } = useReview({
     initialContent: review,
-    targetId,
+    targetId: targetId!,
   });
 	
 	return (
