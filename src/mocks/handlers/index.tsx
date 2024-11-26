@@ -17,6 +17,6 @@ export const handlers = [
   // ...authHandlers,
   // ...storeHandlers,
   ...bookmarkHandler,
-  ...restaurantHandler,
+  // ...restaurantHandler,
   // ...reviewHandler
 ];

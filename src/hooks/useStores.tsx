@@ -30,20 +30,28 @@ export const useStores = () => {
       searchText: debouncedSearchValue,
       isToggleOn,
     },
-  );
+	);
 	
 	useEffect(() => {
 		if (isSearchPage) {
 			if (!searchValue) {
 				setStores([]);
 				setNoResultText('검색어를 입력해 주세요!')
+				return;
 			}
 			if (searchResult) {
 				setStores(searchResult);
         setNoResultText('검색 결과가 없습니다.');
 			}
 		} else if (isBookmarkPage) {
-			setStores(bookmarks);
+			if (!bookmarks?.length) {
+				setStores([]);
+			} else {
+				setStores(bookmarks.map(item => ({
+					...item,
+					photo_url: item.photos[0]
+				})))
+			}
 			setNoResultText('스크랩된 스토어가 없습니다.');
 		}
 	}, [isSearchPage, isBookmarkPage, searchResult, bookmarks, searchValue]); 

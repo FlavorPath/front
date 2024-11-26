@@ -18,6 +18,7 @@ const SearchPage = () => {
           placeholder={isToggleOn ? '키워드로 검색해보세요' : '식당을 탐색해보세요'}
           value={searchValue}
           onValueChange={setSearchValue}
+          autoFocus
         />
       </div>
       <div className={styles.toggle_wrap}>

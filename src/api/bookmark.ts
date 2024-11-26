@@ -1,14 +1,13 @@
-
-import axios from 'axios'
+import axiosInstance from '.'
 
 export const fetchGetBookmarks = async () => {
-	const response = await axios.get('/scraps')
-	return response.data
+	const response = await axiosInstance.get('/scrap');
+	return response.data.data
 }
 
 export const removeBookmarks = async (restaurantId: number) => {
-	const response = await axios.delete('/scraps', {
-    data: { restaurantId },
+	const response = await axiosInstance.post('/scrap', {
+    restaurantId,
   });
 	return response.data
 }
