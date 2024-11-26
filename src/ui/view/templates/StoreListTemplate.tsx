@@ -16,7 +16,7 @@ const StoreListTemplate = () => {
           />
         ))
       )}
-      {!stores && !isSearchLoading && <div className={styles.no_result}>{noResultText}</div>}
+      {!stores.length && !isSearchLoading && <div className={styles.no_result}>{noResultText}</div>}
     </div>
   );
 };
