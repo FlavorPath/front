@@ -25,7 +25,7 @@ export const useStores = () => {
 	const { data: bookmarks } = useGetBookmarks()
 	const debouncedSearchValue = useDebounce(searchValue, 150); 
 
-	const { data: searchResult, isFetching: isSearchLoading } = useGetSearchStores(
+	const { data: searchResult, isLoading: isSearchLoading } = useGetSearchStores(
     {
       searchText: debouncedSearchValue,
       isToggleOn,
@@ -34,6 +34,10 @@ export const useStores = () => {
 	
 	useEffect(() => {
 		if (isSearchPage) {
+			if (!searchValue) {
+				setStores([]);
+				setNoResultText('검색어를 입력해 주세요!')
+			}
 			if (searchResult) {
 				setStores(searchResult);
         setNoResultText('검색 결과가 없습니다.');
