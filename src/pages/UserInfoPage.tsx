@@ -6,17 +6,18 @@ import { css } from "@styled-system/css";
 import { useNavigate } from "react-router-dom";
 
 const UserInfoPage = () => {
-  const { reviews, isFetching, isFetchingNextPage, observerTarget } =
-    useUserReview();
+  // const {
+  //   reviews,
+  //   isFetching,
+  //   isFetchingNextPage,
+  //   observerTarget,
+  //   handleDeleteReview,
+  // } = useUserReview();
   const navigate = useNavigate();
 
   const handleEdit = (reviewId: number) => {
     console.log(`Edit review ID: ${reviewId}`);
-    navigate(`/review/리뷰아이디?targetId=${reviewId}`);
-  };
-
-  const handleDelete = (reviewId: number) => {
-    console.log(`Delete review ID: ${reviewId}`);
+    navigate(`/review/${reviewId}?type=edit`);
   };
 
   return (
@@ -25,7 +26,7 @@ const UserInfoPage = () => {
         <Header headerText="내 정보" />
         <UserInfo />
       </div>
-      <div className={styles.reviewWrapper}>
+      {/* <div className={styles.reviewWrapper}>
         {reviews.map((review) => (
           <div key={review.id} className={styles.reviewItem}>
             <div className={styles.reviewHeader}>
@@ -44,7 +45,7 @@ const UserInfoPage = () => {
                   iconName="TrashIcon"
                   library="hero-solid"
                   fill="#f44336"
-                  onClick={() => handleDelete(review.id)}
+                  onClick={() => handleDeleteReview(review.id)}
                   className={styles.icon}
                 />
               </div>
@@ -55,11 +56,11 @@ const UserInfoPage = () => {
             </p>
           </div>
         ))}
-        <div ref={observerTarget}>
-          {isFetchingNextPage && <p>Loading more reviews...</p>}
+        <div ref={observerTarget} className={styles.observerTarget}>
+          {isFetchingNextPage && <p>리뷰 로딩중</p>}
         </div>
-        {isFetching && !isFetchingNextPage && <p>Fetching reviews...</p>}
-      </div>
+        {isFetching && !isFetchingNextPage && <p>리뷰 패칭중...</p>}
+      </div> */}
     </div>
   );
 };
@@ -121,5 +122,11 @@ const styles = {
   reviewDate: css({
     textStyle: "body4",
     color: "#777",
+  }),
+  observerTarget: css({
+    height: "50px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }),
 };

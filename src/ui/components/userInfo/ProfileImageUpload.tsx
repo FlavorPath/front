@@ -3,8 +3,11 @@ import { css } from "@styled-system/css";
 import { useState } from "react";
 
 const ProfileImageUpload = () => {
-  const { updateProfileIcon, isProfileIconUpdating } = useSelectedUser();
-  const [preview, setPreview] = useState<string | null>(null);
+  const { userInfo, updateProfileIcon, isProfileIconUpdating } =
+    useSelectedUser();
+  const [preview, setPreview] = useState<string | null | undefined>(
+    userInfo?.data.icon
+  );
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

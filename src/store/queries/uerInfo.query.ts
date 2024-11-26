@@ -47,7 +47,6 @@ const updateNickname = async (
   data: UpdateNicknameRequest
 ): Promise<UpdateNicknameResponse> => {
   const { accessToken } = useAuth.getState();
-  // console.log(accessToken);
   if (!accessToken) {
     throw new Error("토큰 없음");
   }
@@ -58,7 +57,7 @@ const updateNickname = async (
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  // console.log("닉네임 변경 요청 완료");
+  console.log("닉네임 변경 요청 완료");
   return response.data;
 };
 
@@ -89,7 +88,7 @@ export const useGetUserInfo = () => {
   return useQuery<UserInfoResponse>({
     queryKey: ["userInfo"],
     queryFn: fetchUserInfo,
-    refetchInterval: 5000,
+    staleTime: 5000,
   });
 };
 
@@ -98,7 +97,7 @@ export const useUpdateNickname = () => {
     mutationFn: (data: UpdateNicknameRequest) => updateNickname(data),
     onSuccess: (response) => {
       if (response.success) {
-        // console.log("닉네임 변경 성공");
+        console.log("닉네임 변경 성공");
       } else {
         console.error("닉네임 변경 실패:", response.message);
       }

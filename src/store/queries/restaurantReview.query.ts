@@ -29,10 +29,10 @@ const deleteReview = async (id: number): Promise<{ success: boolean }> => {
 
 const fetchReviews = async ({
   id,
-  cursor = 0, // 기본값 설정
+  cursor = 0,
 }: {
   id: number;
-  cursor?: number; // cursor를 선택적 매개변수로 변경
+  cursor?: number;
 }): Promise<ReviewsResponse> => {
   const url = `${API_PATH.restaurant}/${id}/reviews?cursor=${cursor}`;
   const response = await axiosInstance.get(url);

@@ -33,8 +33,7 @@ export const useInfiniteUserReviews = () => {
     queryKey: ["userReviews"],
     queryFn: ({ pageParam = 0 }) => fetchUserReviews({ cursor: pageParam }),
     getNextPageParam: (lastPage) => {
-      // lastCursor가 null이면 undefined 반환 (더 이상 페이지 없음)
-      return lastPage.lastCursor !== null ? lastPage.lastCursor : undefined;
+      return lastPage.reviews.length > 0 ? lastPage.lastCursor : null;
     },
     initialPageParam: 0,
   });
