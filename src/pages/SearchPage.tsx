@@ -31,7 +31,7 @@ const SearchPage = () => {
           </div>
         </div>
       )}
-			<StoreListTemplate />
+      <StoreListTemplate />
     </div>
   );
 };
