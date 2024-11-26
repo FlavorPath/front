@@ -11,14 +11,17 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
 
   const { mutate: deleteBookmark } = useDeleteBookmark();
 
+  console.log(props)
+
   return (
     <div className={styles.container}>
       <a className={flex({ width: '100%' })}>
         <div className={styles.store_img}>
           <img
-            src={props.img}
+            src={props.photo_url}
             alt='store img'
             style={{ height: 'inherit', objectFit: 'cover' }}
+            loading="lazy"
           />
         </div>
         <div className={styles.info_box}>
@@ -43,7 +46,7 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
       {!isSearching && (
         <button
           className={styles.bookmark}
-          onClick={() => deleteBookmark({ restaurantId: props.restaurantId})}
+          onClick={() => deleteBookmark({ restaurantId: props.restaurantId })}
         >
           <span className={styles.solid_icon}>
             <Icon
