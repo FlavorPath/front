@@ -5,25 +5,27 @@ import Header from '@/ui/view/molecule/Header';
 import { useMobileDevice } from '@/utils/hooks/useMobileDevice';
 import { css, cx } from '@styled-system/css';
 import { flex, float } from '@styled-system/patterns';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 const ReviewPage = () => {
   const navigate = useNavigate();
+  const { reviewId } = useParams();
   const [searchparams] = useSearchParams();
   const isMobile = useMobileDevice();
-	const { isUpdate, isFocused, content, onSave } = useReview({
+	const { isUpdate, restaurant, isFocused, content, onSave } = useReview({
     targetId: Number(searchparams.get('targetId')!),
+    reviewId: Number(reviewId) || 0,
   });
 	
 	return (
     <div className={styles.container}>
       <Header headerText={isUpdate ? '리뷰 수정하기' : '리뷰 남기기'} />
       <div className={css({ margin: '0 30px' })}>
-        <h3 className={styles.title}>박순례손말이고기 산정집 광화문점</h3>
-        <p className={styles.address}>서울 종로구 종로 19</p>
+        <h3 className={styles.title}>{restaurant?.name}</h3>
+        <p className={styles.address}>{restaurant?.address}</p>
         <div className={css({ position: 'relative' })}>
           <Textarea />
-          <span className={styles.length}>{content.length} / 200</span>
+          <span className={styles.length}>{content?.length} / 200</span>
         </div>
       </div>
       <div
@@ -77,8 +79,9 @@ const styles = {
     marginTop: '20px',
   }),
   address: css({
-    marginTop: '16px',
+    marginTop: '6px',
     textStyle: 'body3',
+    lineHeight: '20px'
   }),
   button_grp: flex({
     width: 'calc(100% - 60px)',
