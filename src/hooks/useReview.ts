@@ -21,8 +21,8 @@ export const useReview = ({ targetId, reviewId }: Props) => {
 
   const { data: restaurant } = useRestaurantDetail(targetId);
   const { data: review } = useGetReview({reviewId});
-  const { mutate: updateReview } = useUpdateReview();
-  const { mutate: addReview } = useAddReview();
+  const { mutate: updateReview } = useUpdateReview({ restaurantId: targetId });
+  const { mutate: addReview } = useAddReview({ restaurantId : targetId});
 
 
     useEffect(() => {
