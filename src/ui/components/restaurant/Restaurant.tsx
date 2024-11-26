@@ -4,15 +4,36 @@ import LabelGroup from "@/ui/view/molecule/LabelGroup";
 import RestaurantNavigation from "@/ui/view/molecule/RestaurantNavigation";
 import Slider from "@/ui/view/molecule/Slider";
 import { css } from "@styled-system/css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type RestaurantLayoutProps = {
   restarauntId: number;
 };
 
 const Restaurant = ({ restarauntId }: RestaurantLayoutProps) => {
-  const { restaurantDetail } = useSelectedRestaurant(restarauntId);
+  const { restaurantDetail, mutate, isMutating } =
+    useSelectedRestaurant(restarauntId);
   const [activeBookMarker, setActiveBookMarker] = useState(false);
+
+  useEffect(() => {
+    if (restaurantDetail) {
+      setActiveBookMarker(restaurantDetail.isScraped);
+    }
+  }, [restaurantDetail]);
+
+  const handleBookmarkClick = () => {
+    if (restaurantDetail) {
+      mutate(restaurantDetail.restaurantId, {
+        onSuccess: () => {
+          setActiveBookMarker((prev) => !prev);
+        },
+        onError: (error) => {
+          console.error("Bookmark update failed:", error);
+        },
+      });
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -22,10 +43,13 @@ const Restaurant = ({ restarauntId }: RestaurantLayoutProps) => {
         <Icon
           iconName="BookmarkIcon"
           library="hero-solid"
-          onClick={() => setActiveBookMarker(true)}
+          onClick={handleBookmarkClick}
           className={css({
+            fill: activeBookMarker ? "primary.main" : "white",
             stroke: "primary.main",
             strokeWidth: "2px",
+            cursor: isMutating ? "not-allowed" : "pointer",
+            transition: "stroke 0.2s",
           })}
         />
       </div>
