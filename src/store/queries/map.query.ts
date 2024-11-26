@@ -15,15 +15,12 @@ type MarkerResponse = {
 const fetchMapMarkers = async () => {
   const url = API_PATH.marker;
   const response = await axiosInstance.get(url);
-  console.log("전체 패칭 진행됨");
   return response.data;
 };
 
 const fetchMapMarkersByLabel = async (label: string) => {
   const url = `${API_PATH.marker}/label?label=${label}`;
-  console.log(url);
   const response = await axiosInstance.get(url);
-  console.log("라벨 패칭 진행됨.");
   return response.data;
 };
 

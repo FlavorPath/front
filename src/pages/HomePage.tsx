@@ -10,10 +10,11 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const navigate = useNavigate();
   const [restarauntId, setRestarauntId] = useState<number>(1);
+  console.log("restarauntId in 홈페이지" + restarauntId);
   const [activeLabel, setActiveLabel] = useState<string>("");
 
-  const navigateToRestaurant = (id: number) => {
-    navigate(`/restaurant/${id}`);
+  const navigateToRestaurant = (restarauntId: number) => {
+    navigate(`/restaurant/${restarauntId}`);
   };
 
   return (
@@ -27,7 +28,10 @@ const HomePage = () => {
       />
       <ButtonGroup activeLabel={activeLabel} setActiveLabel={setActiveLabel} />
       <KaKaoMap setRestarauntId={setRestarauntId} activeLabel={activeLabel} />
-      <CustomBottomSheet onNavigate={navigateToRestaurant}>
+      <CustomBottomSheet
+        restarauntId={restarauntId}
+        navigateToRestaurant={navigateToRestaurant}
+      >
         <Restaurant restarauntId={restarauntId} />
       </CustomBottomSheet>
     </div>

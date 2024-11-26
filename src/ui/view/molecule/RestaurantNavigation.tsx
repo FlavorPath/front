@@ -40,7 +40,7 @@ const styles = {
     width: "100%",
     height: "50px",
     margin: "0",
-    position: "fixed",
+    position: "absolute",
     left: 0,
     marginTop: 290,
     padding: "0px 20px 0px 20px",
