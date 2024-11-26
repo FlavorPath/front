@@ -44,7 +44,14 @@ export const useStores = () => {
         setNoResultText('검색 결과가 없습니다.');
 			}
 		} else if (isBookmarkPage) {
-			setStores(bookmarks ?? []);
+			if (!bookmarks?.length) {
+				setStores([]);
+			} else {
+				setStores(bookmarks.map(item => ({
+					...item,
+					photo_url: item.photos[0]
+				})))
+			}
 			setNoResultText('스크랩된 스토어가 없습니다.');
 		}
 	}, [isSearchPage, isBookmarkPage, searchResult, bookmarks, searchValue]); 
