@@ -2,7 +2,6 @@ import { center, flex } from "@styled-system/patterns";
 import { css } from "@styled-system/css";
 import Icon from "../atom/Icon";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 interface IProps {
   headerText?: string;
@@ -16,7 +15,11 @@ const Header = ({ headerText, hideArrow }: IProps) => {
 
   const goBack = () => {
     if (location.pathname.includes("restaurant")) {
-      navigate("/");
+      if (window.history.state?.usr?.from === '/') {
+        navigate('/');
+      } else {
+        navigate(-1);
+      }
     } else {
       navigate(-1);
     }

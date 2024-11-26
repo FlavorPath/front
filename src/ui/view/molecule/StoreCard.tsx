@@ -1,25 +1,24 @@
 import { css, cx } from '@styled-system/css';
 import { flex } from '@styled-system/patterns';
 import Icon from '../atom/Icon';
-import { useLocation } from 'react-router-dom';
 import { Store } from '@/mocks/mock-data/stores.mock';
-import { useDeleteBookmark } from '@/store/queries/bookmarks.query';
+import { useScrap } from '@/hooks/useScrap';
 
-const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
-  const location = useLocation();
-  const isSearching = location.pathname === '/search'
-
-  const { mutate: deleteBookmark } = useDeleteBookmark();
+const StoreCard = ({ searchText, ...props }: Store & { searchText: string }) => {
+  const { isSearching, deleteBookmark, onClick } = useScrap();
 
   return (
     <div className={styles.container}>
-      <a className={flex({ width: '100%' })}>
+      <a
+        className={flex({ width: '100%' })}
+        onClick={() => onClick(props)}
+      >
         <div className={styles.store_img}>
           <img
             src={props.photo_url}
             alt='store img'
             className={styles.photo}
-            loading="lazy"
+            loading='lazy'
           />
         </div>
         <div className={styles.info_box}>
@@ -42,7 +41,7 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
         </div>
       </a>
       {!isSearching && (
-        <button
+        <div
           className={styles.bookmark}
           onClick={() => deleteBookmark({ restaurantId: props.restaurantId })}
         >
@@ -52,7 +51,7 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
               iconName='BookmarkIcon'
             />
           </span>
-        </button>
+        </div>
       )}
     </div>
   );
@@ -92,6 +91,11 @@ const styles = {
     marginTop: '8px',
     textStyle: 'caption1',
     fontWeight: 'light',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    maxWidth: '245px',
+    maxHeight: '12px',
   }),
   bookmark: css({
     position: 'absolute',
