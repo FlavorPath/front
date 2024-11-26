@@ -1,6 +1,7 @@
 import axiosInstance from "@/api";
 import { API_PATH } from "@/api/api-path";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { queryClient } from "@/utils/queryClient";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 
 export type Review = {
   id: number;
@@ -16,7 +17,16 @@ export type ReviewsResponse = {
   lastCursor: number | null;
 };
 
-// API 호출 함수
+const deleteReview = async (id: number): Promise<{ success: boolean }> => {
+  const url = `/user/review/${id}`;
+  const response = await axiosInstance.delete(url, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
+    },
+  });
+  return response.data;
+};
+
 const fetchReviews = async ({
   id,
   cursor = 0, // 기본값 설정
@@ -29,14 +39,27 @@ const fetchReviews = async ({
   return response.data;
 };
 
-// 무한 스크롤 쿼리 훅
+export const useDeleteReview = () => {
+  return useMutation<{ success: boolean }, Error, number>({
+    mutationFn: deleteReview,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["reviews"],
+      });
+    },
+    onError: (error) => {
+      console.error("리뷰 삭제 실패:", error);
+    },
+  });
+};
+
 export const useInfiniteReviews = (restaurantId: number) => {
   return useInfiniteQuery<ReviewsResponse, Error>({
     queryKey: ["reviews", restaurantId],
     queryFn: ({ pageParam = 0 }) =>
       fetchReviews({ id: restaurantId, cursor: pageParam }),
-    getNextPageParam: (lastPage) => lastPage.lastCursor || undefined, // 다음 cursor 반환
-    initialPageParam: 0, // 초기 cursor 설정
-    enabled: !!restaurantId, // restaurantId가 있을 때만 실행
+    getNextPageParam: (lastPage) => lastPage.lastCursor || undefined,
+    initialPageParam: 0,
+    enabled: !!restaurantId,
   });
 };

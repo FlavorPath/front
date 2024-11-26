@@ -15,12 +15,11 @@ export type UserReviewsResponse = {
 
 const fetchUserReviews = async ({
   cursor = 0,
-  limit = 10,
 }: {
   cursor?: number;
   limit?: number;
 }): Promise<UserReviewsResponse> => {
-  const url = `/user/review?cursor=${cursor}&limit=${limit}`;
+  const url = `/user/review?cursor=${cursor}`;
   const response = await axiosInstance.get(url, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
@@ -33,7 +32,10 @@ export const useInfiniteUserReviews = () => {
   return useInfiniteQuery<UserReviewsResponse, Error>({
     queryKey: ["userReviews"],
     queryFn: ({ pageParam = 0 }) => fetchUserReviews({ cursor: pageParam }),
-    getNextPageParam: (lastPage) => lastPage.lastCursor || undefined, // 다음 커서 반환
-    initialPageParam: 0, // 초기 커서 설정
+    getNextPageParam: (lastPage) => {
+      // lastCursor가 null이면 undefined 반환 (더 이상 페이지 없음)
+      return lastPage.lastCursor !== null ? lastPage.lastCursor : undefined;
+    },
+    initialPageParam: 0,
   });
 };
