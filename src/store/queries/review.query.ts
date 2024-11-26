@@ -1,6 +1,6 @@
-import { fetchAddReview, fetchUpdateReview } from '@/api/review';
+import { fetchAddReview, fetchGetReview, fetchUpdateReview } from '@/api/review';
 import { queryClient } from '@/utils/queryClient';
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom';
 
 export const useAddReview = () => {
@@ -34,3 +34,15 @@ export const useUpdateReview = () => {
     }
   });
 }
+
+interface GetReviewProps {
+  reviewId: number
+}
+
+export const useGetReview = ({ reviewId }: GetReviewProps) => {
+  return useQuery({
+    queryKey: ['review'],
+    queryFn: () => fetchGetReview(reviewId),
+    enabled: !!reviewId
+  });
+};
