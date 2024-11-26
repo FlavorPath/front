@@ -19,7 +19,7 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
             src={props.photo_url}
             alt='store img'
             className={styles.photo}
-            loading="lazy"
+            loading='lazy'
           />
         </div>
         <div className={styles.info_box}>
@@ -42,7 +42,7 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
         </div>
       </a>
       {!isSearching && (
-        <button
+        <div
           className={styles.bookmark}
           onClick={() => deleteBookmark({ restaurantId: props.restaurantId })}
         >
@@ -52,7 +52,7 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
               iconName='BookmarkIcon'
             />
           </span>
-        </button>
+        </div>
       )}
     </div>
   );
