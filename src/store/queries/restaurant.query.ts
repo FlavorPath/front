@@ -42,9 +42,14 @@ export const fetchRestaurantDetail = async (id: number, token: string) => {
   return response.data;
 };
 
-export const updateScrape = async (id: number) => {
+export const updateScrape = async (id: number, token: string) => {
   const url = `${API_PATH.restaurant}/${id}/scrap`;
-  const response = await axiosInstance.post(url);
+  const response = await axiosInstance.post(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log("response " + response);
   return response.data;
 };
 
@@ -59,8 +64,9 @@ export const useRestaurantDetail = (id: number) => {
 };
 
 export const useUpdateScrapeMutation = () => {
+  const token = getTokenFromLocalStorage();
   return useMutation({
-    mutationFn: (id: number) => updateScrape(id),
+    mutationFn: (id: number) => updateScrape(id, token),
     onSettled: async (_, __, variables) => {
       await queryClient.invalidateQueries({
         queryKey: ["restaurant", variables],
