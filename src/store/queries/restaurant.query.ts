@@ -33,7 +33,6 @@ const getTokenFromLocalStorage = () => {
 
 export const fetchRestaurantDetail = async (id: number, token: string) => {
   const url = `${API_PATH.restaurant}/${id}`;
-
   const response = await axiosInstance.get(url, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -59,7 +58,7 @@ export const useRestaurantDetail = (id: number) => {
     queryKey: ["restaurant", id],
     queryFn: () => fetchRestaurantDetail(id, token),
     staleTime: 1000 * 60 * 5,
-    enabled: !!id && !!token, // id와 token이 있을 때만 실행
+    enabled: !!id && !!token,
   });
 };
 
