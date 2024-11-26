@@ -25,9 +25,11 @@ export const useReview = ({ targetId, reviewId }: Props) => {
   const { mutate: addReview } = useAddReview();
 
 
-  useEffect(() => {
-    setContent(review[0].content);
-  }, [review])
+    useEffect(() => {
+      if (review) {
+        setContent(review[0]?.content);
+      }
+    }, [review]);
 
   const handleSave = () => {
     if (reviewId) {
