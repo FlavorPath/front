@@ -1,3 +1,4 @@
+import useBottomSheetStore from "@/store/stores/BottomSheet.store";
 import KaKaoMap from "@/ui/components/map/KaKaoMap";
 import Restaurant from "@/ui/components/restaurant/Restaurant";
 import SearchInput from "@/ui/view/atom/SearchInput";
@@ -10,9 +11,14 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const navigate = useNavigate();
   const [restarauntId, setRestarauntId] = useState<number>(1);
-
-  const navigateToRestaurant = (id: number) => {
-    navigate(`/restaurant/${id}`);
+  console.log("restarauntId in 홈페이지" + restarauntId);
+  const [activeLabel, setActiveLabel] = useState<string>("");
+  const setOpenBottomSheet = useBottomSheetStore(
+    (state) => state.setOpenBottomSheet
+  );
+  const navigateToRestaurant = (restarauntId: number) => {
+    navigate(`/restaurant/${restarauntId}`);
+    setOpenBottomSheet(false);
   };
 
   return (
@@ -20,14 +26,16 @@ const HomePage = () => {
       <SearchInput
         icon="MagnifyingGlassIcon"
         placeholder="식당을 탐색해보세요"
-        defaultValue=""
         readOnly
         className={styles.input}
         onClick={() => navigate("/search")}
       />
-      <ButtonGroup />
-      <KaKaoMap setRestarauntId={setRestarauntId} />
-      <CustomBottomSheet onNavigate={navigateToRestaurant}>
+      <ButtonGroup activeLabel={activeLabel} setActiveLabel={setActiveLabel} />
+      <KaKaoMap setRestarauntId={setRestarauntId} activeLabel={activeLabel} />
+      <CustomBottomSheet
+        restarauntId={restarauntId}
+        navigateToRestaurant={navigateToRestaurant}
+      >
         <Restaurant restarauntId={restarauntId} />
       </CustomBottomSheet>
     </div>

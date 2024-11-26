@@ -18,42 +18,58 @@ export type RestaurantDetail = {
   phone: string;
   isScraped: boolean;
 };
-// export const fetchRestaurantDetail = async (id: number, token: string) => {
-//   const url = `${API_PATH.restaurant}/${id}`;
-//   const response = await axiosInstance.get(url, {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-//   return response.data;
-// };
 
-export const fetchRestaurantDetail = async (id: number) => {
+const getTokenFromLocalStorage = () => {
+  const authStorage = localStorage.getItem("auth-storage");
+  if (!authStorage) return "";
+  try {
+    const parsed = JSON.parse(authStorage);
+    return parsed.state?.accessToken || "";
+  } catch (error) {
+    console.error("Failed to parse auth-storage:", error);
+    return "";
+  }
+};
+
+export const fetchRestaurantDetail = async (id: number, token: string) => {
   const url = `${API_PATH.restaurant}/${id}`;
-  const response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
-export const updateScrape = async (id: number) => {
+export const updateScrape = async (id: number, token: string) => {
   const url = `${API_PATH.restaurant}/${id}/scrap`;
-  const response = await axiosInstance.post(url);
+  const response = await axiosInstance.post(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log("response " + response);
   return response.data;
 };
 
 export const useRestaurantDetail = (id: number) => {
+  const token = getTokenFromLocalStorage();
   return useQuery<RestaurantDetail>({
     queryKey: ["restaurant", id],
-    queryFn: () => fetchRestaurantDetail(id),
+    queryFn: () => fetchRestaurantDetail(id, token),
     staleTime: 1000 * 60 * 5,
-    enabled: !!id,
+    enabled: !!id && !!token,
   });
 };
 
 export const useUpdateScrapeMutation = () => {
+  const token = getTokenFromLocalStorage();
   return useMutation({
-    mutationFn: (id: number) => updateScrape(id),
+    mutationFn: (id: number) => updateScrape(id, token),
     onSettled: async (_, __, variables) => {
-      await queryClient.invalidateQueries({ queryKey: ["scrape", variables] });
+      await queryClient.invalidateQueries({
+        queryKey: ["restaurant", variables],
+      });
     },
   });
 };
