@@ -16,7 +16,7 @@ const RestaurantReview = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.reviewWrapper}>
+      <div className={styles.reviewContainer}>
         <div
           className={css({
             textStyle: "button1",
@@ -49,29 +49,11 @@ const styles = {
     padding: "5px 20px 0px 20px",
     overflow: "scroll",
   }),
-  reviewWrapper: css({
+  reviewContainer: css({
     height: "70px",
     width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
   }),
-  wrapper: css({
-    width: "335px",
-    display: "flex",
-    flexDir: "column",
-    gap: "8px",
-  }),
-  userWrapper: css({
-    display: "flex",
-    gap: "8px",
-  }),
-  userImg: css({
-    width: "20px",
-    height: "20px",
-    borderRadius: "50%",
-  }),
-  // reviewWrapper: css({
-  //   whiteSpace: "pre-wrap",
-  // }),
 };

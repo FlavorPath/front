@@ -1,3 +1,4 @@
+import useBottomSheetStore from "@/store/stores/BottomSheet.store";
 import KaKaoMap from "@/ui/components/map/KaKaoMap";
 import Restaurant from "@/ui/components/restaurant/Restaurant";
 import SearchInput from "@/ui/view/atom/SearchInput";
@@ -12,9 +13,12 @@ const HomePage = () => {
   const [restarauntId, setRestarauntId] = useState<number>(1);
   console.log("restarauntId in 홈페이지" + restarauntId);
   const [activeLabel, setActiveLabel] = useState<string>("");
-
+  const setOpenBottomSheet = useBottomSheetStore(
+    (state) => state.setOpenBottomSheet
+  );
   const navigateToRestaurant = (restarauntId: number) => {
     navigate(`/restaurant/${restarauntId}`);
+    setOpenBottomSheet(false);
   };
 
   return (
