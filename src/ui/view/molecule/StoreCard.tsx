@@ -16,9 +16,10 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
       <a className={flex({ width: '100%' })}>
         <div className={styles.store_img}>
           <img
-            src={props.img}
+            src={props.photo_url}
             alt='store img'
-            style={{ height: 'inherit', objectFit: 'cover' }}
+            className={styles.photo}
+            loading="lazy"
           />
         </div>
         <div className={styles.info_box}>
@@ -43,7 +44,7 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
       {!isSearching && (
         <button
           className={styles.bookmark}
-          onClick={() => deleteBookmark({ restaurantId: props.restaurantId})}
+          onClick={() => deleteBookmark({ restaurantId: props.restaurantId })}
         >
           <span className={styles.solid_icon}>
             <Icon
@@ -109,5 +110,10 @@ const styles = {
     '& > button > svg': {
       fill: 'primary.main',
     },
+  }),
+  photo: css({
+    width: '100%',
+    height: 'inherit',
+    objectFit: 'cover',
   }),
 };

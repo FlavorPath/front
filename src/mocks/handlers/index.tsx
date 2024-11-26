@@ -15,7 +15,7 @@ export const delayForDevelopment = async (ms = 1000) => {
 export const handlers = [
   ...mapHandlers,
   // ...authHandlers,
-  ...storeHandlers,
+  // ...storeHandlers,
   ...bookmarkHandler,
   ...restaurantHandler,
   // ...reviewHandler
