@@ -6,8 +6,8 @@ export const fetchGetBookmarks = async () => {
 }
 
 export const removeBookmarks = async (restaurantId: number) => {
-	const response = await axiosInstance.delete('/scrap', {
-    data: { restaurantId },
+	const response = await axiosInstance.post('/scrap', {
+    restaurantId,
   });
 	return response.data
 }
