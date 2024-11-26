@@ -17,7 +17,7 @@ export const useReview = ({  targetId }: Props) => {
   const params = new URLSearchParams(window.location.search);
   const isUpdate = params.get('type') === 'update';
 
-  const { content, isFocused } = useTextareaStore();  
+  const { content, isFocused, setContent } = useTextareaStore();  
   const { mutate: updateReview } = useUpdateReview();
   const { mutate: addReview } = useAddReview();
 
@@ -33,6 +33,7 @@ export const useReview = ({  targetId }: Props) => {
         content,
       });
     }
+    setContent('')
   };
 
   return {
