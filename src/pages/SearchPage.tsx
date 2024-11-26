@@ -24,14 +24,13 @@ const SearchPage = () => {
         <div className={styles.toggle_text}>키워드로 검색</div>
         <Toggle />
       </div>
-      {isSearchLoading && (
+      {isSearchLoading ? (
         <div>
           <div className={styles.loading}>
             <span>Loading...</span>
           </div>
         </div>
-      )}
-			<StoreListTemplate />
+      ) : <StoreListTemplate />}
     </div>
   );
 };
