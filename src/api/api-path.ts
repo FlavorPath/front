@@ -6,4 +6,7 @@ export const API_PATH = {
   scraps: "/scraps",
   searchStore: "/search",
   review: "/review",
+  userInfo: "/user/info",
+  userNickname: "/user/nickname",
+  userProfileIcon: "/user/profile-icon",
 };
