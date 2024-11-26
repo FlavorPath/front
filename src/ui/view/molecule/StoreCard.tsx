@@ -1,18 +1,27 @@
 import { css, cx } from '@styled-system/css';
 import { flex } from '@styled-system/patterns';
 import Icon from '../atom/Icon';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Store } from '@/mocks/mock-data/stores.mock';
 import { useDeleteBookmark } from '@/store/queries/bookmarks.query';
 
-const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
+const StoreCard = ({ searchText, ...props }: Store & { searchText: string }) => {
+  const navigate = useNavigate()
   const location = useLocation();
   const isSearching = location.pathname === '/search'
 
   const { mutate: deleteBookmark } = useDeleteBookmark();
 
+  const clickHandler = () => {
+    if (isSearching) {
+      navigate(`/restaurant/${props.id}`);
+    } else {
+      navigate(`/restaurant/${props.restaurantId}`);
+    }
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={clickHandler}>
       <a className={flex({ width: '100%' })}>
         <div className={styles.store_img}>
           <img
@@ -92,6 +101,11 @@ const styles = {
     marginTop: '8px',
     textStyle: 'caption1',
     fontWeight: 'light',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    maxWidth: '245px',
+    maxHeight: '12px',
   }),
   bookmark: css({
     position: 'absolute',
