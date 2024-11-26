@@ -1,28 +1,18 @@
 import { css, cx } from '@styled-system/css';
 import { flex } from '@styled-system/patterns';
 import Icon from '../atom/Icon';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { Store } from '@/mocks/mock-data/stores.mock';
-import { useDeleteBookmark } from '@/store/queries/bookmarks.query';
+import { useScrap } from '@/hooks/useScrap';
 
 const StoreCard = ({ searchText, ...props }: Store & { searchText: string }) => {
-  const navigate = useNavigate()
-  const location = useLocation();
-  const isSearching = location.pathname === '/search'
-
-  const { mutate: deleteBookmark } = useDeleteBookmark();
-
-  const clickHandler = () => {
-    if (isSearching) {
-      navigate(`/restaurant/${props.id}`);
-    } else {
-      navigate(`/restaurant/${props.restaurantId}`);
-    }
-  }
+  const { isSearching, deleteBookmark, onClick } = useScrap();
 
   return (
-    <div className={styles.container} onClick={clickHandler}>
-      <a className={flex({ width: '100%' })}>
+    <div className={styles.container}>
+      <a
+        className={flex({ width: '100%' })}
+        onClick={() => onClick(props)}
+      >
         <div className={styles.store_img}>
           <img
             src={props.photo_url}
