@@ -3,11 +3,11 @@ import StoreCard from '../molecule/StoreCard';
 import { useStores } from '@/hooks/useStores';
 
 const StoreListTemplate = () => {
-  const { stores, noResultText, searchValue } = useStores();
+  const { stores, noResultText, searchValue, isSearchLoading } = useStores();
 
   return (
     <div>
-      {stores?.length ? (
+      {stores && (
         stores?.map(item => (
           <StoreCard
             key={item.name}
@@ -15,9 +15,8 @@ const StoreListTemplate = () => {
             searchText={searchValue}
           />
         ))
-      ) : (
-        <div className={styles.no_result}>{noResultText}</div>
       )}
+      {!stores && !isSearchLoading && <div className={styles.no_result}>{noResultText}</div>}
     </div>
   );
 };
