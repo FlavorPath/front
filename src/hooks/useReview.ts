@@ -1,5 +1,7 @@
-import { useAddReview, useUpdateReview } from '@/store/queries/review.query';
+import { useRestaurantDetail } from '@/store/queries/restaurant.query';
+import { useAddReview, useGetReview, useUpdateReview } from '@/store/queries/review.query';
 import useTextareaStore from '@/store/stores/textarea.store';
+import { useEffect } from 'react';
 
 export interface Review {
   id: number;
@@ -11,20 +13,28 @@ export interface Review {
 
 interface Props {
   targetId: number;
+  reviewId: number;
 }
 
-export const useReview = ({  targetId }: Props) => {
-  const params = new URLSearchParams(window.location.search);
-  const isUpdate = params.get('type') === 'update';
+export const useReview = ({ targetId, reviewId }: Props) => {
+  const { content, isFocused, setContent } = useTextareaStore();
 
-  const { content, isFocused } = useTextareaStore();  
-  const { mutate: updateReview } = useUpdateReview();
-  const { mutate: addReview } = useAddReview();
+  const { data: restaurant } = useRestaurantDetail(targetId);
+  const { data: review } = useGetReview({reviewId});
+  const { mutate: updateReview } = useUpdateReview({ restaurantId: targetId });
+  const { mutate: addReview } = useAddReview({ restaurantId : targetId});
+
+
+    useEffect(() => {
+      if (review) {
+        setContent(review[0]?.content);
+      }
+    }, [review]);
 
   const handleSave = () => {
-    if (isUpdate) {
+    if (reviewId) {
       updateReview({
-        reviewId: targetId,
+        reviewId,
         content,
       });
     } else {
@@ -33,10 +43,12 @@ export const useReview = ({  targetId }: Props) => {
         content,
       });
     }
+    setContent('');
   };
 
   return {
-    isUpdate,
+    isUpdate: !!reviewId,
+    restaurant,
     isFocused,
     content,
     onSave: handleSave,
