@@ -11,8 +11,6 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
 
   const { mutate: deleteBookmark } = useDeleteBookmark();
 
-  console.log(props)
-
   return (
     <div className={styles.container}>
       <a className={flex({ width: '100%' })}>
@@ -20,7 +18,7 @@ const StoreCard = ({searchText, ...props}: Store & {searchText: string}) => {
           <img
             src={props.photo_url}
             alt='store img'
-            style={{ height: 'inherit', objectFit: 'cover' }}
+            className={styles.photo}
             loading="lazy"
           />
         </div>
@@ -112,5 +110,10 @@ const styles = {
     '& > button > svg': {
       fill: 'primary.main',
     },
+  }),
+  photo: css({
+    width: '100%',
+    height: 'inherit',
+    objectFit: 'cover',
   }),
 };
