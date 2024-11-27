@@ -3,8 +3,14 @@ import { useInfiniteUserReviews } from "@/store/queries/userReview.query";
 import { useEffect, useRef } from "react";
 
 const useUserReview = () => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
-    useInfiniteUserReviews();
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isFetching,
+    refetch,
+  } = useInfiniteUserReviews();
 
   const { mutate: deleteReview } = useDeleteReview();
 
@@ -12,7 +18,6 @@ const useUserReview = () => {
 
   useEffect(() => {
     if (!hasNextPage || isFetchingNextPage) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -21,11 +26,9 @@ const useUserReview = () => {
       },
       { threshold: 1.0 }
     );
-
     if (observerTarget.current) {
       observer.observe(observerTarget.current);
     }
-
     return () => {
       if (observerTarget.current) {
         observer.unobserve(observerTarget.current);
@@ -40,6 +43,7 @@ const useUserReview = () => {
       deleteReview(reviewId, {
         onSuccess: () => {
           console.log(`리뷰 ${reviewId} 삭제 성공`);
+          refetch();
         },
         onError: (error) => {
           console.error(`리뷰 ${reviewId} 삭제 실패:`, error);
@@ -54,7 +58,8 @@ const useUserReview = () => {
     isFetchingNextPage,
     hasNextPage,
     observerTarget,
-    handleDeleteReview, // 삭제 기능 추가
+    handleDeleteReview,
+    refetch,
   };
 };
 

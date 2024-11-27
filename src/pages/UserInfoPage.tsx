@@ -3,6 +3,7 @@ import UserInfo from "@/ui/components/userInfo/UserInfo";
 import Header from "@/ui/view/molecule/Header";
 import UserReviewItem from "@/ui/view/molecule/UserReviewitem";
 import { css } from "@styled-system/css";
+
 import { useNavigate } from "react-router-dom";
 
 const UserInfoPage = () => {
@@ -14,7 +15,6 @@ const UserInfoPage = () => {
     handleDeleteReview,
   } = useUserReview();
   const navigate = useNavigate();
-
   const handleEdit = (reviewId: number) => {
     console.log(`Edit review ID: ${reviewId}`);
     navigate(`/review/${reviewId}?type=edit`);
@@ -32,10 +32,9 @@ const UserInfoPage = () => {
           <UserReviewItem
             key={review.id}
             label={review.label}
-            restaurantId={review.restaurant_id}
             content={review.content}
-            createdAt={review.created_at}
             reviewId={review.id}
+            name={review.name}
             onEdit={handleEdit}
             onDelete={handleDeleteReview}
           />

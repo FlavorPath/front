@@ -6,7 +6,8 @@ export type UserReview = {
   restaurant_id: number;
   content: string;
   created_at: string;
-  label: string;
+  label: "한식" | "디저트" | "중식" | "양식" | "일식";
+  name: string;
 };
 
 export type UserReviewsResponse = {

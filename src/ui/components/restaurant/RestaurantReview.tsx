@@ -20,7 +20,6 @@ const RestaurantReview = () => {
 
   useEffect(() => {
     if (!hasNextPage || isFetchingNextPage) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -29,11 +28,9 @@ const RestaurantReview = () => {
       },
       { threshold: 1.0 }
     );
-
     if (observerTarget.current) {
       observer.observe(observerTarget.current);
     }
-
     return () => {
       if (observerTarget.current) {
         observer.unobserve(observerTarget.current);
