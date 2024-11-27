@@ -8,19 +8,14 @@ import { useRef, useEffect } from "react";
 const RestaurantReview = () => {
   const restaurantId = useOutletContext<number>();
   const navigate = useNavigate();
-  const {
-    reviews,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isFetching,
-  } = useSelectedRestaurantReview(restaurantId);
+  const { reviews, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useSelectedRestaurantReview(restaurantId);
 
   const observerTarget = useRef<HTMLDivElement | null>(null);
 
   const handleNavigateToWrite = () => {
     console.log("아이콘 눌림");
-    navigate(`/review?type=create&targetId=${restaurantId}`);
+    navigate(`/review?targetId=${restaurantId}`);
   };
 
   useEffect(() => {
@@ -32,7 +27,7 @@ const RestaurantReview = () => {
           fetchNextPage();
         }
       },
-      { threshold: 1.0 } // 타겟이 완전히 보였을 때 트리거
+      { threshold: 1.0 }
     );
 
     if (observerTarget.current) {
@@ -73,7 +68,6 @@ const RestaurantReview = () => {
         />
       ))}
 
-      {/* Observer Target */}
       <div ref={observerTarget} className={styles.observerTarget}>
         {isFetchingNextPage && <p>리뷰 로딩중...</p>}
       </div>

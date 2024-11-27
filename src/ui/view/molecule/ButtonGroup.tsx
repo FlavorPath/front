@@ -1,5 +1,6 @@
 import { css } from "@styled-system/css";
 import Button from "../atom/Button";
+
 type ButtonGroupProps = {
   activeLabel: string;
   setActiveLabel: (value: string) => void;
@@ -36,7 +37,9 @@ const ButtonGroup = ({ activeLabel, setActiveLabel }: ButtonGroupProps) => {
             borderRadius: 12,
             fontWeight: "medium",
           })}
-          onClick={() => setActiveLabel(item.value)}
+          onClick={() =>
+            setActiveLabel(activeLabel === item.value ? "" : item.value)
+          }
         >
           {item.label}
         </Button>
