@@ -15,8 +15,8 @@ const Header = ({ headerText, hideArrow }: IProps) => {
 
   const goBack = () => {
     if (location.pathname.includes("restaurant")) {
-      if (window.history.state?.usr?.from === '/') {
-        navigate('/');
+      if (window.history.state?.usr?.from === "/") {
+        navigate("/");
       } else {
         navigate(-1);
       }

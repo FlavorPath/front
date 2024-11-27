@@ -111,8 +111,8 @@ export const useUpdateNickname = () => {
 export const useUpdateProfileIcon = () => {
   return useMutation<UpdateProfileIconResponse, Error, File>({
     mutationFn: updateProfileIcon,
-    onSuccess: (response) => {
-      // console.log("프로필 아이콘 수정 성공:", response.profileIcon);
+    onSuccess: () => {
+      console.log("프로필 아이콘 수정 성공:");
     },
     onError: (error) => {
       console.error("프로필 아이콘 수정 실패:", error);

@@ -6,6 +6,7 @@ export type UserReview = {
   restaurant_id: number;
   content: string;
   created_at: string;
+  label: string;
 };
 
 export type UserReviewsResponse = {

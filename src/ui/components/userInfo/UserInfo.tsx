@@ -100,10 +100,8 @@ export default UserInfo;
 const styles = {
   container: css({
     textAlign: "center",
-    marginTop: "20px",
     borderRadius: "5px",
-    border: "2px solid black",
-    paddingBottom: "5px",
+    padding: "10px",
   }),
   nicknameContainer: css({
     display: "flex",
