@@ -7,7 +7,7 @@ export type UserReview = {
   content: string;
   created_at: string;
   label: "한식" | "디저트" | "중식" | "양식" | "일식";
-  name: string;
+  restaurant_name: string;
 };
 
 export type UserReviewsResponse = {

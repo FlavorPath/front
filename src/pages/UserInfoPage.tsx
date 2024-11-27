@@ -26,7 +26,6 @@ const UserInfoPage = () => {
         <Header headerText="내 정보" />
         <UserInfo />
       </div>
-      <div className={styles.line} />
       <div className={styles.reviewWrapper}>
         {reviews.map((review) => (
           <UserReviewItem
@@ -34,7 +33,7 @@ const UserInfoPage = () => {
             label={review.label}
             content={review.content}
             reviewId={review.id}
-            name={review.name}
+            name={review.restaurant_name}
             onEdit={handleEdit}
             onDelete={handleDeleteReview}
           />
