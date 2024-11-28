@@ -5,14 +5,11 @@ const useDynamicMapSize = () => {
     width: `${window.innerWidth}px`,
     height: `${window.innerHeight - 60}px`,
   });
-
   const [mapSize, setMapSize] = useState(getMapSize);
-
   useEffect(() => {
     const handleResize = () => {
       setMapSize(getMapSize());
     };
-
     let resizeTimeout: number | undefined;
     const debouncedResize = () => {
       if (resizeTimeout) {
@@ -21,9 +18,7 @@ const useDynamicMapSize = () => {
       resizeTimeout = requestAnimationFrame(handleResize);
     };
     handleResize();
-
     window.addEventListener("resize", debouncedResize);
-
     return () => {
       if (resizeTimeout) {
         cancelAnimationFrame(resizeTimeout);

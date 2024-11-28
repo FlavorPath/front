@@ -22,7 +22,6 @@ const UserInfo = () => {
       alert("닉네임은 비어 있을 수 없습니다.");
       return;
     }
-
     updateNicknameMutate(
       { nickname: nickname },
       {
@@ -50,7 +49,6 @@ const UserInfo = () => {
   return (
     <div className={styles.container}>
       <ProfileImageUpload />
-
       <div className={styles.nicknameContainer}>
         {isEditing ? (
           <>
@@ -107,7 +105,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "8px",
+    gap: "2px",
     marginTop: "10px",
   }),
   nickname: css({
@@ -116,7 +114,8 @@ const styles = {
   }),
   tag: css({
     fontSize: "18px",
-    color: "#888",
+    color: "background.gray",
+    fontWeight: "medium",
   }),
   editIcon: css({
     cursor: "pointer",

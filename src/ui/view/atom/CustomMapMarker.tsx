@@ -35,6 +35,7 @@ const CustomMapMarker = ({ location, name, labels, onMarkerClick }: IProp) => {
   const onClick = () => {
     setOpenBottomSheet(true);
     onMarkerClick(location.latitude, location.longitude);
+    console.log(labels);
   };
   const splitLabels = labels[0].split(",");
   const markerImageSrc = markerMap[splitLabels[0] as keyof typeof markerMap];

@@ -15,77 +15,77 @@ import RestaurantReview from "@/ui/components/restaurant/RestaurantReview";
 
 const router = [
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <NavigationLayout />,
         children: [
           {
-            path: '/',
+            path: "/",
             element: <HomePage />,
           },
           {
-            path: '/recommendations',
-            element: <div>추천 페이지</div>,
+            path: "/recommendations",
+            element: <div>서비스 준비중</div>,
           },
           {
-            path: '/bookmarks',
+            path: "/bookmarks",
             element: <ScrapPage />,
           },
           {
-            path: '/profile',
+            path: "/profile",
             element: <UserInfoPage />,
           },
         ],
       },
       {
-        path: '/restaurant/:id',
+        path: "/restaurant/:id",
         element: <RestaurantPage />,
         children: [
           {
-            path: '',
+            path: "",
             element: <RestaurantMain />,
           },
           {
-            path: 'menu',
+            path: "menu",
             element: <RestaurantMenu />,
           },
           {
-            path: 'review',
+            path: "review",
             element: <RestaurantReview />,
           },
         ],
       },
       {
-        path: '/auth',
+        path: "/auth",
         element: <AuthLayout />,
         children: [
           {
-            path: 'login',
+            path: "login",
             element: <LoginPage />,
           },
           {
-            path: 'signup',
+            path: "signup",
             element: <SignUpPage />,
           },
         ],
       },
       {
-        path: '/bookmark',
+        path: "/bookmark",
         element: <ScrapPage />,
       },
       {
-        path: '/search',
+        path: "/search",
         element: <SearchPage />,
       },
       {
-        path: '/review',
+        path: "/review",
         element: <ReviewPage />,
       },
       {
-        path: '/review/:reviewId',
+        path: "/review/:reviewId",
         element: <ReviewPage />,
       },
     ],
