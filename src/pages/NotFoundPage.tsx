@@ -1,6 +1,6 @@
-import Icon from '@/ui/view/atom/Icon';
+import { centerContainer } from '@/styles/commonStyle/centerContainer';
 import { css } from '@styled-system/css';
-import { center, flex } from '@styled-system/patterns';
+import { flex } from '@styled-system/patterns';
 
 const NotFoundPage = () => {
   return (
@@ -21,23 +21,20 @@ const NotFoundPage = () => {
 export default NotFoundPage;
 
 const styles = {
-  container: center({
-    flexDirection: 'column',
-    height: '100dvh',
-    width: '100%',
-    paddingBottom: '100px'
+  container: centerContainer({
+    direction: 'column',
   }),
   number: css({
     marginTop: '30px',
     fontSize: '120px',
     fontWeight: 'bold',
     letterSpacing: '11px',
-    color: 'background.gray'
+    color: 'background.gray',
   }),
   text_box: flex({
     flexDirection: 'column',
     textAlign: 'center',
     gap: '8px',
-    marginTop: '30px'
-  })
+    marginTop: '30px',
+  }),
 };

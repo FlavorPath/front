@@ -10,7 +10,7 @@ const SignUpPage = () => {
     useSignup();
 
   return (
-    <div className={css({ height: "calc(100dvh - 60px)" })}>
+    <div className={css({ height: "calc(100dvh - 90px)" })}>
       <form
         onSubmit={onSubmit}
         className={cx(styles.form, css({ marginTop: "28px", gap: "40px" }))}
