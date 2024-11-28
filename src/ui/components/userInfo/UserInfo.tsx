@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelectedUser } from "@/hooks/userInfo/useUserProfile.hook";
 import ProfileImageUpload from "./ProfileImageUpload";
 import Icon from "@/ui/view/atom/Icon";
-import Loading from '@/ui/view/atom/Loading';
+import { center } from '@styled-system/patterns';
 
 const UserInfo = () => {
   const {
@@ -40,11 +40,15 @@ const UserInfo = () => {
   };
 
   if (isUserLoading) {
-    return <Loading />
+    return <div className={center({ height: '100%'})}>로딩 중...</div>;
   }
 
   if (userError) {
-    return <p>사용자 정보를 가져오는 중 오류가 발생했습니다.</p>;
+    return (
+      <div className={center({ height: '100%' })}>
+        사용자 정보를 가져오는 중 오류가 발생했습니다.
+      </div>
+    );
   }
 
   return (
