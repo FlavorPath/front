@@ -1,7 +1,6 @@
 import { MapMarker } from "react-kakao-maps-sdk";
 import KoreanMarker from "@/assets/KoreanFood.svg";
 import JapaneseMarker from "@/assets/JapaneseFood.svg";
-import RamenMarker from "@/assets/Ramen.svg";
 import ChineseMarker from "@/assets/ChineseFood.svg";
 import WesternMarker from "@/assets/WesternFood.svg";
 import Dessert from "@/assets/Dessert.svg";
@@ -33,14 +32,12 @@ const CustomMapMarker = ({ location, name, labels, onMarkerClick }: IProp) => {
   const setOpenBottomSheet = useBottomSheetStore(
     (state) => state.setOpenBottomSheet
   );
-
   const onClick = () => {
     setOpenBottomSheet(true);
     onMarkerClick(location.latitude, location.longitude);
   };
-
-  const markerImageSrc =
-    markerMap[labels[0] as keyof typeof markerMap] || KoreanMarker;
+  const splitLabels = labels[0].split(",");
+  const markerImageSrc = markerMap[splitLabels[0] as keyof typeof markerMap];
 
   return (
     <MapMarker
