@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 const UserInfoPage = () => {
   const {
     reviews,
-    isFetching,
-    isFetchingNextPage,
-    observerTarget,
+    // isFetching,
+    // isFetchingNextPage,
+    // observerTarget,
     handleDeleteReview,
   } = useUserReview();
   const navigate = useNavigate();
@@ -38,10 +38,10 @@ const UserInfoPage = () => {
             onDelete={handleDeleteReview}
           />
         ))}
-        <div ref={observerTarget} className={styles.observerTarget}>
+        {/* <div ref={observerTarget} className={styles.observerTarget}>
           {isFetchingNextPage && <p>리뷰 로딩중</p>}
         </div>
-        {isFetching && !isFetchingNextPage && <p>리뷰 패칭중...</p>}
+        {isFetching && !isFetchingNextPage && <p>리뷰 패칭중...</p>} */}
       </div>
     </div>
   );
@@ -52,7 +52,7 @@ export default UserInfoPage;
 const styles = {
   container: css({
     width: "100%",
-    height: "100%",
+    height: "100dvh",
     display: "flex",
     flexDirection: "column",
     position: "relative",
