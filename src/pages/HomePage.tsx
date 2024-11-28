@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const navigate = useNavigate();
   const [restarauntId, setRestarauntId] = useState<number>(1);
-  console.log("restarauntId in 홈페이지" + restarauntId);
   const [activeLabel, setActiveLabel] = useState<string>("");
   const setOpenBottomSheet = useBottomSheetStore(
     (state) => state.setOpenBottomSheet

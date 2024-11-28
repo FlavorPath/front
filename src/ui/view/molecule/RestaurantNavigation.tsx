@@ -1,6 +1,5 @@
-import { useRestaurantNavigationStore } from "@/store/stores/restaurantNavigation.store";
 import { css } from "@styled-system/css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const navigationItems = [
   { Name: "홈", path: "" },
@@ -11,16 +10,26 @@ const navigationItems = [
 const RestaurantNavigation = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const location = useLocation();
+
   const handleNavigation = (item: { Name: string; path: string }) => {
-    navigate(`/restaurant/${id}/${item.path}`);
+    if (location.pathname.includes("restaurant")) {
+      navigate(`/restaurant/${id}/${item.path}`);
+    }
   };
   return (
     <div className={styles.Wrapper}>
-      {navigationItems.map((item, index) => (
+      {navigationItems.map((item) => (
         <div
           key={item.Name}
           className={styles.Item}
           onClick={() => handleNavigation(item)}
+          style={{
+            cursor: location.pathname.includes("restaurant")
+              ? "pointer"
+              : "not-allowed",
+            opacity: location.pathname.includes("restaurant") ? 1 : 0.5,
+          }}
         >
           {item.Name}
         </div>

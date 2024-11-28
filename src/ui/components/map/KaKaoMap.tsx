@@ -5,6 +5,7 @@ import { useState } from "react";
 import useDynamicMapSize from "@/hooks/map/useDynamicMapSize";
 import { useMap } from "@/hooks/map/useMap.hook";
 import { css } from "@styled-system/css";
+import Toast from "@/ui/view/atom/Toast";
 
 type KaKaoMapProps = {
   setRestarauntId: React.Dispatch<React.SetStateAction<number>>;
@@ -16,6 +17,7 @@ export default function KaKaoMap({
   activeLabel,
 }: KaKaoMapProps) {
   useKakaoLoader();
+  const mapSize = useDynamicMapSize();
   const [map, setMap] = useState<any>(null);
   const {
     HoleMarkers,
@@ -25,7 +27,7 @@ export default function KaKaoMap({
     isLoading,
     isError,
   } = useMap(activeLabel);
-  const mapSize = useDynamicMapSize();
+
   const handleMarkerClick = async (
     latitude: number,
     longitude: number,
@@ -38,8 +40,9 @@ export default function KaKaoMap({
     setRestarauntId(id);
   };
 
-  if (LoadingHole || isLoading) return <div>지도 로딩중...</div>;
-  if (HoleError || isError) return <p>문제 발생.</p>;
+  if (LoadingHole || isLoading)
+    return <Toast message={"로딩중"} variant="info" />;
+  if (HoleError || isError) return <Toast message={"에러발생"} />;
 
   const markersToRender = activeLabel ? filteredMarkers : HoleMarkers;
 

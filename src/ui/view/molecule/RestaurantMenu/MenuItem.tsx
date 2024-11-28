@@ -6,6 +6,13 @@ type MenuItemProp = {
   price: string;
 };
 
+const formatPrice = (price: string): string => {
+  const numericPrice = parseFloat(price);
+  return isNaN(numericPrice)
+    ? "가격 정보 없음"
+    : `${numericPrice.toLocaleString()}원`;
+};
+
 const MenuItem = ({ image, name, price }: MenuItemProp) => {
   return (
     <div className={styles.container}>
@@ -17,7 +24,7 @@ const MenuItem = ({ image, name, price }: MenuItemProp) => {
           {name}
         </div>
         <div className={css({ textStyle: "body2", padding: "2px" })}>
-          {price}
+          {formatPrice(price)}
         </div>
       </div>
     </div>
@@ -30,13 +37,18 @@ const styles = {
   container: css({
     display: "flex",
     height: "44px",
+    gap: 10,
   }),
   img: css({
     width: "44px",
     height: "44px",
+    maxHeight: "44px",
+    overflow: "hidden",
+    borderRadius: 5,
   }),
   wrapper: css({
     display: "flex",
     flexDir: "column",
+    gap: 10,
   }),
 };
