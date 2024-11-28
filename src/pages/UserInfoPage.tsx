@@ -1,7 +1,7 @@
 import useUserReview from "@/hooks/userInfo/useUserReview.hook";
 import UserInfo from "@/ui/components/userInfo/UserInfo";
 import Header from "@/ui/view/molecule/Header";
-import UserReviewItem from "@/ui/view/molecule/UserReviewitem";
+import UserReviewItem from "@/ui/view/molecule/UserReviewItem";
 
 import { css } from "@styled-system/css";
 import { center } from "@styled-system/patterns";
@@ -18,7 +18,6 @@ const UserInfoPage = () => {
   } = useUserReview();
   const navigate = useNavigate();
   const handleEdit = (reviewId: number) => {
-    console.log(`Edit review ID: ${reviewId}`);
     navigate(`/review/${reviewId}?type=edit`);
   };
 
