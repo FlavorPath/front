@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelectedUser } from "@/hooks/userInfo/useUserProfile.hook";
 import ProfileImageUpload from "./ProfileImageUpload";
 import Icon from "@/ui/view/atom/Icon";
+import Loading from '@/ui/view/atom/Loading';
 
 const UserInfo = () => {
   const {
@@ -39,7 +40,7 @@ const UserInfo = () => {
   };
 
   if (isUserLoading) {
-    return <p>로딩 중...</p>;
+    return <Loading />
   }
 
   if (userError) {
