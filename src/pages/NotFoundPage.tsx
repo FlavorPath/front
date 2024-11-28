@@ -1,4 +1,3 @@
-import Icon from '@/ui/view/atom/Icon';
 import { css } from '@styled-system/css';
 import { center, flex } from '@styled-system/patterns';
 
