@@ -1,21 +1,12 @@
-import { center } from '@styled-system/patterns';
 import Loading from '@/ui/view/atom/Loading';
+import { centerContainer } from '@/styles/commonStyle/centerContainer';
 
 const LoadingPage = () => {
 	return (
-    <div className={styles.container}>
+    <div className={centerContainer()}>
       <Loading />
     </div>
   );
 };
 
 export default LoadingPage;
-
-const styles = {
-  container: center({
-    flexDirection: 'column',
-    height: '100dvh',
-    width: '100%',
-    paddingBottom: '100px',
-  }),
-};
