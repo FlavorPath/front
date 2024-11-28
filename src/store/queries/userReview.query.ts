@@ -23,11 +23,7 @@ const fetchUserReviews = async ({
   limit?: number;
 }): Promise<UserReviewsResponse> => {
   const url = `/user/review?cursor=${cursor}`;
-  const response = await axiosInstance.get(url, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-    },
-  });
+  const response = await axiosInstance.get(url);
   return response.data;
 };
 

@@ -19,53 +19,30 @@ export type RestaurantDetail = {
   isScraped: boolean;
 };
 
-const getTokenFromLocalStorage = () => {
-  const authStorage = localStorage.getItem("auth-storage");
-  if (!authStorage) return "";
-  try {
-    const parsed = JSON.parse(authStorage);
-    return parsed.state?.accessToken || "";
-  } catch (error) {
-    console.error("Failed to parse auth-storage:", error);
-    return "";
-  }
-};
-
-export const fetchRestaurantDetail = async (id: number, token: string) => {
+export const fetchRestaurantDetail = async (id: number) => {
   const url = `${API_PATH.restaurant}/${id}`;
-  const response = await axiosInstance.get(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await axiosInstance.get(url);
   return response.data;
 };
 
-export const updateScrape = async (id: number, token: string) => {
+export const updateScrape = async (id: number) => {
   const url = `${API_PATH.restaurant}/${id}/scrap`;
-  const response = await axiosInstance.post(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  console.log("response " + response);
+  const response = await axiosInstance.post(url);
   return response.data;
 };
 
 export const useRestaurantDetail = (id: number) => {
-  const token = getTokenFromLocalStorage();
   return useQuery<RestaurantDetail>({
     queryKey: ["restaurant", id],
-    queryFn: () => fetchRestaurantDetail(id, token),
+    queryFn: () => fetchRestaurantDetail(id),
     staleTime: 1000 * 60 * 5,
-    enabled: !!id && !!token,
+    enabled: !!id,
   });
 };
 
 export const useUpdateScrapeMutation = () => {
-  const token = getTokenFromLocalStorage();
   return useMutation({
-    mutationFn: (id: number) => updateScrape(id, token),
+    mutationFn: (id: number) => updateScrape(id),
     onSettled: async (_, __, variables) => {
       await queryClient.invalidateQueries({
         queryKey: ["restaurant", variables],

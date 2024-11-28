@@ -33,13 +33,8 @@ const fetchUserInfo = async (): Promise<UserInfoResponse> => {
     throw new Error("토큰 없음");
   }
 
-  const url = `${API_PATH.userInfo}`;
-  const response = await axiosInstance.get(url, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  // console.log("사용자 정보 패칭 완료");
+  const url = `${API_PATH.user}/info`;
+  const response = await axiosInstance.get(url);
   return response.data;
 };
 
@@ -51,12 +46,8 @@ const updateNickname = async (
     throw new Error("토큰 없음");
   }
 
-  const url = `${API_PATH.userNickname}`;
-  const response = await axiosInstance.put(url, data, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const url = `${API_PATH.user}/nickname`;
+  const response = await axiosInstance.put(url, data);
   console.log("닉네임 변경 요청 완료");
   return response.data;
 };
@@ -69,13 +60,12 @@ const updateProfileIcon = async (
     throw new Error("토큰 없음");
   }
 
-  const url = `${API_PATH.userProfileIcon}`;
+  const url = `${API_PATH.user}/profile-icon`;
   const formData = new FormData();
   formData.append("profileIcon", file);
 
   const response = await axiosInstance.put(url, formData, {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "multipart/form-data",
     },
   });
