@@ -1,5 +1,6 @@
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
+import NotFoundPage from '@/pages/NotFoundPage';
 import RestaurantPage from "@/pages/RestaurantPage";
 import ReviewPage from "@/pages/ReviewPage";
 import ScrapPage from "@/pages/ScrapPage";
@@ -37,6 +38,10 @@ const router = [
           {
             path: '/profile',
             element: <UserInfoPage />,
+          },
+          {
+            path: '*',
+            element: <NotFoundPage />,
           },
         ],
       },
