@@ -1,6 +1,6 @@
 import useKakaoLoader from "@/hooks/map/useKakaoLoader";
 import CustomMapMarker from "@/ui/view/atom/CustomMapMarker";
-import { Map } from "react-kakao-maps-sdk";
+import { Map, MarkerClusterer } from "react-kakao-maps-sdk";
 import { useState } from "react";
 import useDynamicMapSize from "@/hooks/map/useDynamicMapSize";
 import { useMap } from "@/hooks/map/useMap.hook";
@@ -61,26 +61,28 @@ export default function KaKaoMap({
         left: 0,
       })}
     >
-      {markersToRender &&
-        markersToRender.map((marker, index) => (
-          <CustomMapMarker
-            key={index}
-            location={{
-              latitude: marker.location.latitude,
-              longitude: marker.location.longitude,
-            }}
-            id={marker.id}
-            name={marker.name}
-            labels={marker.labels}
-            onMarkerClick={() =>
-              handleMarkerClick(
-                marker.location.latitude,
-                marker.location.longitude,
-                marker.id
-              )
-            }
-          />
-        ))}
+      <MarkerClusterer averageCenter={true} minLevel={7}>
+        {markersToRender &&
+          markersToRender.map((marker, index) => (
+            <CustomMapMarker
+              key={index}
+              location={{
+                latitude: marker.location.latitude,
+                longitude: marker.location.longitude,
+              }}
+              id={marker.id}
+              name={marker.name}
+              labels={marker.labels}
+              onMarkerClick={() =>
+                handleMarkerClick(
+                  marker.location.latitude,
+                  marker.location.longitude,
+                  marker.id
+                )
+              }
+            />
+          ))}
+      </MarkerClusterer>
     </Map>
   );
 }
