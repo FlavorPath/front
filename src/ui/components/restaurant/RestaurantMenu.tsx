@@ -8,15 +8,6 @@ const RestaurantMenu = () => {
   const { restaurantDetail } = useSelectedRestaurant(restaurantId);
   return (
     <div className={styles.container}>
-      <h1
-        className={css({
-          textStyle: "button1",
-          padding: "10px",
-          paddingLeft: "none",
-        })}
-      >
-        대표 메뉴
-      </h1>
       <div className={styles.wrapper}>
         {restaurantDetail &&
           restaurantDetail.menu.map((item, index) => (
@@ -40,7 +31,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: "5px",
-    padding: "10px 20px 0px 20px",
+    padding: "20px 20px 0px 20px",
   }),
   wrapper: css({
     display: "flex",
