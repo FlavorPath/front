@@ -1,3 +1,4 @@
+import RecommendPage from '@/pages/RecommendPage';
 import { lazy } from 'react';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
@@ -31,7 +32,7 @@ const router = [
           },
           {
             path: '/recommendations',
-            element: <div>서비스 준비중</div>,
+            element: <RecommendPage />,
           },
           {
             path: '/bookmarks',
