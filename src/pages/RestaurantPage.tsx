@@ -1,4 +1,3 @@
-import useSelectedRestaurant from "@/hooks/restaurant/useSelectedRestaurant.hook";
 import Restaurant from "@/ui/components/restaurant/Restaurant";
 import Header from "@/ui/view/molecule/Header";
 import { css } from "@styled-system/css";

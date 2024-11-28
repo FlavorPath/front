@@ -1,14 +1,12 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "@/ui/view/molecule/Header";
-import useAuth from "@/store/stores/auth.store";
 
 type AuthPathType = "/auth/signup" | "/auth/login";
 
 const AuthLayout = () => {
   const location = useLocation();
   const [type, setType] = useState<AuthPathType>("/auth/login");
-  const text = type === "/auth/signup" ? "회원가입" : "로그인";
 
   useEffect(() => {
     setType(location.pathname as AuthPathType);

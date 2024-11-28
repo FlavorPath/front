@@ -32,7 +32,7 @@ const fetchReviews = async ({
   cursor = 0,
 }: {
   id: number;
-  cursor?: number;
+  cursor: number | undefined;
 }): Promise<ReviewsResponse> => {
   const url = `${API_PATH.restaurant}/${id}/reviews?cursor=${cursor}`;
   const response = await axiosInstance.get(url);
@@ -57,7 +57,7 @@ export const useInfiniteReviews = (restaurantId: number) => {
   return useInfiniteQuery<ReviewsResponse, Error>({
     queryKey: ["reviews", restaurantId],
     queryFn: ({ pageParam = 0 }) =>
-      fetchReviews({ id: restaurantId, cursor: pageParam }),
+      fetchReviews({ id: restaurantId, cursor: pageParam as number }),
     getNextPageParam: (lastPage) => lastPage.lastCursor || undefined,
     initialPageParam: 0,
     enabled: !!restaurantId,

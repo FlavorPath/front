@@ -8,7 +8,6 @@ const useSelectedRestaurant = (id: number) => {
     data: restaurantDetail,
     isLoading,
     error,
-    refetch,
   } = useRestaurantDetail(id);
   const { mutate, isPending: isMutating } = useUpdateScrapeMutation();
   return {

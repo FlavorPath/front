@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useSelectedUser } from "@/hooks/userInfo/useUserProfile.hook";
 import ProfileImageUpload from "./ProfileImageUpload";
 import Icon from "@/ui/view/atom/Icon";
+import { center, flex } from '@styled-system/patterns';
+import Loading from '@/ui/view/atom/Loading';
 
 const UserInfo = () => {
   const {
@@ -39,11 +41,15 @@ const UserInfo = () => {
   };
 
   if (isUserLoading) {
-    return <p>로딩 중...</p>;
+    return <div className={center({ height: '100%'})}>로딩 중...</div>;
   }
 
   if (userError) {
-    return <p>사용자 정보를 가져오는 중 오류가 발생했습니다.</p>;
+    return (
+      <div className={center({ height: '100%' })}>
+        사용자 정보를 가져오는 중 오류가 발생했습니다.
+      </div>
+    );
   }
 
   return (
@@ -53,13 +59,16 @@ const UserInfo = () => {
         {isEditing ? (
           <>
             <input
-              type="text"
+              type='text'
               value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+              onChange={e => setNickname(e.target.value)}
               className={styles.nicknameInput}
               maxLength={20}
             />
-            <button onClick={handleSaveNickname} className={styles.saveButton}>
+            <button
+              onClick={handleSaveNickname}
+              className={styles.saveButton}
+            >
               저장
             </button>
             <button
@@ -71,16 +80,12 @@ const UserInfo = () => {
           </>
         ) : (
           <>
-            <span className={styles.nickname}>
-              {userInfo?.data.nickname || "닉네임 없음"}
-            </span>
-            <span className={styles.tag}>
-              {userInfo?.data.tag || "태그 없음"}
-            </span>
+            <span className={styles.nickname}>{userInfo?.data.nickname || '닉네임 없음'}</span>
+            <span className={styles.tag}>{userInfo?.data.tag || '태그 없음'}</span>
             <Icon
-              iconName="PencilIcon"
-              library="hero-solid"
-              fill="#000000"
+              iconName='PencilIcon'
+              library='hero-solid'
+              fill='#000000'
               className={styles.editIcon}
               onClick={() => setIsEditing(true)}
             />
@@ -88,7 +93,11 @@ const UserInfo = () => {
         )}
       </div>
 
-      {isNicknameUpdating && <p>닉네임 변경 중...</p>}
+      {isNicknameUpdating && (
+        <div className={flex({ paddingTop: '30px', position: 'absolute', left: '50%', transform: 'translateX(-50%)'})}>
+          <Loading />
+        </div>
+      )}
     </div>
   );
 };

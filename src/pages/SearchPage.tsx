@@ -5,6 +5,7 @@ import Header from '@/ui/view/molecule/Header';
 import StoreListTemplate from '@/ui/view/templates/StoreListTemplate';
 import { css } from '@styled-system/css';
 import { center, flex } from '@styled-system/patterns';
+import loading from '@/assets/loading/loading.webp'
 
 const SearchPage = () => {
 	const { isToggleOn, searchValue, setSearchValue, isSearchLoading } = useStores();
@@ -28,7 +29,10 @@ const SearchPage = () => {
       {isSearchLoading && (
         <div>
           <div className={styles.loading}>
-            <span>Loading...</span>
+            <img
+              src={loading}
+              width={60}
+            />
           </div>
         </div>
       )}

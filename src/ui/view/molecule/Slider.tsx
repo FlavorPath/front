@@ -1,5 +1,5 @@
 import { css } from "@styled-system/css";
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 interface IProp {
   images: string[];
