@@ -1,7 +1,6 @@
 import { BottomSheet, BottomSheetRef } from "react-spring-bottom-sheet";
 import useBottomSheetStore from "../../../store/stores/BottomSheet.store";
 import { useRef } from "react";
-import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
 
 type BottomSheetProps = {
   navigateToRestaurant: (id: number) => void; // navigateToRestaurant의 타입 정의

@@ -19,7 +19,7 @@ export type UserReviewsResponse = {
 const fetchUserReviews = async ({
   cursor = 0,
 }: {
-  cursor?: number;
+  cursor: number | undefined;
   limit?: number;
 }): Promise<UserReviewsResponse> => {
   const url = `/user/review?cursor=${cursor}`;
@@ -43,7 +43,7 @@ const fetchUserReviews = async ({
 export const useInfiniteUserReviews = () => {
   return useInfiniteQuery<UserReviewsResponse, Error>({
     queryKey: ["userReviews"],
-    queryFn: ({ pageParam = 0 }) => fetchUserReviews({ cursor: pageParam }),
+    queryFn: ({ pageParam = 0 }) => fetchUserReviews({ cursor: pageParam as number }),
     getNextPageParam: (lastPage) => {
       if (lastPage.success || lastPage.lastCursor === null) {
         return undefined;
