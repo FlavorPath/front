@@ -1,9 +1,10 @@
 import useUserReview from "@/hooks/userInfo/useUserReview.hook";
 import UserInfo from "@/ui/components/userInfo/UserInfo";
 import Header from "@/ui/view/molecule/Header";
-import UserReviewItem from '@/ui/view/molecule/UserReviewItem';
+import UserReviewItem from "@/ui/view/molecule/UserReviewitem";
+
 import { css } from "@styled-system/css";
-import { center } from '@styled-system/patterns';
+import { center } from "@styled-system/patterns";
 
 import { useNavigate } from "react-router-dom";
 
@@ -24,12 +25,12 @@ const UserInfoPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.userWrapper}>
-        <Header headerText='내 정보' />
+        <Header headerText="내 정보" />
         <UserInfo />
       </div>
       <div className={styles.reviewWrapper}>
         {reviews?.length ? (
-          reviews.map(review => (
+          reviews.map((review) => (
             <UserReviewItem
               key={review.id}
               label={review.label}
@@ -56,44 +57,44 @@ export default UserInfoPage;
 
 const styles = {
   container: css({
-    width: '100%',
-    height: '100dvh',
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
+    width: "100%",
+    height: "100dvh",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
   }),
   userWrapper: css({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    height: '250px',
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    height: "250px",
   }),
   line: css({
-    position: 'absolute',
-    top: '280px',
+    position: "absolute",
+    top: "280px",
     left: 0,
-    height: '5px',
-    width: '100%',
-    backgroundColor: 'background.gray',
+    height: "5px",
+    width: "100%",
+    backgroundColor: "background.gray",
   }),
   reviewWrapper: css({
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '20px',
-    padding: '10px 20px',
-    overflowY: 'auto',
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+    padding: "10px 20px",
+    overflowY: "auto",
   }),
   observerTarget: css({
-    height: '50px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "50px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }),
   noResult: center({
-    height: 'calc(100dvh - 400px)',
-    textAlign: 'center',
-    textStyle: 'caption1',
-    fontWeight: 'light',
+    height: "calc(100dvh - 400px)",
+    textAlign: "center",
+    textStyle: "caption1",
+    fontWeight: "light",
   }),
 };
