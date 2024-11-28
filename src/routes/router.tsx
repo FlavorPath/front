@@ -1,42 +1,44 @@
-import HomePage from "@/pages/HomePage";
-import LoginPage from "@/pages/LoginPage";
-import NotFoundPage from '@/pages/NotFoundPage';
-import RestaurantPage from "@/pages/RestaurantPage";
-import ReviewPage from "@/pages/ReviewPage";
-import ScrapPage from "@/pages/ScrapPage";
-import SearchPage from "@/pages/SearchPage";
-import SignUpPage from "@/pages/SignupPage";
-import UserInfoPage from "@/pages/UserInfoPage";
-import AuthLayout from "@/ui/components/layout/AuthLayout";
-import Layout from "@/ui/components/layout/Layout";
-import NavigationLayout from "@/ui/components/layout/NavigationLayout";
-import RestaurantMain from "@/ui/components/restaurant/RestaurantMain";
-import RestaurantMenu from "@/ui/components/restaurant/RestaurantMenu";
-import RestaurantReview from "@/ui/components/restaurant/RestaurantReview";
+import { lazy } from 'react';
+
+const HomePage = lazy(() => import('@/pages/HomePage'));
+const LoginPage = lazy(() => import('@/pages/LoginPage'));
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
+const RestaurantPage = lazy(() => import('@/pages/RestaurantPage'));
+const ReviewPage = lazy(() => import('@/pages/ReviewPage'));
+const ScrapPage = lazy(() => import('@/pages/ScrapPage'));
+const SearchPage = lazy(() => import('@/pages/SearchPage'));
+const SignUpPage = lazy(() => import('@/pages/SignupPage'));
+const UserInfoPage = lazy(() => import('@/pages/UserInfoPage'));
+const AuthLayout = lazy(() => import('@/ui/components/layout/AuthLayout'));
+const Layout = lazy(() => import('@/ui/components/layout/Layout'));
+const NavigationLayout = lazy(() => import('@/ui/components/layout/NavigationLayout'));
+const RestaurantMain = lazy(() => import('@/ui/components/restaurant/RestaurantMain'));
+const RestaurantMenu = lazy(() => import('@/ui/components/restaurant/RestaurantMenu'));
+const RestaurantReview = lazy(() => import('@/ui/components/restaurant/RestaurantReview'));
 
 const router = [
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <NavigationLayout />,
         children: [
           {
-            path: "/",
+            path: '/',
             element: <HomePage />,
           },
           {
-            path: "/recommendations",
+            path: '/recommendations',
             element: <div>서비스 준비중</div>,
           },
           {
-            path: "/bookmarks",
+            path: '/bookmarks',
             element: <ScrapPage />,
           },
           {
-            path: "/profile",
+            path: '/profile',
             element: <UserInfoPage />,
           },
           {
@@ -46,51 +48,51 @@ const router = [
         ],
       },
       {
-        path: "/restaurant/:id",
+        path: '/restaurant/:id',
         element: <RestaurantPage />,
         children: [
           {
-            path: "",
+            path: '',
             element: <RestaurantMain />,
           },
           {
-            path: "menu",
+            path: 'menu',
             element: <RestaurantMenu />,
           },
           {
-            path: "review",
+            path: 'review',
             element: <RestaurantReview />,
           },
         ],
       },
       {
-        path: "/auth",
+        path: '/auth',
         element: <AuthLayout />,
         children: [
           {
-            path: "login",
+            path: 'login',
             element: <LoginPage />,
           },
           {
-            path: "signup",
+            path: 'signup',
             element: <SignUpPage />,
           },
         ],
       },
       {
-        path: "/bookmark",
+        path: '/bookmark',
         element: <ScrapPage />,
       },
       {
-        path: "/search",
+        path: '/search',
         element: <SearchPage />,
       },
       {
-        path: "/review",
+        path: '/review',
         element: <ReviewPage />,
       },
       {
-        path: "/review/:reviewId",
+        path: '/review/:reviewId',
         element: <ReviewPage />,
       },
     ],
