@@ -1,4 +1,3 @@
-import useDynamicBottomSheetHeight from "@/hooks/useDynamicBottomSheetHeight";
 import useBottomSheetStore from "@/store/stores/BottomSheet.store";
 import KaKaoMap from "@/ui/components/map/KaKaoMap";
 import Restaurant from "@/ui/components/restaurant/Restaurant";
@@ -6,7 +5,7 @@ import SearchInput from "@/ui/view/atom/SearchInput";
 import ButtonGroup from "@/ui/view/molecule/ButtonGroup";
 import CustomBottomSheet from "@/ui/view/molecule/CustomBottomSheet";
 import { css } from "@styled-system/css";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {

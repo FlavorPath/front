@@ -13,7 +13,7 @@ const Toast: React.FC<ToastProps> = ({
   message,
   variant = "info",
   size = "medium",
-  duration = 3000,
+  duration = 2000,
   onClose,
 }) => {
   useEffect(() => {

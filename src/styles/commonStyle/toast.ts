@@ -3,8 +3,8 @@ import { cva } from "@styled-system/css";
 export const toast = cva({
   base: {
     position: "fixed",
-    bottom: "20px",
-    left: "50%",
+    top: "20px",
+    left: "60%",
     transform: "translateX(-50%)",
     zIndex: 1050,
     display: "flex",
