@@ -46,7 +46,6 @@ const styles = {
     flexDirection: "column",
     gap: "8px",
     padding: "10px",
-    borderBottom: "1px solid #eee",
   }),
   userWrapper: css({
     display: "flex",
