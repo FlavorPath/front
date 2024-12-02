@@ -1,42 +1,41 @@
+import { useEffect } from "react";
 import {
   useGetHoleMarkers,
   useGetMarkersByLabel,
   prefetchMarkersByLabel,
 } from "@/store/queries/map.query";
 import { useQueryClient } from "@tanstack/react-query";
+import { MAP_LABELS } from "@/constants/mapLabels";
 
 export const useMap = (label?: string) => {
   const queryClient = useQueryClient();
   const safeLabel = label ?? "";
+  const HoleMarkersQuery = useGetHoleMarkers();
+  const filteredMarkersQuery = useGetMarkersByLabel(safeLabel);
 
-  const {
-    data: HoleMarkers,
-    isLoading: LoadingHole,
-    isError: HoleError,
-  } = useGetHoleMarkers();
-
-  const {
-    data: filteredMarkers,
-    isLoading,
-    isError,
-    isPending,
-  } = useGetMarkersByLabel(safeLabel);
-
-  const labels = ["한식", "일식", "중식", "양식", "디저트"];
-
-  labels
-    .filter((label) => label !== safeLabel)
-    .forEach((label) => {
-      prefetchMarkersByLabel(queryClient, label);
-    });
+  useEffect(() => {
+    try {
+      MAP_LABELS.filter((l) => l !== safeLabel).forEach((label) => {
+        prefetchMarkersByLabel(queryClient, label);
+      });
+    } catch (e) {
+      console.error("라벨에 의한 프리패칭 실패: ", e);
+    }
+  }, [safeLabel, queryClient]);
 
   return {
-    HoleMarkers,
-    LoadingHole,
-    HoleError,
-    filteredMarkers,
-    isLoading,
-    isError,
-    isPending,
+    markers: {
+      hole: HoleMarkersQuery.data,
+      filtered: filteredMarkersQuery.data,
+    },
+    isLoading: {
+      hole: HoleMarkersQuery.isLoading,
+      filtered: filteredMarkersQuery.isLoading,
+    },
+    isError: {
+      hole: HoleMarkersQuery.isError,
+      filtered: filteredMarkersQuery.isError,
+    },
+    isPending: filteredMarkersQuery.isPending,
   };
 };
