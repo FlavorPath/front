@@ -1,6 +1,7 @@
+import React, { useState } from "react";
+import Resizer from "react-image-file-resizer";
 import { useSelectedUser } from "@/hooks/userInfo/useUserProfile.hook";
 import { css } from "@styled-system/css";
-import { useState } from "react";
 
 const ProfileImageUpload = () => {
   const { userInfo, updateProfileIcon, isProfileIconUpdating } =
@@ -9,15 +10,49 @@ const ProfileImageUpload = () => {
     userInfo?.data.icon
   );
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const resizeFile = (file: File): Promise<string> =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        150,
+        150,
+        "JPEG",
+        90,
+        0,
+        (uri) => {
+          resolve(uri as string);
+        },
+        "base64"
+      );
+    });
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      updateProfileIcon(file);
+      try {
+        const resizedImage = await resizeFile(file);
+        setPreview(resizedImage);
+
+        // Convert base64 to File if needed
+        const byteString = atob(resizedImage.split(",")[1]);
+        const mimeString = resizedImage
+          .split(",")[0]
+          .split(":")[1]
+          .split(";")[0];
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const intArray = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+          intArray[i] = byteString.charCodeAt(i);
+        }
+        const optimizedFile = new Blob([arrayBuffer], { type: mimeString });
+
+        // Update profile icon with optimized file
+        updateProfileIcon(
+          new File([optimizedFile], file.name, { type: mimeString })
+        );
+      } catch (err) {
+        console.error("이미지 최적화 중 오류 발생:", err);
+      }
     }
   };
 

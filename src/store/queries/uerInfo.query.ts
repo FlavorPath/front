@@ -59,17 +59,14 @@ const updateProfileIcon = async (
   if (!accessToken) {
     throw new Error("토큰 없음");
   }
-
   const url = `${API_PATH.user}/profile-icon`;
   const formData = new FormData();
   formData.append("profileIcon", file);
-
   const response = await axiosInstance.put(url, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   });
-
   console.log("프로필 아이콘 수정 요청 완료");
   return response.data;
 };
